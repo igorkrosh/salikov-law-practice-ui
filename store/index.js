@@ -6,6 +6,7 @@ export const state = () => ({
     recomendations: [],
     journal: [],
     achievements: [],
+    pagetitle: '',
 })
 
 export const getters = {
@@ -29,6 +30,9 @@ export const getters = {
     },
     ACHIEVEMENTS: state => {
         return state.achievements;
+    },
+    PAGETITLE: state => {
+        return state.pagetitle;
     }
 }
 
@@ -53,6 +57,9 @@ export const mutations = {
     },
     SET_ACHIEVEMENTS: (state, payload) => {
         state.achievements = payload;
+    },
+    SET_PAGETITLE: (state, payload) => {
+        state.pagetitle = payload;
     }
 }
 
@@ -197,5 +204,8 @@ export const actions = {
         ]
 
         context.commit('SET_RECOMENDATIONS', recomendations);
+    },
+    SET_PAGETITLE: (context, payload) => {
+        context.commit('SET_PAGETITLE', payload);
     }
 }

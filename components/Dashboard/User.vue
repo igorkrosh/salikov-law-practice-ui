@@ -30,7 +30,9 @@
 
 <script>
 export default {
-
+    mounted() {
+        this.$store.dispatch('SET_PAGETITLE', 'Моё обучение')
+    }
 }
 </script>
 

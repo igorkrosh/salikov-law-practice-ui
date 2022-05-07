@@ -8,7 +8,7 @@
                             a(href="/" class="logo")
                                 img(src="~assets/images/logo.png", alt="")
                         .col.second
-                            h1 Мое обучение 
+                            h1 {{this.$store.getters.PAGETITLE}}
                             HeaderSearchBlock
                 .side 
                     HeaderUserInfo
