@@ -21,10 +21,18 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '~/assets/scss/core.scss',
+    '~/assets/scss/fonts.scss',
+    '~/assets/scss/lk.scss',
+    '~/assets/scss/response.scss'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    {
+      src: '~/plugins/v-calendar.js',
+      mode: 'client'
+    }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -40,5 +48,10 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    
+  },
+
+  router: {
+    linkExactActiveClass: 'active'
   }
 }

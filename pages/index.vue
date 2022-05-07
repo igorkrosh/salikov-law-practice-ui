@@ -1,9 +1,18 @@
-<template>
-  <Tutorial/>
+<template lang="pug">
+    .dashboard
+        DashboardUser(v-if="this.$store.getters.USER.role == 'user'")
 </template>
 
 <script>
 export default {
-  name: 'IndexPage'
+    data() {
+        return {
+            
+        }
+    }
 }
 </script>
+
+<style>
+
+</style>
