@@ -67,7 +67,7 @@ export default {
         grid-template-columns: repeat(7, 32px);
         grid-auto-rows: 32px;
         grid-row-gap: 10px;
-        grid-column-gap: 30px;
+        grid-column-gap: 27px;
     }
 
     .is-today .vc-day-content
@@ -75,6 +75,12 @@ export default {
         background: none;
         border: 2px solid #f2d3b7;
         color: #000;
+    }
+
+    .vc-day-content
+    {
+        width: 100%;
+        height: 100%;
     }
 }
 </style>

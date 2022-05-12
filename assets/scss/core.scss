@@ -379,7 +379,7 @@ img.background
 
 /***BtnMenu***/
 
-.btn__menu
+.btn-show-menu
 {
     width: 40px;
     height: 40px;
@@ -390,7 +390,7 @@ img.background
     display: none;
 }
 
-.btn__menu:before, .btn__menu:after, .btn__menu span
+.btn-show-menu:before, .btn-show-menu:after, .btn-show-menu span
 {
     height: 2px;
     position: absolute;
@@ -400,42 +400,42 @@ img.background
     transition: 0.5s;
 }
 
-.btn__menu span
+.btn-show-menu span
 {
     width: 65%;    
 }
 
-.btn__menu:before
+.btn-show-menu:before
 {
     content: "";
     width: 50%;
     transform: translate(-50%, -6px);
 }
 
-.btn__menu:after
+.btn-show-menu:after
 {
     content: "";
     width: 50%;
     transform: translate(-50%, 6px);
 }
 
-.btn__menu:hover:after, .btn__menu:hover:before, .btn__menu:hover span
+.btn-show-menu:hover:after, .btn-show-menu:hover:before, .btn-show-menu:hover span
 {
     width: 65%;
 }
 
-.btn__menu.active span
+.btn-show-menu.active span
 {
     opacity: 0; 
 }
 
-.btn__menu.active:after
+.btn-show-menu.active:after
 {
     top: 50%;
     transform: translate(-50%, -50%) rotate(-135deg);
 }
 
-.btn__menu.active:before
+.btn-show-menu.active:before
 {
     transform: translate(-50%, -50%) rotate(135deg);
 }

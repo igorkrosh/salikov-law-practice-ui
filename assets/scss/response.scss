@@ -39,7 +39,7 @@
 
     section.lk .page .content
     {
-        grid-template-columns: 50px calc(100% - 50px);
+        grid-template-columns: 70px calc(100% - 70px);
     }
 
     section.lk .content
@@ -51,6 +51,11 @@
     {
         width: 100%;
         font-size: 14px;
+    }
+
+    .courses-wrapper
+    {
+        grid-template-columns: repeat(4, 260px);
     }
 
 }
@@ -196,6 +201,11 @@
     {
         grid-template-columns: 530px 430px;
     }
+
+    .courses-wrapper
+    {
+        grid-template-columns: repeat(3, 284px);
+    }
 }
 
 @media(max-width: 992px)
@@ -253,7 +263,153 @@
 
     section.lk .content .col.second
     {
-        margin-top: 40px;
+        padding-top: 40px;
+        position: relative;
+    }
+
+    section.lk .side:nth-child(2):after
+    {
+        content: none;
+    }
+
+    section.lk .page:after
+    {
+        content: none;
+    }
+
+    section.lk .page .col-wrapper .col.second:after
+    {
+        content: '';
+        width: 100vw;
+        height: 100%;
+        position: absolute;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        background: #fff;
+        z-index: -1;
+    }
+
+    .btn-show-menu 
+    {
+        display: flex;
+        align-items: center;
+        margin: 0;
+        background: #354c55;
+        border-radius: 10px;
+        height: 50px;
+        width: 50px;
+        position: fixed;
+        right: 25px;
+        bottom: 15px;
+        box-shadow: 0px 0px 5px rgb(0 0 0 / 50%);
+        z-index: 10;
+    }
+
+    .btn-show-menu:before, .btn-show-menu:after, .btn-show-menu span
+    {
+        background: #fff;
+    }
+
+    .menu.active 
+    {
+        right: 15px;
+    }
+
+    .menu 
+    {
+        position: fixed;
+        right: -100vw;
+        top: 15px;
+        z-index: 20;
+        padding: 10px;
+        background: #f1fafd;
+        box-shadow: 0px 0px 5px rgb(0 0 0 / 50%);
+        border-radius: 10px;
+        height: 450px;
+        width: 275px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        transition: 0.3s;
+
+        .btn-menu
+        {
+            font-size: 14px;
+            width: 100%;
+        }
+    }
+
+    .user-wrapper 
+    {
+        display: flex;
+        align-items: flex-start;
+        padding-bottom: 20px;
+    }
+
+    section.lk .user-info.mobile
+    {
+        padding: 0;
+    }
+
+    .user-info .user .btn-lk
+    {
+        font-size: 14px;
+        flex-wrap: wrap;
+
+    }
+
+    section.lk .support .notification
+    {
+        margin-right: 10px;
+        margin-top: 5px;
+    }
+
+    section.lk .user-info.mobile .btn-wrapper
+    {
+        width: 100%;
+    }
+
+    section.lk .user-info.mobile .wrapper
+    {
+        position: initial;
+        width: 100%;
+    }
+
+    .user-info.mobile .wrapper
+    {
+        max-height: 0;
+        overflow: hidden;
+        transition: 0.3s;
+        box-shadow: none;
+        margin-top: 10px;
+        padding: 0;
+    }
+
+    .user-info.mobile .wrapper.active 
+    {
+        opacity: 1;
+        pointer-events: all;
+        max-height: 500px;
+    }
+
+    .menu-wrapper
+    {
+        padding: 0;
+    }
+
+    section.lk .page .content
+    {
+        grid-template-columns: 100%;
+    }
+
+    .courses-wrapper
+    {
+        grid-template-columns: repeat(2, 359px);
+    }
+
+    .header
+    {
+        z-index: 1;
     }
 }
 
@@ -262,6 +418,11 @@
     section.lk .container
     {
         max-width: 540px;
+    }
+
+    .courses-wrapper
+    {
+        grid-template-columns: 100%;
     }
 }
 
@@ -346,16 +507,16 @@
         align-items: flex-start;
     }
 
+    section.lk .user-info .user .btn-lk
+    {
+        padding-right: 10px;
+    }
+
     section.lk .user-info.mobile
     {
         display: flex;
         justify-content: center;
         padding-top: 20px;
-        
-        .btn-lk 
-        {
-            padding: 0;
-        }
 
         .wrapper 
         {
@@ -408,4 +569,16 @@
     {
         justify-content: center;
     }
+
+    section.lk .page .content
+    {
+        grid-template-columns: 100%;
+    }
+
+    section.lk .page .col-wrapper .col.first
+    {
+        padding-left: 0;
+    }
+
+    
 }

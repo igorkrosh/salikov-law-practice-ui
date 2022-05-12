@@ -2,11 +2,7 @@
     .col-wrapper 
         .col.first.page-events
             CalendarBlock
-        .col.second 
-            .journal.block(v-if="this.$store.getters.JOURNAL.length > 0")
-                h2 Задания:
-                .item-wrapper
-                    ProfileJournalItem(v-for="(item, index) in this.$store.getters.JOURNAL" :key="index" :item="item")
+        ProfileColumnInfo(:calendar="false")
 </template>
 
 <script>

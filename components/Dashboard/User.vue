@@ -16,16 +16,7 @@
                 h2 Рекомендации:
                 .wrapper
                     CourseCard(v-for="(item, index) in this.$store.getters.RECOMENDATIONS" :key="index" :item="item")
-        .col.second
-            CalendarBlock
-            .journal.block(v-if="this.$store.getters.JOURNAL.length > 0")
-                h2 Задания:
-                .item-wrapper
-                    ProfileJournalItem(v-for="(item, index) in this.$store.getters.JOURNAL" :key="index" :item="item")
-            .achievements.block 
-                h2 Достижения:
-                .item-wrapper 
-                    ProfileAchievementsItem(v-for="(item, index) in this.$store.getters.ACHIEVEMENTS" :key="index" :item="item")
+        ProfileColumnInfo
 </template>
 
 <script>

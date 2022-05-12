@@ -1,16 +1,20 @@
 <template lang="pug">
-    .menu
-        NuxtLink(v-for="(item, index) in this.menu[this.$store.getters.USER.role]" :key="index" :to="item.link").btn-menu
-            .icon 
-                img(:src="item.icon", alt="")
-            |{{item.name}}
-        .support 
-            a(href="").btn-menu
-                .icon
-                    img(src="~assets/images/icons/menu/8.png", alt="")
-                |Поддержка
-            HeaderBtnNotification
-            HeaderUserInfo(mobile=true)
+    .menu-wrapper
+        .menu(:class="{active:active}")
+            NuxtLink(v-for="(item, index) in this.menu[this.$store.getters.USER.role]" :key="index" :to="item.link").btn-menu
+                .icon 
+                    img(:src="item.icon", alt="")
+                |{{item.name}}
+            .support 
+                a(href="").btn-menu
+                    .icon
+                        img(src="~assets/images/icons/menu/8.png", alt="")
+                    |Поддержка
+                .user-wrapper
+                    HeaderBtnNotification
+                    HeaderUserInfo(mobile=true)
+        .btn-show-menu(@click="active = !active" :class="{active:active}")
+            span
 </template>
 
 <script>
@@ -60,12 +64,13 @@ export default {
                         name: 'Пройденые курсы'
                     }
                 ]
-            }
+            },
+            active: false
         }
     }
 }
 </script>
 
-<style>
+<style lang="scss">
 
 </style>

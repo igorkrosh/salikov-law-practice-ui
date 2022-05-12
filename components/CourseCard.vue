@@ -74,6 +74,7 @@ export default {
         padding: 25px 20px;
         display: flex;
         flex-direction: column;
+        background: #fff;
 
         .name 
         {
