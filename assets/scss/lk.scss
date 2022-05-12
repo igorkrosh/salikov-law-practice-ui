@@ -937,3 +937,158 @@ section.lk .page:after
 {
     padding-right: 20px;
 }
+
+.card 
+{
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+    background: #fff;
+    flex-wrap: wrap;
+    display: flex;
+}
+
+.input-wrapper 
+{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+
+    label 
+    {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    input 
+    {
+        height: 35px;
+        border: 1px solid #dedede;
+        padding: 0 10px;
+        font-family: 'OpenSans';
+    }
+}
+.page-edit
+{
+    .card 
+    {
+        justify-content: space-between;
+
+        .input-wrapper 
+        {
+            width: 48%;
+        }
+
+        .btn-wrapper 
+        {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+
+            img 
+            {
+                margin-right: 10px;
+            }
+        }
+    }
+
+    .info.block 
+    {
+        padding-top: 20px;
+
+        h2 
+        {
+            margin-bottom: 40px;
+        }
+    }
+    .user 
+    {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        background: #fdf6ef;
+        padding: 15px 120px;
+        position: relative;
+        border-top-left-radius: 100px;
+        border-bottom-left-radius: 100px;
+        
+        .avatar 
+        {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            position: absolute;
+            left: 0;
+        }
+
+        .wrapper 
+        {
+            display: flex;
+            flex-direction: column;
+        }
+
+        span 
+        {
+            font-size: 24px;
+            color: #354c55;
+        }
+
+        span.type 
+        {
+            font-size: 14px;
+        }
+    }
+}
+
+.page-referral 
+{
+    b 
+    {
+        margin-bottom: 15px;
+        display: block;
+    }
+
+    .score 
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .value 
+        {
+            background: #354c55;
+            color: #fff;
+            padding: 10px 25px;
+            font-size: 42px;
+            font-weight: 600;
+            border-radius: 15px;
+            margin-bottom: 20px;
+
+            small 
+            {
+                font-size: 21px;
+            }
+        }
+
+        .btn 
+        {
+            margin-bottom: 20px;
+        }
+    }
+}
+
+.btn.blue 
+{
+    padding: 15px 25px;
+    color: #fff;
+    background: #80a6b4;
+    border: none;
+    height: auto;
+    min-height: 43px;
+    img 
+    {
+        margin-left: 10px;
+    }
+}

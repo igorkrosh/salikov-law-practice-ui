@@ -24,7 +24,7 @@
                     .icon
                         img(src="~assets/images/icons/menu/8.png", alt="")
                     |Выход 
-            .score(v-if="!mobile") У вас: {{points.toLocaleString('ru')}} баллов
+            .score(v-if="!mobile && this.$store.getters.USER.points != undefined") У вас: {{this.$store.getters.USER.points.toLocaleString('ru')}} баллов
 </template>
 
 <script>
@@ -37,7 +37,6 @@ export default {
     },
     data() {
         return {
-            points: 35000,
             active: false,
             menu: [
                 {

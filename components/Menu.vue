@@ -53,11 +53,13 @@ export default {
                         icon: '/assets/images/icons/menu/6.png',
                         name: 'Реферальная программа'
                     },
+                    /*
                     {
                         link: '/certificates',
                         icon: '/assets/images/icons/menu/7.png',
                         name: 'Мои сертификаты'
                     },
+                    */
                     {
                         link: '/taken',
                         icon: '/assets/images/icons/menu/8.png',

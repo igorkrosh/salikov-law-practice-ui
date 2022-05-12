@@ -105,7 +105,7 @@
 
     section.lk .page .col-wrapper
     {
-        grid-template-columns: 480px 430px;
+        grid-template-columns: 460px 430px;
     }
 
 }
@@ -206,6 +206,21 @@
     {
         grid-template-columns: repeat(3, 284px);
     }
+
+    .page-edit .user
+    {
+        padding-right: 10px;
+    }
+
+    .page-edit .user span
+    {
+        font-size: 18px;
+    }
+
+    .page-edit .card .input-wrapper
+    {
+        width: 100%;
+    }
 }
 
 @media(max-width: 992px)
@@ -261,10 +276,12 @@
         transform: translateX(-50%);
     }
 
-    section.lk .content .col.second
+    section.lk .page .content .col.second
     {
         padding-top: 40px;
+        padding-left: 0;
         position: relative;
+        width: 100%;
     }
 
     section.lk .side:nth-child(2):after
@@ -580,5 +597,13 @@
         padding-left: 0;
     }
 
-    
+    .card
+    {
+        padding: 20px;
+    }
+
+    .page-referral .btn.blue 
+    {
+        font-size: 14px;
+    }
 }

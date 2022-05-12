@@ -72,6 +72,8 @@ export const actions = {
             user: {
                 role: 'user',
                 points: 35000,
+                allPoints: 712136,
+                invites: 12,
                 name: 'Иванов Иван Иванович',
                 avatar: '',
             },
