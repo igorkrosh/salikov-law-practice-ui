@@ -6,9 +6,9 @@
                     img(:src="item.icon", alt="")
                 |{{item.name}}
             .support 
-                a(href="").btn-menu
+                NuxtLink(to="/support").btn-menu.hover
                     .icon
-                        img(src="~assets/images/icons/menu/8.png", alt="")
+                        img(src="/assets/images/icons/menu/support.png", alt="")
                     |Поддержка
                 .user-wrapper
                     HeaderBtnNotification
@@ -39,12 +39,12 @@ export default {
                         name: 'Обратная связь'
                     },
                     {
-                        link: '/courses',
+                        link: '/user/courses',
                         icon: '/assets/images/icons/menu/4.png',
                         name: 'Курсы'
                     },
                     {
-                        link: '/webinars',
+                        link: '/user/webinars',
                         icon: '/assets/images/icons/menu/5.png',
                         name: 'Вебинары'
                     },
@@ -61,12 +61,77 @@ export default {
                     },
                     */
                     {
-                        link: '/done',
+                        link: '/user/done',
                         icon: '/assets/images/icons/menu/8.png',
                         name: 'Пройденые курсы'
                     }
-                ]
+                ],
+                admin: [
+                    {
+                        link: '/events',
+                        icon: '/assets/images/icons/menu/2.png',
+                        name: 'События'
+                    },
+                    {
+                        link: '/callback',
+                        icon: '/assets/images/icons/menu/3.png',
+                        name: 'Обратная связь'
+                    },
+                    {
+                        link: '/',
+                        icon: '/assets/images/icons/menu/4.png',
+                        name: 'Курсы'
+                    },
+                    {
+                        link: '/webinars',
+                        icon: '/assets/images/icons/menu/5.png',
+                        name: 'Вебинары'
+                    },
+                    {
+                        link: '/referral',
+                        icon: '/assets/images/icons/menu/6.png',
+                        name: 'Реферальная программа'
+                    },
+                    {
+                        link: '/user/add',
+                        icon: '/assets/images/icons/menu/user.png',
+                        name: 'Добавить пользователя'
+                    },
+                    {
+                        link: '/user/all',
+                        icon: '/assets/images/icons/menu/group.png',
+                        name: 'Пользователи'
+                    },
+                ],
+                educator: [
+                    {
+                        link: '/',
+                        icon: '/assets/images/icons/menu/1.png',
+                        name: 'Мои курсы'
+                    },
+                    {
+                        link: '/events',
+                        icon: '/assets/images/icons/menu/2.png',
+                        name: 'События'
+                    },
+                    {
+                        link: '/callback',
+                        icon: '/assets/images/icons/menu/3.png',
+                        name: 'Обратная связь'
+                    },
+                    {
+                        link: '/webinars',
+                        icon: '/assets/images/icons/menu/5.png',
+                        name: 'Вебинары'
+                    },
+                    {
+                        link: '/referral',
+                        icon: '/assets/images/icons/menu/6.png',
+                        name: 'Реферальная программа'
+                    },
+                ],
             },
+            
             active: false
         }
     }

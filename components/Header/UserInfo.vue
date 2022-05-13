@@ -4,7 +4,7 @@
         .user 
             button.btn-lk(@click="active = !active")
                 .btn-wrapper
-                    img(src="~assets/images/avatar.png", alt="").avatar
+                    img(src="/assets/images/avatar.png", alt="").avatar
                     span Иванов Иван Иванович
                 .wrapper(v-if="!mobile")
                     a.btn-menu(v-for="(item, index) in this.menu" :key="index" :href="item.link")
@@ -13,7 +13,7 @@
                         |{{item.name}}
                     a(href="#").btn-menu
                         .icon
-                            img(src="~assets/images/icons/menu/8.png", alt="")
+                            img(src="/assets/images/icons/profile/3.png", alt="")
                         |Выход 
             .wrapper(v-if="mobile" :class="{active:active}")
                 a.btn-menu(v-for="(item, index) in this.menu" :key="index" :href="item.link")
@@ -22,7 +22,7 @@
                     |{{item.name}}
                 a(href="#").btn-menu
                     .icon
-                        img(src="~assets/images/icons/menu/8.png", alt="")
+                        img(src="/assets/images/icons/profile/3.png", alt="")
                     |Выход 
             .score(v-if="!mobile && this.$store.getters.USER.points != undefined") У вас: {{this.$store.getters.USER.points.toLocaleString('ru')}} баллов
 </template>
@@ -41,12 +41,12 @@ export default {
             menu: [
                 {
                     link: '/profile',
-                    icon: '/assets/images/icons/menu/8.png',
+                    icon: '/assets/images/icons/profile/2.png',
                     name: 'Мой профиль'
                 },
                 {
                     link: '/profile/edit',
-                    icon: '/assets/images/icons/menu/8.png',
+                    icon: '/assets/images/icons/profile/1.png',
                     name: 'Редактировать'
                 }
             ]

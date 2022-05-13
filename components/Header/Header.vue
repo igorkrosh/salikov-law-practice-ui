@@ -10,7 +10,7 @@
                         .col.second
                             h1 {{this.$store.getters.PAGETITLE}}
                             HeaderSearchBlock
-                .side 
+                .side.white
                     HeaderUserInfo
 </template>
 

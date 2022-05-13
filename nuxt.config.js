@@ -32,7 +32,8 @@ export default {
     {
       src: '~/plugins/v-calendar.js',
       mode: 'client'
-    }
+    },
+    '~plugins/vue-js-modal.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

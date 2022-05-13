@@ -221,6 +221,41 @@
     {
         width: 100%;
     }
+
+    .page-add-course .course-bloks .btn-wrapper
+    {
+        flex-wrap: wrap;
+        justify-content: center;
+
+        .btn 
+        {
+            margin: 5px;
+        }
+    }
+
+    .filters-radio
+    {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+
+        .radio 
+        {
+            margin-right: 15px;
+        }
+    }
+
+    .filters-input
+    {
+        .filter
+        {
+            margin-bottom: 10px;
+        }
+    }
+
+    .page-users .table
+    {
+        grid-template-columns: 100%;
+    }
 }
 
 @media(max-width: 992px)
@@ -289,9 +324,9 @@
         content: none;
     }
 
-    section.lk .page:after
+    section.lk .bg-white
     {
-        content: none;
+        display: none;
     }
 
     section.lk .page .col-wrapper .col.second:after
@@ -440,6 +475,32 @@
     .courses-wrapper
     {
         grid-template-columns: 100%;
+    }
+
+    .vm--modal.dialog
+    {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .card 
+        {
+            width: 500px;
+            overflow-y: scroll;
+            height: 400px;
+        }
+    }
+
+    .card 
+    {
+        .row, .center 
+        {
+            flex-wrap: wrap;
+        }
+
+        .input-wrapper, .select-wrapper
+        {
+            width: 100%;
+        }
     }
 }
 
@@ -605,5 +666,18 @@
     .page-referral .btn.blue 
     {
         font-size: 14px;
+    }
+
+    .page-add-course .card
+    {
+        padding: 25px;
+    }
+
+    .vm--modal.dialog
+    {
+        .card 
+        {
+            width: 300px;
+        }
     }
 }

@@ -31,11 +31,33 @@
                         button.btn 
                             img(src="/assets/images/icons/edit.png")
                             |Редактировать
+            .info.block 
+                h2 Блок для тестирования
+                .card 
+                    .btn-wrapper 
+                        button.btn(@click="SetRole('user')") Роль: Пользователь
+                    .btn-wrapper(@click="SetRole('educator')")
+                        button.btn Роль: Преподаватель
+                    .btn-wrapper(@click="SetRole('admin')")
+                        button.btn Роль: Администратор
         ProfileColumnInfo
 </template>
 
 <script>
 export default {
+    methods: {
+        SetRole(role)
+        {
+            this.$store.dispatch('SET_USER', {
+                role: role,
+                points: 35000,
+                allPoints: 712136,
+                invites: 12,
+                name: 'Иванов Иван Иванович',
+                avatar: '',
+            })
+        }
+    },
     mounted() {
         this.$store.dispatch('SET_PAGETITLE', 'Редактирование профиля')
     }
