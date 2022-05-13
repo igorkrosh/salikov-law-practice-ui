@@ -61,7 +61,7 @@ export default {
                     },
                     */
                     {
-                        link: '/taken',
+                        link: '/done',
                         icon: '/assets/images/icons/menu/8.png',
                         name: 'Пройденые курсы'
                     }

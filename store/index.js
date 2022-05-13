@@ -6,6 +6,7 @@ export const state = () => ({
     recomendations: [],
     journal: [],
     achievements: [],
+    done: [],
     pagetitle: '',
 })
 
@@ -33,6 +34,9 @@ export const getters = {
     },
     PAGETITLE: state => {
         return state.pagetitle;
+    },
+    DONE: state => {
+        return state.done;
     }
 }
 
@@ -60,6 +64,9 @@ export const mutations = {
     },
     SET_PAGETITLE: (state, payload) => {
         state.pagetitle = payload;
+    },
+    SET_DONE: (state, payload) => {
+        state.done = payload;
     }
 }
 
@@ -167,6 +174,22 @@ export const actions = {
                     text: 'Прохождение нескольких курсов одновременно'
                 }
 
+            ],
+            done: [
+                {
+                    image: 'https://www.iserbia.rs/files//2018/06/tajna-oruzja-uverljivih-ljudi.jpg',
+                    title: 'Охрана исключительных прав IT-компаний: программное обеспечение и товарные знаки',
+                    lectors: 'Иванов А.А.',
+                    type: 'Курс',
+                    progress: 100
+                },
+                {
+                    image: 'https://www.iserbia.rs/files//2018/06/tajna-oruzja-uverljivih-ljudi.jpg',
+                    title: 'Охрана исключительных прав IT-компаний: программное обеспечение и товарные знаки 2',
+                    lectors: 'Иванов А.А.',
+                    type: 'Курс',
+                    progress: 100
+                }
             ]
         }
 
@@ -176,6 +199,7 @@ export const actions = {
         context.commit('SET_RESULTS', profile.results);
         context.commit('SET_JOURNAL', profile.journal);
         context.commit('SET_ACHIEVEMENTS', profile.achievements);
+        context.commit('SET_DONE', profile.done);
     },
     LOAD_RECOMENDATIONS: (context, payload) => {
         let recomendations = [
