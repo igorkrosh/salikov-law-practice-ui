@@ -1,5 +1,5 @@
 <template lang="pug">
-    .courses-wrapper.page
+    .courses-wrapper.full-page
         CourseCard(v-for="(item, index) in this.courses" :key="index" :item="item")
 </template>
 
