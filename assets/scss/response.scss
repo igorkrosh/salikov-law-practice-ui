@@ -610,6 +610,21 @@
             width: 100%;
         }
     }
+
+    section.lk .page .col-wrapper .col.second .col.second
+    {
+        padding-top: 0;
+    }
+
+    section.lk .page .col-wrapper .col.first .recomendation
+    {
+        display: none;
+    }
+
+    section.lk .page .col-wrapper .col.second .recomendation
+    {
+        display: block;
+    }
 }
 
 @media(max-width: 540px)
