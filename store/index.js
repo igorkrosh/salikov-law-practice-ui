@@ -8,6 +8,7 @@ export const state = () => ({
     achievements: [],
     done: [],
     pagetitle: '',
+    disableBgWhite: false
 })
 
 export const getters = {
@@ -37,6 +38,9 @@ export const getters = {
     },
     DONE: state => {
         return state.done;
+    },
+    DISABLE_BG_WHITE: state=> {
+        return state.disableBgWhite;
     }
 }
 
@@ -67,6 +71,9 @@ export const mutations = {
     },
     SET_DONE: (state, payload) => {
         state.done = payload;
+    },
+    SET_DISABLE_BG_WHITE: (state, payload) => {
+        state.disableBgWhite = payload;
     }
 }
 
@@ -233,5 +240,8 @@ export const actions = {
     },
     SET_PAGETITLE: (context, payload) => {
         context.commit('SET_PAGETITLE', payload);
+    },
+    SET_DISABLE_BG_WHITE: (content, payload) => {
+        content.commit('SET_DISABLE_BG_WHITE', payload);
     }
 }

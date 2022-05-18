@@ -29,7 +29,11 @@ export default {
     },
     mounted() {
         this.$store.dispatch('SET_PAGETITLE', 'Поддержка')
-    }
+        this.$store.dispatch('SET_DISABLE_BG_WHITE', true);
+    },
+    destroyed() {
+        this.$store.dispatch('SET_DISABLE_BG_WHITE', false)
+    },
 }
 </script>
 

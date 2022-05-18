@@ -6,7 +6,7 @@
                 .content(:class="{'hide-menu':menuHide}")
                     Menu(@menu-hide="HideMenu")
                     Nuxt
-            .bg-white(ref="bgWhite")
+            .bg-white(ref="bgWhite" :class="{hide: this.$store.getters.DISABLE_BG_WHITE}")
 </template>
 
 <script>
