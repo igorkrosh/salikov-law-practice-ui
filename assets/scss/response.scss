@@ -1,3 +1,111 @@
+@media(min-width: 1921px)
+{
+    section.lk 
+    {
+        .container
+        {
+            max-width: 1920px;
+        }
+
+        .content 
+        {
+            grid-template-columns: 1230px 660px;
+        }
+    }
+
+    section.lk .page .col-wrapper
+    {
+        grid-template-columns: 945px 645px;
+    }
+
+    section.lk .calendar.block
+    {
+        width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    section.lk .progress-wrapper .item
+    {
+        width: 100%;
+    }
+
+    section.lk .recomendation .wrapper
+    {
+        grid-template-columns: repeat(3, 290px);
+    }
+
+    section.lk .recomendation .wrapper .course-card .desc
+    {
+        padding: 25px 20px;
+    }
+
+    section.lk .recomendation .wrapper .course-card .desc .name
+    {
+        font-size: 14px;
+    }
+
+    section.lk .page-events .calendar.block
+    {
+        width: 100%;
+    }
+
+    .page-events .calendar.block .vc-weekday, .page-events .calendar.block .vc-day-content
+    {
+        font-size: 24px;
+    }
+
+    .page-events .calendar.block .vc-container .vc-weeks
+    {
+        grid-template-columns: repeat(7, 105px);
+        grid-auto-rows: 60px;
+    }
+
+    .page-events .calendar.block .vc-container .vc-title
+    {
+        font-size: 30px;
+    }
+
+    .page-events .calendar.block .vc-container .vc-header
+    {
+        padding-left: 35px;
+        padding-right: 35px;
+    }
+
+    .courses-wrapper
+    {
+        grid-template-columns: repeat(4, 382px);
+
+        .course-card .desc .name
+        {
+            font-size: 16px;
+        }
+    }
+
+    section.lk .progress-wrapper .item
+    {
+        grid-template-columns: 220px calc(100% - 220px);
+        min-height: 160px;
+    }
+
+    section.lk .progress-wrapper .item .desc
+    {
+        display: flex;
+        flex-direction: column;
+
+        .item-title
+        {
+            margin-bottom: auto;
+        }
+    }
+
+    .page-users .table
+    {
+        grid-template-columns: repeat(2, 450px);
+    }
+    
+}
+
 @media(max-width: 1450px)
 {
     section.lk .container
@@ -679,5 +787,15 @@
         {
             width: 300px;
         }
+    }
+
+    .page-events .calendar.block .vc-weekday, .page-events .calendar.block .vc-day-content
+    {
+        font-size: 14px;
+    }
+
+    section.lk .page-events .calendar.block .vc-weeks
+    {
+        grid-column-gap: 1px;
     }
 }

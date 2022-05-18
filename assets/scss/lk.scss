@@ -1383,3 +1383,34 @@ section.lk .page .col-wrapper .col.first.page-users
     border-radius: 0;
     box-shadow: none;
 }
+
+.page-events .calendar.block 
+{
+    .vc-container 
+    {
+        background: none;
+    }
+
+    .vc-title
+    {
+        font-size: 30px;
+    }
+
+    .vc-weekday, .vc-day-content
+    {
+        font-size: 20px;
+    }
+
+    .vc-weeks 
+    {
+        grid-column-gap: 56px;
+    }
+    
+} 
+
+.callback.block 
+{
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
