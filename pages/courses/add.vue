@@ -32,15 +32,9 @@
                             label Тесты:
                             .input
                                 input(placeholder="1 тест")
-                    .card.course-bloks
-                        b Блок №2
-                        .btn-wrapper
-                            button.btn Стрим-ссылка 
-                            button.btn Видео-запись
-                            button.btn.blue Задания
-                            button.btn.blue Тесты
+                    CourseBlock(:count="count" v-for="(item, index) in count" :key="index")
                     .add-block
-                        button.btn.blue Добавить блок
+                        button.btn.blue(@click="count++") Добавить блок
                     .couse-info 
                         .input-wrapper 
                             label Дата начала:
@@ -56,6 +50,11 @@
 
 <script>
 export default {
+    data() {
+        return {
+            count: 1
+        }
+    },
     mounted() {
         this.$store.dispatch('SET_PAGETITLE', 'Добавить курс')
     }

@@ -33,7 +33,12 @@ export default {
       src: '~/plugins/v-calendar.js',
       mode: 'client'
     },
-    '~plugins/vue-js-modal.js'
+    '~plugins/vue-js-modal.js',
+    {
+      src: '~plugins/vue2-editor.js',
+      mode: 'client'
+    },
+    '~plugins/vuescroll.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -45,6 +50,7 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    "vue2-editor/nuxt"
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

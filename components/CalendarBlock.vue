@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style lang="scss">
-.calendar.block .vc-container
+.calendar .vc-container
 {
     border: none;
     font-family: 'OpenSans';    

@@ -1,10 +1,10 @@
 <template lang="pug">
-    .menu-wrapper
+    .menu-wrapper(:class="{hide:hide}")
         .menu(:class="{active:active}")
             NuxtLink(v-for="(item, index) in this.menu[this.$store.getters.USER.role]" :key="index" :to="item.link").btn-menu
                 .icon 
                     img(:src="item.icon", alt="")
-                |{{item.name}}
+                span {{item.name}}
             .support 
                 NuxtLink(to="/support").btn-menu.hover
                     .icon
@@ -15,6 +15,7 @@
                     HeaderUserInfo(mobile=true)
         .btn-show-menu(@click="active = !active" :class="{active:active}")
             span
+        button.hide-menu(@click="HideMenu")
 </template>
 
 <script>
@@ -132,7 +133,19 @@ export default {
                 ],
             },
             
-            active: false
+            active: false,
+            hide: false
+        }
+    },
+    methods: {
+        HideMenu()
+        {
+            this.hide = !this.hide;
+            this.$emit('menu-hide')
+        },
+        TransitionEnd()
+        {
+            console.log('end')
         }
     }
 }

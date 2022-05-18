@@ -315,7 +315,7 @@ img.background
     position: relative;
 }
 
-.btn__modal__close
+.btn-modal-close
 {
     position: absolute;
     top: 22px;
@@ -328,7 +328,7 @@ img.background
     cursor: pointer;
 }
 
-.btn__modal__close:after
+.btn-modal-close:after
 {
     content: "";
     height: 2px;   
@@ -340,7 +340,7 @@ img.background
     transform: translate(-50%, -50%) rotate(-45deg);
 }
 
-.btn__modal__close:before
+.btn-modal-close:before
 {
     content: "";
     height: 2px;   
@@ -352,12 +352,12 @@ img.background
     transform: translate(-50%, -50%) rotate(45deg);
 }
 
-.btn__modal__close:hover
+.btn-modal-close:hover
 {
     background: #ffffff
 }
 
-.btn__modal__close:hover:after, .btn__modal__close:hover:before
+.btn-modal-close:hover:after, .btn-modal-close:hover:before
 {
     background-color: #000000;
 }

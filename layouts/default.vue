@@ -3,20 +3,29 @@
         Header(ref="header")
         .page
             .container 
-                .content
-                    Menu
+                .content(:class="{'hide-menu':menuHide}")
+                    Menu(@menu-hide="HideMenu")
                     Nuxt
             .bg-white(ref="bgWhite")
 </template>
 
 <script>
 export default {
+    data() {
+        return {
+            menuHide: false
+        }
+    },
     methods: {
         SetBgWhite() {
             let left = this.$refs.header.$el.querySelector('.side.white').getBoundingClientRect().left;
             let width = window.innerWidth;
 
             this.$refs.bgWhite.style.width = `${width - left - 15}px`
+        },
+        HideMenu()
+        {
+            this.menuHide = !this.menuHide;
         }
     },
     destroyed() {
