@@ -1,5 +1,5 @@
 <template lang="pug">
-    a(href="").item 
+    NuxtLink(:to="link").item 
         .img 
             img(:src="item.image", alt="")
         .desc 
@@ -14,7 +14,7 @@
 
 <script>
 export default {
-    props: ['item'],
+    props: ['item', 'link'],
 }
 </script>
 

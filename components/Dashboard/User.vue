@@ -3,7 +3,7 @@
     .col.first 
         .progress-wrapper.block(v-if="this.$store.getters.PROGRESS.length > 0")
             h2 Прогресс:
-            ProfileProgressItem(v-for="(item, index) in this.$store.getters.PROGRESS" :key="index" :item="item")
+            ProfileProgressItem(v-for="(item, index) in this.$store.getters.PROGRESS" :key="index" :item="item" link="/courses/detail")
         .webinar.block(v-if="this.$store.getters.WEBINAR.length > 0")
             h2 Предстоящие вебинары:
             .webinar-wrapper
