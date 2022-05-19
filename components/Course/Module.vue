@@ -17,6 +17,7 @@
                     span(v-else-if="item.type == 'homework'") Домашнее задание
                     span(v-else-if="item.type == 'test'") Тест
                     span(v-else-if="item.type == 'none'") {{item.type}}
+                NuxtLink(v-if="item.link" :to='item.link').link
             
 </template>
 

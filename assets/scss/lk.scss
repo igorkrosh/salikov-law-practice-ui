@@ -1597,3 +1597,20 @@ section.lk .page .content.hide-menu
         width: calc(100% - 90px);
     }
 }
+
+.journal.block .title-wrapper 
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn.sm
+{
+    padding: 5px 10px;
+    min-width: auto;
+    font-size: 14px;
+    min-height: 30px;
+    font-weight: 600;
+    height: initial;
+}

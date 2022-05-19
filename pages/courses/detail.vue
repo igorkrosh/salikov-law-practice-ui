@@ -19,7 +19,7 @@ export default {
             modules: [
                 {
                     count: 'Модуль 1.',
-                    title: 'Актуальные задания',
+                    title: 'Актуальные занятия',
                     data: [
                         {
                             icon: 'check',
@@ -60,14 +60,24 @@ export default {
                             date: '17.05.2022,  19:00',
                             title: 'Введение в типы данных и циклы',
                             educator: 'Иванов И.И.',
-                            type: 'test'
+                            type: 'test',
+                            link: '/courses/result'
                         },
                         {
                             icon: 'done',
                             date: '17.05.2022,  19:00',
                             title: 'Python. Знакомство с консолью',
                             educator: 'Иванов И.И.',
-                            type: 'test'
+                            type: 'test',
+                            link: '/courses/result'
+                        },
+                        {
+                            icon: 'none',
+                            date: '17.05.2022,  19:00',
+                            title: 'Python. Знакомство с консолью',
+                            educator: 'Иванов И.И.',
+                            type: 'test',
+                            link: '/courses/test'
                         }
                     ]
                 }
@@ -170,6 +180,15 @@ export default {
             display: flex;
             justify-content: space-between;
             align-items: center;
+
+            .link 
+            {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+            }
 
             .info 
             {

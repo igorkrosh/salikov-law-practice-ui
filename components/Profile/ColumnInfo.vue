@@ -26,19 +26,5 @@ export default {
 </script>
 
 <style>
-.journal.block .title-wrapper 
-{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
 
-.btn.sm
-{
-    padding: 5px 10px;
-    min-width: auto;
-    font-size: 14px;
-    min-height: 30px;
-    font-weight: 600;
-}
 </style>
