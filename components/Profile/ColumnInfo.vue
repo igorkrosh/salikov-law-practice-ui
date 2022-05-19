@@ -2,7 +2,9 @@
 .col.second
     CalendarBlock(v-if="calendar")
     .journal.block(v-if="this.$store.getters.JOURNAL.length > 0")
-        h2 Задания:
+        .title-wrapper 
+            h2 Задания:
+            NuxtLink(to="/educator/homework").btn.blue.sm Задания учеников
         .item-wrapper
             ProfileJournalItem(v-for="(item, index) in this.$store.getters.JOURNAL" :key="index" :item="item")
             button.btn(v-if="this.$store.getters.USER.role != 'user'") Добавить
@@ -24,5 +26,19 @@ export default {
 </script>
 
 <style>
+.journal.block .title-wrapper 
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
+.btn.sm
+{
+    padding: 5px 10px;
+    min-width: auto;
+    font-size: 14px;
+    min-height: 30px;
+    font-weight: 600;
+}
 </style>

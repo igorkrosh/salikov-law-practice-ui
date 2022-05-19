@@ -1487,6 +1487,11 @@ section.lk .page .col-wrapper .col.first.page-users
     flex-direction: column;
 }
 
+section.lk .page .col-wrapper .col.second .col.second 
+{
+    padding-left: 0;
+}
+
 section.lk .page .col-wrapper .col.second .recomendation
 {
     display: none;
