@@ -19,7 +19,7 @@
                                     .item-title Ученик: Иванов И.И.
                                     .date Срок сдачи: 22.04.22
                                 .text Задание по курсу: Обращение взыскания на интеллектуальную собственность
-                ModalHomeworkCheck
+                ModalHomeworkCheck(@modal-close="HideModal")
     ProfileColumnInfo
 </template>
 
@@ -32,6 +32,10 @@ export default {
         ShowModal()
         {
             this.$modal.show('homework-modal')
+        },
+        HideModal()
+        {
+            this.$modal.hide('homework-modal')
         }
     }
 }
