@@ -1,6 +1,22 @@
-import Vue from 'vue'
-import VModal from 'vue-js-modal/dist/ssr.nocss'
+import Vue from 'vue';
+import VModal from 'vue-js-modal/dist/ssr.nocss';
+import AbstractModal from 'vue-js-modal/src/components/Modal.vue';
 
-import 'vue-js-modal/dist/styles.css'
+Vue.use(VModal, {
+  componentName: 'abstract-modal',
+});
 
-Vue.use(VModal, { dialog: true })
+Vue.component('Modal', {
+  extends: AbstractModal,
+  computed: {
+    /**
+     * Fix using "adaptive" and "scrollable" at the same time
+     */
+    autoHeight () {
+      if (this.scrollable) {
+        return 'auto';
+      }
+      return AbstractModal.computed.autoHeight.apply(this);
+    }
+  }
+});
