@@ -58,31 +58,7 @@ export default {
         margin-bottom: 40px;
     }
 
-    .test-wrapper 
-    {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-
-        .radio 
-        {
-            padding: 20px;
-            padding-left: 40px;
-            font-weight: 400;
-            width: 100%;
-            border-radius: 10px;
-
-            .checkmark
-            {
-                left: 12px;
-            }
-        }
-
-        .radio:hover 
-        {
-            background: #f0f0f0;
-        }
-    }
+    
 
     .center 
     {
