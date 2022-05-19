@@ -14,11 +14,15 @@
                         button.btn.blue(@click="count++") Добавить блок
                     .couse-info 
                         .input-wrapper 
+                            label Авторы:
+                            input(placeholder="Иванов И.И.")
+                        .input-wrapper 
                             label Дата начала:
                             input(placeholder="04.05.2022")
                         .input-wrapper 
-                            label Задания:
+                            label Продолжительность:
                             input(placeholder="2 недели")
+                        
                         .btn-wrapper
                             button.btn Сохранить
 
