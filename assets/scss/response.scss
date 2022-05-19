@@ -9,18 +9,22 @@
 
         .content 
         {
-            grid-template-columns: 1230px 660px;
+            grid-template-columns: 1465px 425px;
         }
     }
 
     section.lk .page .col-wrapper .col.first 
     {
-        width: 945px;
+        width: 1165px;
     }
 
     section.lk .page .content.hide-menu .col-wrapper .col.first
     {
-        width: 1155px;
+        width: 1375px;
+    }
+    .page-add-course .course-bloks .btn-wrapper
+    {
+        justify-content: space-evenly;
     }
     section.lk .calendar.block
     {

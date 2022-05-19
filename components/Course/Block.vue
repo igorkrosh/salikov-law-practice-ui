@@ -1,6 +1,12 @@
 <template lang="pug">
 .card.course-bloks
     b Блок №{{index}}
+    .input-wrapper 
+        label Название блока
+        input
+    .date-row 
+        .wrapper
+            DatePicker(label="Дата проведения")
     .btn-wrapper
         button.btn(@click="ModalShow(`course-block-stream-${index}`)") Стрим-ссылка 
         button.btn(@click="ModalShow(`course-block-video-${index}`)") Видео-запись
