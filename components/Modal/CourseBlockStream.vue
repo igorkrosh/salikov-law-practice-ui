@@ -4,6 +4,9 @@ Modal(:name="ModalName" height="auto" classes="dialog" :adaptive="true" :scrolla
         .btn-modal-close(@click="$emit('modal-close', ModalName)")
         h3 Добавить стрим-ссылку
         .input-wrapper 
+            label Автор:
+            input(placeholder="Иванов И.И.")
+        .input-wrapper 
             label Название урока:
             .input
                 input

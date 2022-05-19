@@ -4,6 +4,9 @@ Modal(:name="ModalName" height="auto" classes="dialog" :adaptive="true" :scrolla
         .btn-modal-close(@click="$emit('modal-close', ModalName)")
         h3 Добавить видео-запись
         .input-wrapper 
+            label Автор:
+            input(placeholder="Иванов И.И.")
+        .input-wrapper 
             label Ссылка на видео-запись:
             .input
                 input(placeholder="https://www.youtube.com")

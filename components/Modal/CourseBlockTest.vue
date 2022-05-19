@@ -3,6 +3,9 @@ Modal(:name="ModalName" :maxHeight="350" height="auto" width="800"  classes="dia
     .card.course-block
         .btn-modal-close(@click="$emit('modal-close', ModalName)")
         h3 Добавить тест
+        .input-wrapper 
+            label Автор:
+            input(placeholder="Иванов И.И.")
         .question(v-for="(item, index) in test")
             .input-wrapper 
                 label Вопрос №{{index+1}}

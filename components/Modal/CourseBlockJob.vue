@@ -4,6 +4,9 @@ Modal(:name="ModalName" height="auto" width="800" classes="dialog" :adaptive="tr
         .btn-modal-close(@click="$emit('modal-close', ModalName)")
         h3 Добавить задание
         .input-wrapper 
+            label Автор:
+            input(placeholder="Иванов И.И.")
+        .input-wrapper 
             label Задание: 
             TextEditor
         .date-row
