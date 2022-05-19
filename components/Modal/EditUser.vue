@@ -1,5 +1,5 @@
 <template lang="pug">
-Modal(name="edit-user" height="700" classes="dialog" :adaptive="true" )
+Modal(name="edit-user" height="700" classes="dialog" :adaptive="true" :scrollable="true")
     .card.edit-user 
         .row
             .input-wrapper 

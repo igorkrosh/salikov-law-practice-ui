@@ -9,7 +9,7 @@
                 NuxtLink(to="/support").btn-menu.hover
                     .icon
                         img(src="/assets/images/icons/menu/support.png", alt="")
-                    |Поддержка
+                    span Поддержка
                 .user-wrapper
                     HeaderBtnNotification
                     HeaderUserInfo(mobile=true)

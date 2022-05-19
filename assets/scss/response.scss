@@ -13,11 +13,15 @@
         }
     }
 
-    section.lk .page .col-wrapper
+    section.lk .page .col-wrapper .col.first 
     {
-        grid-template-columns: 945px 645px;
+        width: 945px;
     }
 
+    section.lk .page .content.hide-menu .col-wrapper .col.first
+    {
+        width: 1155px;
+    }
     section.lk .calendar.block
     {
         width: 400px;
@@ -57,7 +61,7 @@
 
     .page-events .calendar.block .vc-container .vc-weeks
     {
-        grid-template-columns: repeat(7, 105px);
+        grid-template-columns: repeat(7, 80px);
         grid-auto-rows: 60px;
     }
 
@@ -114,6 +118,33 @@
         grid-template-columns: 65% 35%;
     }
 
+    .menu-wrapper .hide-menu
+    {
+        display: none;
+    }
+
+    .menu-wrapper
+    {
+        width: 70px;
+        padding-right: 20px;
+    }
+
+    section.lk .page .col-wrapper
+    {
+        flex-wrap: wrap;
+        width: calc(100% - 70px);
+    }
+
+    section.lk .page .col-wrapper .col.first
+    {
+        width: 675px;
+    }
+
+    section.lk .page .col-wrapper .col.second .col.second 
+    {
+        width: 100%;
+    }
+
     .content .btn-menu
     {
         font-size: 0;
@@ -166,6 +197,11 @@
         grid-template-columns: repeat(4, 260px);
     }
 
+    .full-page
+    {
+        width: calc(100% - 70px);
+    }
+
 }
 
 @media(max-width: 1200px)
@@ -216,6 +252,15 @@
         grid-template-columns: 460px 430px;
     }
 
+    section.lk .page .col-wrapper .col.first
+    {
+        width: 475px;
+    }
+
+    section.lk .page .col-wrapper .col.second
+    {
+        width: 415px;
+    }
 }
 
 @media(max-width: 1200px)
@@ -368,6 +413,14 @@
 
 @media(max-width: 992px)
 {
+    .full-page
+    {
+        width: 100%;
+    }
+    .menu-wrapper
+    {
+        width: 0;
+    }
     section.lk .container
     {
         max-width: 768px;
@@ -480,7 +533,7 @@
     {
         position: fixed;
         right: -100vw;
-        top: 15px;
+        top: 95px;
         z-index: 20;
         padding: 10px;
         background: #f1fafd;
@@ -571,6 +624,21 @@
     {
         z-index: 1;
     }
+
+    section.lk .page .col-wrapper .col.first, section.lk .page .col-wrapper
+    {
+        width: 100%;
+    }
+
+    .btn-menu
+    {
+        overflow: initial;
+    }
+
+    .menu .user-wrapper
+    {
+        align-items: center;
+    }
 }
 
 @media(max-width: 768px)
@@ -593,8 +661,6 @@
         .card 
         {
             width: 500px;
-            overflow-y: scroll;
-            height: 400px;
         }
     }
 
@@ -624,6 +690,26 @@
     section.lk .page .col-wrapper .col.second .recomendation
     {
         display: block;
+    }
+
+    .full-page
+    {
+        width: 100%;
+    }
+
+    .page-test h3
+    {
+        padding: 0;
+    }
+
+    .page-test-result h3
+    {
+        padding: 0;
+    }
+
+    .page-homework .filter-wrapper
+    {
+        flex-direction: column;
     }
 }
 
@@ -812,5 +898,46 @@
     section.lk .page-events .calendar.block .vc-weeks
     {
         grid-column-gap: 1px;
+    }
+
+    .question-item .question
+    {
+        font-size: 16px;
+    }
+    .page-support .btn-wrapper
+    {
+        justify-content: center;
+    }
+
+    .page-course-detail .course-info
+    {
+        flex-direction: column;
+    }
+
+    .page-test-result .counter
+    {
+        flex-direction: column;
+    }
+
+    .date-row .wrapper, .date-row
+    {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .calendar.popover .date-wrapper
+    {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .answer-wrapper .answer .input-wrapper .text
+    {
+        width: 90%;
+    }
+
+    .answer-wrapper .answer .input-wrapper .radio
+    {
+        width: 10%;
     }
 }

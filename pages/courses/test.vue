@@ -35,38 +35,5 @@ export default {
 </script>
 
 <style lang="scss">
-.page-test 
-{
-    .card
-    {
-        width: 100%;
-    }
 
-    .counter 
-    {
-        width: 100%;
-        text-align: center;
-        font-size: 14px;
-    }
-
-    h3 
-    {
-        font-size: 16px;
-        width: 100%;
-        text-align: center;
-        padding: 0 100px;
-        margin-bottom: 40px;
-    }
-
-    
-
-    .center 
-    {
-        margin-top: 20px;
-        .btn 
-        {
-            margin: 5px;
-        }
-    }
-}
 </style>

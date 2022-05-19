@@ -2,7 +2,7 @@
     .col-wrapper.page-edit
         .col.first
             .progress-wrapper.block(v-if="this.$store.getters.PROGRESS.length > 0")
-                ProfileProgressItem(v-for="(item, index) in this.$store.getters.DONE" :key="index" :item="item")
+                ProfileProgressItem(v-for="(item, index) in this.$store.getters.DONE" :key="index" :item="item" link="/courses/detail")
         ProfileColumnInfo
 </template>
 

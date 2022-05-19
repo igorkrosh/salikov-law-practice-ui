@@ -1,5 +1,5 @@
 <template lang="pug">
-Modal(:name="ModalName" height="auto" width="800" classes="dialog" :adaptive="true")
+Modal(:name="ModalName" height="auto" width="800" classes="dialog" :adaptive="true" :scrollable="true")
     .card.course-block
         .btn-modal-close(@click="$emit('modal-close', ModalName)")
         h3 Добавить задание
