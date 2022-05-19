@@ -53,7 +53,8 @@ export default {
                             date: '17.05.2022,  19:00',
                             title: 'Антимонопольный контроль в сфере экономической концентрации',
                             educator: 'Иванов И.И.',
-                            type: 'homework'
+                            type: 'homework',
+                            link: '/courses/homework'
                         },
                         {
                             icon: 'close',
