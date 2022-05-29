@@ -1025,6 +1025,16 @@ section.lk .bg-white.hide
     position: relative;
 }
 
+.input-wrapper.error 
+{
+    color: #a90808;
+}
+
+.input-wrapper .msg 
+{
+    font-size: 13px;
+}
+
 .input-wrapper
 {
     display: flex;
@@ -1429,19 +1439,19 @@ section.lk .page .col-wrapper .col.first.page-users
 
 }
 
+.center
+{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
 .card 
 {
     .row 
     {
         display: flex;
         justify-content: space-between;
-        width: 100%;
-    }
-
-    .center
-    {
-        display: flex;
-        justify-content: center;
         width: 100%;
     }
 
@@ -2120,4 +2130,12 @@ section.lk .page .content.hide-menu
             }
         }
     }
+}
+
+
+.required
+{
+    color: #a90808;
+    display: inline-block;
+    margin-left: 5px;
 }

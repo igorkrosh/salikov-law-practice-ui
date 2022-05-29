@@ -1,8 +1,8 @@
 <template lang="pug">
-    .page-support.full-page
-        SupportItem(v-for="(item, index) in this.questions" :key="index" :item="item")
-        .btn-wrapper 
-            NuxtLink(to="/callback").btn Написать в техподдержку
+.page-support.full-page
+    SupportItem(v-for="(item, index) in this.questions" :key="index" :item="item")
+    .btn-wrapper 
+        NuxtLink(to="/callback").btn Написать в техподдержку
                     
 </template>
 

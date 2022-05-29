@@ -8,7 +8,7 @@ export const state = () => ({
     achievements: [],
     done: [],
     pagetitle: '',
-    disableBgWhite: false
+    disableBgWhite: false,
 })
 
 export const getters = {

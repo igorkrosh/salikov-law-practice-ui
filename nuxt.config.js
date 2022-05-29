@@ -39,6 +39,17 @@ export default {
       mode: 'client'
     },
     '~plugins/vuescroll.js',
+    {
+      src: '~plugins/vue-notification.js',
+      mode: 'client'
+    },
+    '~/plugins/axios',
+    
+    {
+      src: '~/plugins/route',
+      mode: 'client'
+    },
+    
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -50,8 +61,19 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    "vue2-editor/nuxt"
+    "vue2-editor/nuxt",
+    '@nuxtjs/axios'
   ],
+
+  axios: {
+    baseURL: 'http://localhost:8000', // Used as fallback if no runtime config is provided
+    credentials: true,
+    headers: {
+      common: {
+        'Access-Control-Allow-Origin': '*'
+      }
+    }
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
@@ -59,6 +81,8 @@ export default {
   },
 
   router: {
-    linkExactActiveClass: 'active'
-  }
+    linkExactActiveClass: 'active',
+  },
+
+  loading: '~/components/TransitionRoute.vue'
 }
