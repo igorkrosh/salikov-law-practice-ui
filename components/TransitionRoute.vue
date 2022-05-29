@@ -20,6 +20,13 @@
                 .then(() => {
                     this.finish();
                 })
+                .catch(error => {
+                    if (this.$route.name != 'login')
+                    {
+                        this.$router.push('/login');
+                    }
+                    this.finish();
+                })
             },
             finish() {
                 this.loading = false
