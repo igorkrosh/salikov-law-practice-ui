@@ -19,7 +19,9 @@ section.lk
 </template>
 
 <script>
-
+export default {
+    pageTransition: 'fade'
+}
 </script>
 
 <style lang="scss">

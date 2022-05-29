@@ -27,6 +27,8 @@ export default {
     '~/assets/scss/response.scss'
   ],
 
+  pageTransition: 'fade',
+
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     {
@@ -44,12 +46,14 @@ export default {
       mode: 'client'
     },
     '~/plugins/axios',
-    
     {
       src: '~/plugins/route',
       mode: 'client'
     },
-    
+    {
+      src: '~/plugins/mixin',
+      mode: 'client'
+    },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -84,5 +88,5 @@ export default {
     linkExactActiveClass: 'active',
   },
 
-  loading: '~/components/TransitionRoute.vue'
+  //loading: '~/components/TransitionRoute.vue'
 }

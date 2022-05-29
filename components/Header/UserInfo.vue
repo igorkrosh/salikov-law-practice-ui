@@ -7,7 +7,7 @@
                 img(src="/assets/images/avatar.png", alt="").avatar
                 span Иванов Иван Иванович
             .wrapper(v-if="!mobile")
-                a.btn-menu(v-for="(item, index) in this.menu" :key="index" :href="item.link")
+                NuxtLink.btn-menu(v-for="(item, index) in this.menu" :key="index" :to="item.link")
                     .icon
                         img(:src="item.icon", alt="")
                     |{{item.name}}
@@ -16,7 +16,7 @@
                         img(src="/assets/images/icons/profile/3.png", alt="")
                     |Выход 
         .wrapper(v-if="mobile" :class="{active:active}")
-            a.btn-menu(v-for="(item, index) in this.menu" :key="index" :href="item.link")
+            NuxtLink.btn-menu(v-for="(item, index) in this.menu" :key="index" :to="item.link")
                 .icon
                     img(:src="item.icon", alt="")
                 |{{item.name}}

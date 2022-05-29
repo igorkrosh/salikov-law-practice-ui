@@ -43,6 +43,8 @@ section.lk
             display: flex;
             width: calc(100% - 300px);
             transition: 0.5s;
+            position: relative;
+            z-index: 5;
 
             .col.first 
             {

@@ -59,7 +59,7 @@ export default {
             })
             .then(response => {
                 this.$notify({title: 'Пользователь зарегистрирован', text: 'Вы будете перенаправлены на страницу входа', type: 'success'})
-                this.$router.replace({ path: '/login' });
+                this.$router.push('/login');
             })
             .catch(error => {
                 this.$notify({title: 'Ошибка заполнения формы', text: 'Пожалуйста, проверте правильность отправляемой формы', type: 'error'})

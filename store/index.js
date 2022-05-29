@@ -9,6 +9,7 @@ export const state = () => ({
     done: [],
     pagetitle: '',
     disableBgWhite: false,
+    loading: false
 })
 
 export const getters = {
@@ -41,6 +42,9 @@ export const getters = {
     },
     DISABLE_BG_WHITE: state=> {
         return state.disableBgWhite;
+    },
+    LOADING: state => {
+        return state.loading
     }
 }
 
@@ -74,7 +78,10 @@ export const mutations = {
     },
     SET_DISABLE_BG_WHITE: (state, payload) => {
         state.disableBgWhite = payload;
-    }
+    },
+    SET_LOADING: (state, payload) => {
+        state.loading = payload;
+    },
 }
 
 export const actions = {
@@ -243,5 +250,8 @@ export const actions = {
     },
     SET_DISABLE_BG_WHITE: (content, payload) => {
         content.commit('SET_DISABLE_BG_WHITE', payload);
-    }
+    },
+    SET_LOADING: (context, payload) => {
+        context.commit('SET_LOADING', payload);
+    },
 }

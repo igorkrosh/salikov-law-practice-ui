@@ -441,6 +441,16 @@ img.background
     transform: translate(-50%, -50%) rotate(135deg);
 }
 
+.fade-enter-active, .fade-leave-active
+{
+    transition: opacity 0.5s;
+}
+
+.fade-enter, .fade-leave-to
+{
+    opacity: 0;
+}
+
 /***Container***/
 
 .container

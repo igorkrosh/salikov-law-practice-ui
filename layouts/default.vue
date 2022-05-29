@@ -7,11 +7,11 @@ section.lk
                 Menu(@menu-hide="HideMenu")
                 Nuxt
         .bg-white(ref="bgWhite" :class="{hide: this.$store.getters.DISABLE_BG_WHITE}")
-    //TransitionRoute
 </template>
 
 <script>
 export default {
+    pageTransition: 'fade',
     data() {
         return {
             menuHide: false
