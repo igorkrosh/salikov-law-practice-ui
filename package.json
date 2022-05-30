@@ -11,6 +11,7 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
     "core-js": "^3.19.3",
+    "maska": "^1.5.0",
     "nuxt": "^2.15.8",
     "v-calendar": "^2.4.1",
     "velocity-animate": "^1.5.2",

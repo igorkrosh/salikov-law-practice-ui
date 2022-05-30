@@ -88,132 +88,17 @@ export const actions = {
     SET_USER: (context, payload) => {
         context.commit('SET_USER', payload);
     },
-    LOAD_PROFILE: (context, payload) => {
-        let profile = {
-            user: {
-                role: 'user',
-                points: 35000,
-                allPoints: 712136,
-                invites: 12,
-                name: 'Иванов Иван Иванович',
-                avatar: '',
-            },
-            progress: [
-                {
-                    image: 'https://www.iserbia.rs/files//2018/06/tajna-oruzja-uverljivih-ljudi.jpg',
-                    title: 'Охрана исключительных прав IT-компаний: программное обеспечение и товарные знаки',
-                    lectors: 'Иванов А.А.',
-                    type: 'Курс',
-                    progress: 50
-                },
-                {
-                    image: 'https://www.iserbia.rs/files//2018/06/tajna-oruzja-uverljivih-ljudi.jpg',
-                    title: 'Охрана исключительных прав IT-компаний: программное обеспечение и товарные знаки 2',
-                    lectors: 'Иванов А.А.',
-                    type: 'Курс',
-                    progress: 99
-                }
-            ],
-            webinar: [
-                {
-                    type: 'course',
-                    title: 'Обращение взыскания на интеллектуальную собственность: тренды',
-                    date: '20.04.2022 16:00',
-                    lectors: 'Саликов И.А.',
-                    webinarType: 'Вебинар в рамках курса'
-                },
-                {
-                    type: 'free',
-                    title: 'Обращение взыскания на интеллектуальную собственность: тренды',
-                    date: '20.04.2022 16:00',
-                    lectors: 'Саликов И.А.',
-                    webinarType: 'Вебинар в рамках курса'
-                }
-            ],
-            results: [
-                {
-                    type: 'one',
-                    title: 'Обращение взыскания на интеллектуальную собственность: тренды',
-                    lectors: 'Иванов И.И',
-                    date: '20.04.2022'
-                },
-                {
-                    type: 'two',
-                    title: 'Обращение взыскания на интеллектуальную собственность: тренды',
-                    lectors: 'Иванов И.И',
-                    date: '20.04.2022'
-                },
-                {
-                    type: 'three',
-                    title: 'Обращение взыскания на интеллектуальную собственность: тренды',
-                    lectors: 'Иванов И.И',
-                    date: '20.04.2022'
-                },
-                {
-                    type: 'four',
-                    title: 'Обращение взыскания на интеллектуальную собственность: тренды',
-                    lectors: 'Иванов И.И',
-                    date: '20.04.2022'
-                },
-                {
-                    type: 'five',
-                    title: 'Обращение взыскания на интеллектуальную собственность: тренды',
-                    lectors: 'Иванов И.И',
-                    date: '20.04.2022'
-                }
-            ],
-            journal: [
-                {
-                    type: '',
-                    title: 'Задание по курсу: Обращение взыскания на интеллектуальную собственность',
-                    text: 'Вычислите квадратный корень...',
-                    date: '20.04.2022'
-                },
-                {
-                    type: '',
-                    title: 'Задание по курсу: Обращение взыскания на интеллектуальную собственность',
-                    text: 'Вычислите квадратный корень...',
-                    date: '20.04.2022'
-                }
-            ],
-            achievements: [
-                {
-                    image: 'https://salikov-law-practice-layout.vercel.app/assets/images/icons/achievements/2.png',
-                    title: 'Тяга к знаниям',
-                    text: 'Начать первый курс обучения'
-                },
-                {
-                    image: 'https://salikov-law-practice-layout.vercel.app/assets/images/icons/achievements/3.png',
-                    title: 'Человек паук',
-                    text: 'Прохождение нескольких курсов одновременно'
-                }
-
-            ],
-            done: [
-                {
-                    image: 'https://www.iserbia.rs/files//2018/06/tajna-oruzja-uverljivih-ljudi.jpg',
-                    title: 'Охрана исключительных прав IT-компаний: программное обеспечение и товарные знаки',
-                    lectors: 'Иванов А.А.',
-                    type: 'Курс',
-                    progress: 100
-                },
-                {
-                    image: 'https://www.iserbia.rs/files//2018/06/tajna-oruzja-uverljivih-ljudi.jpg',
-                    title: 'Охрана исключительных прав IT-компаний: программное обеспечение и товарные знаки 2',
-                    lectors: 'Иванов А.А.',
-                    type: 'Курс',
-                    progress: 100
-                }
-            ]
-        }
-
-        context.commit('SET_USER', profile.user);
-        context.commit('SET_PROGRESS', profile.progress);
-        context.commit('SET_WEBINAR', profile.webinar);
-        context.commit('SET_RESULTS', profile.results);
-        context.commit('SET_JOURNAL', profile.journal);
-        context.commit('SET_ACHIEVEMENTS', profile.achievements);
-        context.commit('SET_DONE', profile.done);
+    LOAD_PROFILE: async function (context, payload) {
+        let profile = await this.$axios.get('/api/profile')
+        
+        context.commit('SET_USER', profile.data.user);
+        
+        context.commit('SET_PROGRESS', profile.data.progress);
+        context.commit('SET_WEBINAR', profile.data.webinar);
+        context.commit('SET_RESULTS', profile.data.results);
+        context.commit('SET_JOURNAL', profile.data.journal);
+        context.commit('SET_ACHIEVEMENTS', profile.data.achievements);
+        context.commit('SET_DONE', profile.data.done);
     },
     LOAD_RECOMENDATIONS: (context, payload) => {
         let recomendations = [

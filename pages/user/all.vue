@@ -8,7 +8,7 @@
                 label.radio Администраторы
                     input(type="radio")
                     span.checkmark
-                label.radio Менеджеры
+                //label.radio Менеджеры
                     input(type="radio")
                     span.checkmark
                 label.radio Преподователь
@@ -17,7 +17,7 @@
                 label.radio Ученики
                     input(type="radio")
                     span.checkmark
-                label.radio Авторы
+                //label.radio Авторы
                     input(type="radio")
                     span.checkmark
             .filters-input 

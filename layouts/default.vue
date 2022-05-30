@@ -7,6 +7,7 @@ section.lk
                 Menu(@menu-hide="HideMenu")
                 Nuxt
         .bg-white(ref="bgWhite" :class="{hide: this.$store.getters.DISABLE_BG_WHITE}")
+    NotificationsSystem
 </template>
 
 <script>
@@ -21,7 +22,7 @@ export default {
         SetBgWhite() {
             let left = this.$refs.header.$el.querySelector(".side.white").getBoundingClientRect().left;
             let width = window.innerWidth;
-            this.$refs.bgWhite.style.width = `${width - left - 15}px`;
+            this.$refs.bgWhite.style.width = `${width - left - 35}px`;
         },
         HideMenu() {
             this.menuHide = !this.menuHide;

@@ -1,8 +1,6 @@
 export default function ({ app }) {
     
     app.router.beforeEach((to, from, next) => {
-        console.log(to)
-
         if (to.name == 'index')
         {
             app.router.push('/login');
@@ -15,6 +13,7 @@ export default function ({ app }) {
             next();
         })
         .catch(error => {
+            console.log(error)
             if (to.name == 'login' || to.name == 'register')
             {
                 next();

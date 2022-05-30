@@ -54,6 +54,10 @@ export default {
       src: '~/plugins/mixin',
       mode: 'client'
     },
+    {
+      src: '~/plugins/maska',
+      mode: 'client'
+    },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

@@ -25,7 +25,7 @@ export default {
             menu: {
                 user: [
                     {
-                        link: '/',
+                        link: '/dashboard',
                         icon: '/assets/images/icons/menu/1.png',
                         name: 'Моё обучение'
                     },
@@ -79,7 +79,7 @@ export default {
                         name: 'Обратная связь'
                     },
                     {
-                        link: '/',
+                        link: '/dashboard',
                         icon: '/assets/images/icons/menu/4.png',
                         name: 'Курсы'
                     },
@@ -106,7 +106,7 @@ export default {
                 ],
                 educator: [
                     {
-                        link: '/',
+                        link: '/dashboard',
                         icon: '/assets/images/icons/menu/1.png',
                         name: 'Мои курсы'
                     },

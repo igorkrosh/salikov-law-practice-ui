@@ -79,7 +79,6 @@ export default {
 
                     this.$refs[key].classList.add('error')
                 }
-
             })
         }
     },

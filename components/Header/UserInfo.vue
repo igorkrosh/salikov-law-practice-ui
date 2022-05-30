@@ -5,7 +5,7 @@
         button.btn-lk(@click="active = !active")
             .btn-wrapper
                 img(src="/assets/images/avatar.png", alt="").avatar
-                span Иванов Иван Иванович
+                span {{$store.getters.USER.name}} {{$store.getters.USER.lastName}}
             .wrapper(v-if="!mobile")
                 NuxtLink.btn-menu(v-for="(item, index) in this.menu" :key="index" :to="item.link")
                     .icon
