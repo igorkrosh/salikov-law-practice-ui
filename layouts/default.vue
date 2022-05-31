@@ -21,8 +21,10 @@ export default {
     methods: {
         SetBgWhite() {
             let left = this.$refs.header.$el.querySelector(".side.white").getBoundingClientRect().left;
+            console.log(left)
             let width = window.innerWidth;
-            this.$refs.bgWhite.style.width = `${width - left - 35}px`;
+            console.log(width)
+            this.$refs.bgWhite.style.width = `${width - left - 20}px`;
         },
         HideMenu() {
             this.menuHide = !this.menuHide;

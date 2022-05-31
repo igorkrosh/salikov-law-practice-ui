@@ -966,6 +966,11 @@ section.lk .bg-white.hide
     z-index: 10;
 }
 
+.vm--block-scroll .header 
+{
+    z-index: 5;
+}
+
 .menu-wrapper 
 {
     padding-right: 40px;
@@ -1416,6 +1421,16 @@ section.lk .page .col-wrapper .col.first.page-users
                 padding: 3px 10px;
                 border-radius: 15px;
             }
+
+            .role.educator 
+            {
+                background: #6CC277;
+            }
+
+            .role.admin 
+            {
+                background: #B41066;
+            }
         }
     }
 
@@ -1444,7 +1459,13 @@ section.lk .page .col-wrapper .col.first.page-users
 {
     width: 100%;
     
-
+    .btn-wrapper 
+    {
+        .btn.blue 
+        {
+            margin-left: 15px;
+        }
+    }
 }
 
 .center

@@ -1,21 +1,21 @@
 <template lang="pug">
-    .menu-wrapper(:class="{hide:hide}")
-        .menu(:class="{active:active}")
-            NuxtLink(v-for="(item, index) in this.menu[this.$store.getters.USER.role]" :key="index" :to="item.link").btn-menu
-                .icon 
-                    img(:src="item.icon", alt="")
-                span {{item.name}}
-            .support 
-                NuxtLink(to="/support").btn-menu.hover
-                    .icon
-                        img(src="/assets/images/icons/menu/support.png", alt="")
-                    span Поддержка
-                .user-wrapper
-                    HeaderBtnNotification
-                    HeaderUserInfo(mobile=true)
-        .btn-show-menu(@click="active = !active" :class="{active:active}")
-            span
-        button.hide-menu(@click="HideMenu")
+.menu-wrapper(:class="{hide:hide}")
+    .menu(:class="{active:active}")
+        NuxtLink(v-for="(item, index) in this.menu[this.$store.getters.USER.role]" :key="index" :to="item.link").btn-menu
+            .icon 
+                img(:src="item.icon", alt="")
+            span {{item.name}}
+        .support 
+            NuxtLink(to="/support").btn-menu.hover
+                .icon
+                    img(src="/assets/images/icons/menu/support.png", alt="")
+                span Поддержка
+            .user-wrapper
+                HeaderBtnNotification
+                HeaderUserInfo(mobile=true)
+    .btn-show-menu(@click="active = !active" :class="{active:active}")
+        span
+    button.hide-menu(@click="HideMenu")
 </template>
 
 <script>
