@@ -13,6 +13,16 @@ export default {
             
         }
     },
+    mounted() {
+        if (this.$store.getters.USER.role)
+        {
+            this.$router.push('/dashboard');
+        }
+        else 
+        {
+            this.$router.push('/login')
+        }
+    },
     layout: 'login',
 }
 </script>

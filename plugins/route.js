@@ -1,13 +1,6 @@
 export default function ({ app }) {
     
     app.router.beforeEach((to, from, next) => {
-        if (to.name == 'index')
-        {
-            app.router.push('/login');
-        }
-
-        console.log()
-
         app.$axios.get('/api/user')
         .then(response => {
             next();
