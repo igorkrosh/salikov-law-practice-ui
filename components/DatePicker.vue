@@ -1,5 +1,15 @@
 <template lang="pug">
-vc-date-picker(class="calendar popover" title-position="left" :masks="{ title: 'MMM', weekdays: 'WW' }" color="none" v-model="date" :select-attribute="selectAttribute" mode="dateTime" is24hr)
+vc-date-picker(
+        class="calendar popover" 
+        title-position="left" 
+        :masks="{ title: 'MMM', weekdays: 'WW' }" 
+        color="none" 
+        v-model="date" 
+        :select-attribute="selectAttribute" 
+        mode="dateTime" 
+        is24hr
+        @input="OnInput"
+    )
     template(v-slot="{ inputValue, togglePopover }")
         .date-wrapper 
             label {{label}}
@@ -11,7 +21,7 @@ vc-date-picker(class="calendar popover" title-position="left" :masks="{ title: '
 
 <script>
 export default {
-    props: ['label'],
+    props: ['label', 'value'],
     data() {
         return {
             date: new Date(),
@@ -25,6 +35,15 @@ export default {
             },
         };
     },
+    methods: {
+        OnInput()
+        {
+            this.$emit('input', this.date);
+        }
+    },
+    mounted() {
+        this.date = this.value;
+    }
 }
 </script>
 

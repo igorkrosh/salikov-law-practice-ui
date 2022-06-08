@@ -58,6 +58,10 @@ export default {
       src: '~/plugins/maska',
       mode: 'client'
     },
+    {
+      src: '~/plugins/vue-picture-input',
+      mode: 'client'
+    },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

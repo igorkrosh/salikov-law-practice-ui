@@ -1,9 +1,10 @@
 <template lang="pug">
-    VueEditor(:editor-toolbar="toolbar")
+VueEditor(:editor-toolbar="toolbar" @input="OnInput" v-model="content")
 </template>
 
 <script>
 export default {
+    props: ['value'],
     data() {
         return {
             toolbar: [
@@ -13,9 +14,21 @@ export default {
                 [{ list: "ordered" }, { list: "bullet" }],
                 [{ 'align': [] }],
                 ["code-block"],
-            ]
+            ],
+            content: '',
         }
     },
+    methods:
+    {
+        OnInput()
+        {
+            this.$emit('input', this.content)
+        }
+    },
+    mounted()
+    {
+        this.content = this.value;
+    }
 }
 </script>
 
