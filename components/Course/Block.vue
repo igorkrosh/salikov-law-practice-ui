@@ -15,9 +15,13 @@
                 label(v-if="item.type == 'video'") Тип: Видео-запись
                 label(v-if="item.type == 'job'") Тип: Задания
                 label(v-if="item.type == 'test'") Тип: Тесты
-            .btn-wrapper 
-                button.btn.sm(@click="ConfigureModule(index)") Настроить
-                button.btn.sm.blue(@click="DropModule(index)") Сбросить
+            .btn-wrapper
+                .wrapper.arrows
+                    button.btn.sm(@click="ModuleDown(index)") ▲
+                    button.btn.sm.blue(@click="ModuleUp(index)") ▼
+                .wrapper
+                    button.btn.sm(@click="ConfigureModule(index)") Настроить
+                    button.btn.sm.blue(@click="DropModule(index)") Сбросить
     .btn-wrapper
         button.btn(@click="AddModule('stream')") + Стрим-ссылка 
         button.btn(@click="AddModule('video')") + Видео-запись
@@ -54,6 +58,10 @@ export default {
         },
         DropModule(index)
         {
+            if (this.block.modules[index]['id'] != undefined)
+            {
+                this.$emit('delete-module', this.block.modules[index]['id'], this.block.modules[index]['type'])
+            }
             this.block.modules.splice(index, 1);
         },
         AddModule(type)
@@ -117,6 +125,7 @@ export default {
             
 
             this.selectedIndex = this.block.modules.length - 1;
+            this.CalcModulesIndex()
 
             this.$modal.show(`course-block-${type}-${this.index}`);
         },
@@ -124,7 +133,44 @@ export default {
         {
             this.selectedIndex = index;
             this.$modal.show(`course-block-${this.block.modules[index].type}-${this.index}`);
-        }
+        },
+        CalcModulesIndex()
+        {
+            for (let index = 0; index < this.block.modules.length; index++)
+            {
+                this.block.modules[index].index = index;
+            }
+        },
+        ModuleDown(index)
+        {
+            let toIndex = index - 1;
+
+            if (toIndex < 0)
+            {
+                return;
+            }
+            
+            let element = this.block.modules[index];
+            this.block.modules.splice(index, 1);
+            this.block.modules.splice(toIndex, 0, element);
+
+            this.CalcModulesIndex()
+        },
+        ModuleUp(index)
+        {
+            let toIndex = index + 1;
+            
+            if (toIndex >= this.block.modules.length)
+            {
+                return;
+            }
+
+            let element = this.block.modules[index];
+            this.block.modules.splice(index, 1);
+            this.block.modules.splice(toIndex, 0, element);
+
+            this.CalcModulesIndex()
+        },
     },
     mounted() {
         this.index = this.count;

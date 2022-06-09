@@ -6,56 +6,69 @@
             textarea(v-model="course.name")
     .block 
         h2 Блоки курса 
-        CourseBlock(v-for="(item, index) in course.blocks" :key="index" :count="index + 1" :block="item")
+        CourseBlock(v-for="(item, index) in course.blocks" :key="index" :count="index + 1" :block="item" @delete-module="DeleteModule")
         .add-block
             button.btn.blue(@click="AddBlock") Добавить блок
         .couse-info 
             .input-wrapper 
                 label Авторы:
                 input(placeholder="Иванов И.И." v-model="course.authors")
-            .input-wrapper 
-                label Дата начала:
-                input(placeholder="04.05.2022" v-model="course.date_start" v-maska="'##.##.####'")
+            DatePicker(label="Дата начала:" v-model="course.date_start")
             .input-wrapper 
                 label Продолжительность:
                 input(placeholder="2 недели" v-model="course.duration")
+            .input-wrapper(v-if="oldCover") 
+                label Текущая обложка курса:
+                .cover 
+                    img(:src="oldCover")
             .input-wrapper 
-                label Обложка курса:
-                PictureInput(
-                    ref="pictureInput" 
-                    width="350" 
-                    height="350" 
-                    accept="image/jpeg,image/png" 
-                    size="10" 
-                    :custom-strings="{drag: 'Перетащите изображение или кликните по форме', change: 'Изменить фото', remove: 'Удалить фото'}"
-                    button-class="btn blue sm"
-                    removeButtonClass="btn blue sm"
-                    :removable="true"
-                    @change="PictireOnChange"
-                )
+                label(v-if="oldCover") Новая обложка курса:
+                label(v-else) Обложка курса:
+                ClientOnly
+                    PictureInput(
+                        ref="pictureInput" 
+                        width="350" 
+                        height="350" 
+                        accept="image/jpeg,image/png" 
+                        size="10" 
+                        :custom-strings="{drag: 'Перетащите изображение или кликните по форме', change: 'Изменить фото', remove: 'Удалить фото'}"
+                        button-class="btn blue sm"
+                        removeButtonClass="btn blue sm"
+                        :removable="true"
+                        @change="PictireOnChange"
+                    )
             .btn-wrapper
                 button.btn(@click="SaveCourse") Сохранить
 </template>
 
 <script>
 export default {
+    props: {
+        enterData: {
+            type: Object,
+            default() {
+                return {}
+            }
+        }
+    },
     data() {
         return {
             course: {
                 name: '',
                 authors: '',
-                date_start: '',
+                date_start: new Date(),
                 duration: '',
                 image: '',
                 blocks: [
                     {
                         title: '',
-                        date: '',
+                        date: new Date(),
                         index: 1,
                         modules: []
                     }
                 ]
             },
+            oldCover: '',
         }
     },
     methods: {
@@ -69,18 +82,49 @@ export default {
         
         AddBlock()
         {
-            this.count++;
+            let index = this.course.blocks.length;
             this.course.blocks.push({
                 title: '',
-                date: '',
+                index: index,
+                date: new Date(),
                 modules: []
             })
         },
         SaveCourse()
         {
             this.$emit('save-course', this.course);
+        },
+        CheckEnterData()
+        {
+            if (this.enterData.id != undefined)
+            {
+                this.course = Object.assign({}, this.enterData);
+                this.course.deleted = {
+                    'stream': [],
+                    'video': [],
+                    'job': [],
+                    'test': [],
+                }
+                this.oldCover = this.course.image;
+                this.course.image = '';
+            }
+        },
+        DeleteModule(moduleID, type)
+        {
+            console.log(moduleID, type);
+            this.course.deleted[type].push(moduleID);
         }
     },
+    watch: {
+        enterData()
+        {
+            this.CheckEnterData();
+        }
+    },
+    mounted() 
+    {
+        this.CheckEnterData();
+    }
 }
 </script>
 

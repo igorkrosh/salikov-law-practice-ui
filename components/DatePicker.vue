@@ -1,5 +1,6 @@
 <template lang="pug">
-vc-date-picker(
+ClientOnly
+    vc-date-picker(
         class="calendar popover" 
         title-position="left" 
         :masks="{ title: 'MMM', weekdays: 'WW' }" 
@@ -10,13 +11,13 @@ vc-date-picker(
         is24hr
         @input="OnInput"
     )
-    template(v-slot="{ inputValue, togglePopover }")
-        .date-wrapper 
-            label {{label}}
-            .date
-                button(@click="togglePopover()") 
-                    img(src="/assets/images/icons/calendar.png")
-                input(:value="inputValue" readonly)
+        template(v-slot="{ inputValue, togglePopover }")
+            .date-wrapper 
+                label {{label}}
+                .date
+                    button(@click="togglePopover()") 
+                        img(src="/assets/images/icons/calendar.png")
+                    input(:value="inputValue" readonly)
 </template>
 
 <script>
@@ -41,8 +42,15 @@ export default {
             this.$emit('input', this.date);
         }
     },
+    watch: {
+        value()
+        {
+            this.date = new Date(this.value);
+        }
+    },
     mounted() {
         this.date = this.value;
+
     }
 }
 </script>
