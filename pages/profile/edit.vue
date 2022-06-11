@@ -1,13 +1,7 @@
 <template lang="pug">
 .col-wrapper.page-edit
     .col.first
-        .user.block
-            img(src="/assets/images/avatar_big.png", alt="").avatar
-            .wrapper
-                span {{$store.getters.USER.name}} {{$store.getters.USER.lastName}}
-                span.type(v-if="$store.getters.USER.role == 'user'") Слушатель
-                span.type(v-if="$store.getters.USER.role == 'admin'") Администратор
-                span.type(v-if="$store.getters.USER.role == 'educator'") Преподаватель
+        ProfileUserBlock
         .info.block 
             h2 Информация
             form.card(@submit.prevent="EditProfile" v-if="this.$store.getters.USER.name != undefined")
@@ -75,10 +69,9 @@ export default {
             .catch(error => {
                 this.$notify({title: 'Ошибка!', text: 'Ошибка отправки формы.', type: 'error'})
             })
-        }
-    },
-    watch: {
-        '$store.getters.USER': function () {
+        },
+        SetUser()
+        {
             let profile = this.$store.getters.USER;
 
             this.user.name = profile.name;
@@ -89,8 +82,14 @@ export default {
             this.user.email = profile.email;
         }
     },
+    watch: {
+        '$store.getters.USER': function () {
+            this.SetUser();
+        }
+    },
     mounted() {
-        this.$store.dispatch('SET_PAGETITLE', 'Редактирование профиля')        
+        this.$store.dispatch('SET_PAGETITLE', 'Редактирование профиля');
+        this.SetUser();  
     }
 }
 </script>
