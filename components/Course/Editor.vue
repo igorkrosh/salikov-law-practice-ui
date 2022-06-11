@@ -1,20 +1,20 @@
 <template lang="pug">
 .page-add-course 
     .block
-        .card.course-name 
+        .card.course-name(:class="{error: errors.includes('name')}")
             span Название курса 
             textarea(v-model="course.name")
     .block 
         h2 Блоки курса 
-        CourseBlock(v-for="(item, index) in course.blocks" :key="index" :count="index + 1" :block="item" @delete-module="DeleteModule")
+        CourseBlock(v-for="(item, index) in course.blocks" :key="index" :count="index + 1" :block="item" @delete-module="DeleteModule" @delete-block="DeteleBlock")
         .add-block
             button.btn.blue(@click="AddBlock") Добавить блок
         .couse-info 
-            .input-wrapper 
+            .input-wrapper(:class="{error: errors.includes('authors')}")
                 label Авторы:
                 input(placeholder="Иванов И.И." v-model="course.authors")
             DatePicker(label="Дата начала:" v-model="course.date_start")
-            .input-wrapper 
+            .input-wrapper(:class="{error: errors.includes('duration')}")
                 label Продолжительность:
                 input(placeholder="2 недели" v-model="course.duration")
             .input-wrapper(v-if="oldCover") 
@@ -64,11 +64,13 @@ export default {
                         title: '',
                         date: new Date(),
                         index: 1,
-                        modules: []
+                        modules: [],
+                        errors: [],
                     }
                 ]
             },
             oldCover: '',
+            errors: []
         }
     },
     methods: {
@@ -87,12 +89,16 @@ export default {
                 title: '',
                 index: index,
                 date: new Date(),
-                modules: []
+                modules: [],
+                errors: [],
             })
         },
         SaveCourse()
         {
-            this.$emit('save-course', this.course);
+            if (this.CheckCourse())
+            {
+                this.$emit('save-course', this.course);
+            }
         },
         CheckEnterData()
         {
@@ -111,8 +117,55 @@ export default {
         },
         DeleteModule(moduleID, type)
         {
-            console.log(moduleID, type);
             this.course.deleted[type].push(moduleID);
+        },
+        DeteleBlock(blockID)
+        {
+            console.log(blockID)
+            this.course.blocks.splice(blockID - 1, 1);
+        },
+        CheckCourse()
+        {
+            this.errors = [];
+
+            for (let block of this.course.blocks)
+            {
+                block.errors = [];
+            }
+            
+            if (this.course.name == '')
+            {
+                this.errors.push('name');
+            }
+
+            if (this.course.authors == '')
+            {
+                this.errors.push('authors');
+            }
+
+            if (this.course.duration == '')
+            {
+                this.errors.push('duration');
+            }
+
+            let check = true;
+
+            for (let block of this.course.blocks)
+            {
+                if (block.title == '')
+                {
+                    block.errors.push('title');
+                    check = false;
+                }
+            }
+
+            if (this.errors.length > 0 || !check)
+            {
+                this.$notify({title: 'Ошибка формы курса', text: 'Проверте правильность заполнения полей', type: 'error'})
+                return false;
+            }
+
+            return true;
         }
     },
     watch: {

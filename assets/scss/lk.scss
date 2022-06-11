@@ -1039,9 +1039,14 @@ section.lk .bg-white.hide
     position: relative;
 }
 
-.input-wrapper.error 
+.input-wrapper.error, .course-name.error
 {
     color: #a90808;
+
+    input, textarea
+    {
+        border-color: #f1b2b2;
+    }
 }
 
 .input-wrapper .msg 

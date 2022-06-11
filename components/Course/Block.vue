@@ -1,7 +1,8 @@
 <template lang="pug">
 .card.course-bloks
+    button.btn-modal-close(@click="$emit('delete-block', index)")
     b Блок №{{index}}
-    .input-wrapper 
+    .input-wrapper(:class="{error: block.errors.includes('title')}")
         label Название блока
         input(v-model="block.title")
     .date-row 
@@ -27,10 +28,10 @@
         button.btn(@click="AddModule('video')") + Видео-запись
         button.btn.blue(@click="AddModule('job')") + Задания
         button.btn.blue(@click="AddModule('test')") + Тесты
-    ModalCourseBlockStream(:blockId="index" v-model="block.modules[selectedIndex]" @modal-close="ModalClose")
-    ModalCourseBlockVideo(:blockId="index" v-model="block.modules[selectedIndex]" @modal-close="ModalClose")
-    ModalCourseBlockJob(:blockId="index" v-model="block.modules[selectedIndex]" @modal-close="ModalClose")
-    ModalCourseBlockTest(:blockId="index" v-model="block.modules[selectedIndex]" @modal-close="ModalClose")
+    ModalCourseBlockStream(:blockId="index" v-model="block.modules[selectedIndex]" @modal-close="ModalClose" @drop-module="DropModule")
+    ModalCourseBlockVideo(:blockId="index" v-model="block.modules[selectedIndex]" @modal-close="ModalClose" @drop-module="DropModule")
+    ModalCourseBlockJob(:blockId="index" v-model="block.modules[selectedIndex]" @modal-close="ModalClose" @drop-module="DropModule")
+    ModalCourseBlockTest(:blockId="index" v-model="block.modules[selectedIndex]" @modal-close="ModalClose" @drop-module="DropModule")
 </template>
 
 <script>
