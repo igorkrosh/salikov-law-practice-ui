@@ -17,6 +17,7 @@ export default {
             this.$axios.$post('/api/course/create', course)
             .then(response => {
                 this.$notify({title: 'Успешно', text: 'Курс успешно создан', type: 'success'});
+                this.$router.push('/dashboard');
             }) 
             .catch(error => {
                 this.$notify({title: 'Ошибка', text: 'Ошибка создания курса', type: 'error'});

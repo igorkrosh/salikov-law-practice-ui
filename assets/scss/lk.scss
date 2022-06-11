@@ -1039,6 +1039,13 @@ section.lk .bg-white.hide
     position: relative;
 }
 
+.btn.red 
+{
+    background: #a90808;
+    border: none;
+    color: #fff;
+}
+
 .input-wrapper.error, .course-name.error
 {
     color: #a90808;
@@ -2271,4 +2278,27 @@ section.lk .page .content.hide-menu
 #picture-input
 {
     z-index: 0;
+}
+
+.course-delete
+{
+    h3 
+    {
+        width: 100%;
+        text-align: center;
+    }
+
+    .btn-wrapper
+    {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .btn.red 
+    {
+        margin-right: 20px;
+    }
 }

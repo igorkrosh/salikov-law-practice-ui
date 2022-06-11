@@ -1,5 +1,5 @@
 <template lang="pug">
-a(href="").item 
+NuxtLink(:to="EditLink").item 
     .img 
         img(:src="item.image", alt="")
     .desc 
@@ -12,6 +12,12 @@ a(href="").item
 <script>
 export default {
     props: ['item'],
+    computed: {
+        EditLink()
+        {
+            return `/courses/edit/${this.item.id}`
+        }
+    }
 }
 </script>
 

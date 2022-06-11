@@ -30,8 +30,8 @@
                         width="350" 
                         height="350" 
                         accept="image/jpeg,image/png" 
-                        size="10" 
-                        :custom-strings="{drag: 'Перетащите изображение или кликните по форме', change: 'Изменить фото', remove: 'Удалить фото'}"
+                        size="2" 
+                        :custom-strings="{drag: 'Перетащите изображение или кликните по форме', change: 'Изменить фото', remove: 'Удалить фото', fileSize: 'Размер изображения не должен превышать 2 Мб'}"
                         button-class="btn blue sm"
                         removeButtonClass="btn blue sm"
                         :removable="true"
@@ -39,6 +39,9 @@
                     )
             .btn-wrapper
                 button.btn(@click="SaveCourse") Сохранить
+            .btn-wrapper(v-if="course.id")
+                button.btn.red(@click="$modal.show('course-delete')") Удалить
+    ModalCourseDelete(@delete-course="DeleteCourse")
 </template>
 
 <script>
@@ -111,6 +114,10 @@ export default {
                     'job': [],
                     'test': [],
                 }
+                for (let block of this.course.blocks)
+                {
+                    block.errors = [];
+                }
                 this.oldCover = this.course.image;
                 this.course.image = '';
             }
@@ -166,6 +173,17 @@ export default {
             }
 
             return true;
+        },
+        DeleteCourse()
+        {
+            this.$axios.$delete(`/api/course/${this.course.id}/delete`)
+            .then(response => {
+                this.$notify({title: 'Успешно', text: 'Курс удален', type: 'success'})
+                this.$router.push('/dashboard')
+            })
+            .catch(error => {
+                this.$notify({title: 'Ошибка удаления курса', text: error.response.data.message, type: 'error'});
+            })
         }
     },
     watch: {
