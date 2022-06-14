@@ -1,6 +1,6 @@
 <template lang="pug">
-    .calendar.block
-        vc-calendar(is-expanded title-position="left" :masks="{ title: 'MMM', weekdays: 'WW' }" :attributes='attrs' color="none")
+.calendar.block
+    vc-calendar(is-expanded title-position="left" :masks="{ title: 'MMM', weekdays: 'WW' }" :attributes='attrs' color="none")
 </template>
 
 <script>
@@ -8,13 +8,44 @@ export default {
     data() {
         return {
             attrs: [
-                {
-                    key: 'today',
-                    highlight: false,
-                    dates: new Date(),
-                },
+                
             ]
         }
+    },
+    methods: {
+        SetDates()
+        {
+            this.attrs = [];
+            this.attrs.push({
+                key: 'today',
+                highlight: false,
+                dates: new Date(),
+            })
+
+            for (let date of this.$store.getters.CALENDAR)
+            {
+                this.attrs.push({
+                    highlight: {
+                        color: date.color,
+                        fillMode: 'light'
+                    },
+                    dates: new Date(date.date),
+                    popover: {
+                        label: date.text,
+                        visibility: 'focus'
+                    }
+                })
+            }
+        }
+    },
+    watch: {
+        '$store.getters.CALENDAR': function () {
+            this.SetDates();
+        }
+    },
+    mounted()
+    {
+        this.SetDates();
     }
 }
 </script>

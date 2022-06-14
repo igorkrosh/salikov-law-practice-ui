@@ -21,7 +21,6 @@ export default {
             this.$axios.$post(`/api/course/${this.courseId}/edit`, course)
             .then(response => {
                 this.$notify({title: 'Успешно', text: 'Курс сохранен', type: 'success'})
-                //this.LoadCourse();
                 this.$router.push('/dashboard');
             })
             .catch(error => {

@@ -9,7 +9,8 @@ export const state = () => ({
     done: [],
     pagetitle: '',
     disableBgWhite: false,
-    loading: false
+    loading: false,
+    calendar: []
 })
 
 export const getters = {
@@ -45,6 +46,9 @@ export const getters = {
     },
     LOADING: state => {
         return state.loading
+    },
+    CALENDAR: state => {
+        return state.calendar;
     }
 }
 
@@ -82,6 +86,9 @@ export const mutations = {
     SET_LOADING: (state, payload) => {
         state.loading = payload;
     },
+    SET_CALENDAR: (state, payload) => {
+        state.calendar = payload;
+    }
 }
 
 export const actions = {
@@ -139,4 +146,12 @@ export const actions = {
     SET_LOADING: (context, payload) => {
         context.commit('SET_LOADING', payload);
     },
+    SET_CALENDAR: (content, payload) => {
+        content.commit('SET_CALENDAR', payload);
+    },
+    LOAD_CALENDAR: async function (content, payload) {
+        let calendar = await this.$axios.$get('/api/user/calendar');
+
+        content.commit('SET_CALENDAR', calendar);
+    }
 }
