@@ -7,7 +7,7 @@
             NuxtLink(v-if="this.$store.getters.USER.role != 'user'" to="/educator/homework").btn.blue.sm Задания учеников
         .item-wrapper
             ProfileJournalItem(v-for="(item, index) in this.$store.getters.JOURNAL" :key="index" :item="item")
-            button.btn(v-if="this.$store.getters.USER.role != 'user'") Добавить
+            //button.btn(v-if="this.$store.getters.USER.role != 'user'") Добавить
     .achievements.block(v-if="this.$store.getters.USER.role == 'user'")
         h2 Достижения:
         .item-wrapper 
