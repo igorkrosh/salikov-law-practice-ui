@@ -59,7 +59,7 @@ export default {
         {
             this.module.test[index].answer.push({
                 text: '',
-                corrent: false
+                correct: false
             })
         },
         AddQuestion()
@@ -69,7 +69,7 @@ export default {
                 answer: [
                     {
                         text: '',
-                        corrent: false
+                        correct: false
                     }
                 ]
             })

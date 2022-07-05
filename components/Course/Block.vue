@@ -115,7 +115,7 @@ export default {
                             answer: [
                                 {
                                     text: '',
-                                    corrent: false,
+                                    correct: false,
                                     comment: '',
                                 }
                             ]

@@ -1,5 +1,5 @@
 <template lang="pug">
-.page-add-course 
+.page
     .block
         .card.course-name(:class="{error: errors.includes('name')}")
             span Название курса 

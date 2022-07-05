@@ -17,9 +17,5 @@ export default {
 </script>
 
 <style>
-.iframe-wrapper 
-{
-    width: 500px;
-    height: 300px;
-}
+
 </style>

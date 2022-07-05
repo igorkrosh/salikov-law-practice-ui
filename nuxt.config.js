@@ -62,6 +62,10 @@ export default {
       src: '~/plugins/vue-picture-input',
       mode: 'client'
     },
+    {
+      src: '~/plugins/vue-kinescope-player.js',
+      mode: 'client'
+    },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

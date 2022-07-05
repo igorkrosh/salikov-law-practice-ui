@@ -1,8 +1,8 @@
 <template lang="pug">
-.col-wrapper
+.col-wrapper.page-add-course 
     .col.first
         CourseEditor(@save-course="EditCourse" v-show="course" :enterData="course" :class="{disable: disable}")
-    ProfileColumnInfo
+    ProfileColumnEditor
 </template>
 
 <script>

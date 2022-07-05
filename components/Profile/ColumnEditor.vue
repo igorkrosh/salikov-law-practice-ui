@@ -6,7 +6,6 @@
 
 <script>
 export default {
-
 }
 </script>
 
@@ -21,6 +20,7 @@ export default {
             align-items: center;
             font-size: 15px;
             margin-bottom: 10px;
+            padding: 10px;
 
             img 
             {

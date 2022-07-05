@@ -8,13 +8,13 @@
         .detail 
             .item.border-bottom(v-for="(item, index) in module.data" :class="item.icon")
                 .info 
-                    .date {{item.date}}
+                    .date(v-if="item.date") {{item.date}}
                     .course-title {{item.title}}
                     .name {{item.educator}}
                 .type(:class="item.type")
-                    span(v-if="item.type == 'webinar'") Вебинар
-                    span(v-else-if="item.type == 'record'") Запись
-                    span(v-else-if="item.type == 'homework'") Домашнее задание
+                    span(v-if="item.type == 'stream'") Стрим
+                    span(v-else-if="item.type == 'video'") Видео
+                    span(v-else-if="item.type == 'job'") Домашнее задание
                     span(v-else-if="item.type == 'test'") Тест
                     span(v-else-if="item.type == 'none'") {{item.type}}
                 NuxtLink(v-if="item.link" :to='item.link').link
