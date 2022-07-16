@@ -36,7 +36,7 @@ export default {
     methods: {
         LoadData()
         {
-            this.$axios.$get(`/api/module/test/${this.moduleId}/`)
+            this.$axios.$get(`/api/module/test/${this.moduleId}`)
             .then(response => {
                 this.test = response;
             })

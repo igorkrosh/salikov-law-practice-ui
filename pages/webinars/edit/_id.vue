@@ -15,12 +15,25 @@ export default {
         }
     },
     methods: {
-        EditWebinar(webinar)
+        EditWebinar(webinar, cover)
         {
             this.disable = true;
             this.$axios.$post(`/api/webinar/${this.webinarId}/edit`, webinar)
             .then(response => {
                 this.$notify({title: 'Успешно', text: 'Вебинар сохранен', type: 'success'})
+
+                if (cover != null)
+                {
+                    let formData = new FormData()
+                    formData.append('cover', cover)
+
+                    this.$axios.$post(`/api/file/webinar/${response.id}/cover`, formData)
+                    .then(response => {})
+                    .catch(error => {
+                        this.$notify({title: 'Ошибка загрузки обложки курса', text: error.response.data.message, type: 'error'})
+                    })
+                }
+
                 this.$router.push('/webinars');
             })
             .catch(error => {

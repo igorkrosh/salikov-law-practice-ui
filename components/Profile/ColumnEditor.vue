@@ -25,6 +25,9 @@ export default {
             img 
             {
                 margin-right: 15px;
+                max-width: 32px;
+                max-height: 32px;
+                border-radius: 50%;
             }
         }
     }

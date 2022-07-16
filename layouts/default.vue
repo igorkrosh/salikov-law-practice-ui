@@ -37,6 +37,7 @@ export default {
         this.$store.dispatch("LOAD_PROFILE");
         this.$store.dispatch("LOAD_RECOMENDATIONS");
         this.$store.dispatch("LOAD_CALENDAR");
+        this.$store.dispatch('admin/LOAD_TASKS');
         window.addEventListener("resize", this.SetBgWhite);
         this.SetBgWhite();
     },

@@ -1,32 +1,83 @@
 <template lang="pug">
 Modal(name="homework-modal" height="auto" width="800" classes="dialog" :adaptive="true" :scrollable="true")
-    .card.homework-block
+    .card.homework-block(v-if="data")
         .btn-modal-close(@click="$emit('modal-close', 'homework-modal')")
         h3 Проверка задания 
-        h4 Ученик <b>Иванов И.И.</b>
-        .desc 
-            b 1. Вычислить квадратный корень
-            b 2. Дата революции в России
+        h4 Ученик: <b>{{data.user}}</b>
+        .desc(v-html="data.question")
         .block-wrapper 
             label Ответ
-            .answer 
+            .answer(v-html="data.answer")
         .block-wrapper 
             label Коментарий преподователя
-            TextEditor
+            TextEditor(v-model="comment")
         .results-wrapper
-                .icon.one
-                .icon.two
-                .icon.three
-                .icon.four
-                .icon.five
+                .icon.one(:class="{active: score == 'one'}" @click="score = 'one'")
+                .icon.two(:class="{active: score == 'two'}" @click="score = 'two'")
+                .icon.three(:class="{active: score == 'three'}" @click="score = 'three'")
+                .icon.four(:class="{active: score == 'four'}" @click="score = 'four'")
+                .icon.five(:class="{active: score == 'five'}" @click="score = 'five'")
         .center
-            button.btn Подтвердить
+            button.btn(@click="SendTask") Подтвердить
             
 </template>
 
 <script>
 export default {
-    
+    props: ['taskId'],
+    data() {
+        return {
+            data: null,
+            comment: '',
+            score: '',
+        }
+    },
+    watch: {
+        taskId() {
+            this.LoadTask();
+        }
+    },
+    methods: {
+        LoadTask()
+        {
+            if (this.taskId == null)
+            {
+                return 
+            }
+
+            this.$axios.$get(`/api/task/${this.taskId}/get`)
+            .then(response => {
+                this.data = response;
+                this.comment = this.data.comment;
+                this.score = this.data.score;
+            })
+            .catch(error => {
+                this.$notify({title: 'Ошибка загрузки задания', text: error.response.data.message, type: 'error'});
+            })
+        },
+        SendTask()
+        {
+            if (this.score == '')
+            {
+                this.$notify({title: 'Ошибка', text: 'Вы не поставили оценку', type: 'error'})
+                return;
+            }
+            this.$axios.$post(`/api/task/${this.taskId}/check`, {
+                comment: this.comment,
+                score: this.score
+            })
+            .then(response => {
+                this.$notify({title: 'Успешно', text: 'Задание сохранено', type: 'success'})
+                this.$emit('modal-close');
+            })
+            .catch(error => {
+                this.$notify({title: 'Ошибка отправки проверки', text: error.response.data.message, type: 'error'})
+            })
+        }
+    },
+    mounted() {
+        this.LoadTask();
+    }
 }
 </script>
 

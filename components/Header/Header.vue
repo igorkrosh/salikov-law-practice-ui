@@ -9,7 +9,7 @@
                             img(src="~assets/images/logo.png", alt="")
                     .col.second
                         h1 {{this.$store.getters.PAGETITLE}}
-                        HeaderSearchBlock
+                        //HeaderSearchBlock
             .side.white
                 HeaderUserInfo
 </template>

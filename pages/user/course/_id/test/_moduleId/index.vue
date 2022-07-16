@@ -1,5 +1,5 @@
 <template lang="pug">
-.page-test.full-page
+.page-test.full-page.page-homework
     .card(v-if="data")
         span.counter Вопрос {{index}} из {{data.test.length}}
         h3 {{data.test[index - 1].question}}
@@ -10,6 +10,8 @@
         .center 
             button.btn.blue.sm(@click="Prev") Назад
             button.btn.sm(@click="Next") Далее
+        .btn-wrapper 
+            a.link(v-if="data.file" :href="data.file" target="_blank") Скачать файл
 </template>
 
 <script>
@@ -26,7 +28,7 @@ export default {
     methods: {
         LoadTest()
         {
-            this.$axios.$get(`/api/module/test/${this.moduleId}/`)
+            this.$axios.$get(`/api/module/test/${this.moduleId}`)
             .then(response => {
                 this.data = response;
 

@@ -4,7 +4,8 @@
     .user 
         button.btn-lk(@click="active = !active")
             .btn-wrapper
-                img(src="/assets/images/avatar.png", alt="").avatar
+                img(v-if="$store.getters.USER.avatar" :src="$store.getters.USER.avatar", alt="").avatar
+                img(v-else src="/assets/images/avatar.jpg", alt="").avatar
                 span {{$store.getters.USER.name}} {{$store.getters.USER.lastName}}
             .wrapper(v-if="!mobile")
                 NuxtLink.btn-menu(v-for="(item, index) in this.menu" :key="index" :to="item.link")

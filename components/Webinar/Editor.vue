@@ -58,25 +58,22 @@ export default {
                 name: '',
                 authors: '',
                 date_start: new Date(),
-                image: '',
                 link: '',
             },
-            oldCover: null
+            oldCover: null,
+            cover: null,
         }
     },
     methods: {
         PictireOnChange(image) 
         {
-            if (image)
-            {
-                this.webinar.image = image;
-            }
+            this.cover = this.$refs.pictureInput.$el.querySelector('input[type=file]').files[0]
         },
         SaveWebinar()
         {
             if (this.CheckWebinar())
             {
-                this.$emit('save-webinar', this.webinar)
+                this.$emit('save-webinar', this.webinar, this.cover)
             }
             else 
             {

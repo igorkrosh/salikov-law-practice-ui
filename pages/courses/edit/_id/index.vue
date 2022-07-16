@@ -15,12 +15,34 @@ export default {
         }
     },
     methods: {
-        EditCourse(course)
+        EditCourse(course, cover, files)
         {
+            let formData = new FormData()
+            formData.append("course", JSON.stringify(course));
+
+            for (let file of files) 
+            {
+                formData.append(file.fileId, file.file)    
+            }
+
             this.disable = true;
-            this.$axios.$post(`/api/course/${this.courseId}/edit`, course)
+
+            this.$axios.$post(`/api/course/${this.courseId}/edit`, formData)
             .then(response => {
                 this.$notify({title: 'Успешно', text: 'Курс сохранен', type: 'success'})
+                
+                if (cover != null)
+                {
+                    let formData = new FormData()
+                    formData.append('cover', cover)
+
+                    this.$axios.$post(`/api/file/course/${response.id}/cover`, formData)
+                    .then(response => {})
+                    .catch(error => {
+                        this.$notify({title: 'Ошибка загрузки обложки курса', text: error.response.data.message, type: 'error'})
+                    })
+                }
+                
                 this.$router.push('/dashboard');
             })
             .catch(error => {

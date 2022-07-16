@@ -11,26 +11,35 @@
                     input(placeholder="Поиск по заданию")
             .journal.block
                 .item-wrapper
-                    .item(@click="ShowModal")
-                        .row
-                            img(src="~/assets/images/icons/achievements/1.png", alt="").icon
+                    .item(v-for="(item, index) in this.$store.getters['admin/TASKS']" :key="index" @click="ShowModal(item.task_id)")
+                        .row.results-wrapper
+                            img(src="~/assets/images/icons/achievements/1.png", alt="" v-if="item.score == ''").icon
+                            .icon(v-else :class="item.score" )
                             .wrapper 
                                 .wrapper
-                                    .item-title Ученик: Иванов И.И.
-                                    .date Срок сдачи: 22.04.22
-                                .text Задание по курсу: Обращение взыскания на интеллектуальную собственность
-                ModalHomeworkCheck(@modal-close="HideModal")
+                                    .item-title Ученик: {{item.user}}
+                                    .date Срок сдачи: {{item.date}}
+                                .text
+                                    b {{item.course}}
+                                .text {{item.module}}
+                ModalHomeworkCheck(@modal-close="HideModal" :taskId="taskId")
     ProfileColumnInfo
 </template>
 
 <script>
 export default {
+    data() {
+        return {
+            taskId: null,
+        }
+    },
     mounted() {
         this.$store.dispatch('SET_PAGETITLE', 'Задания учеников')
     },
     methods: {
-        ShowModal()
+        ShowModal(id)
         {
+            this.taskId = id;
             this.$modal.show('homework-modal')
         },
         HideModal()

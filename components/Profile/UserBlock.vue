@@ -1,6 +1,7 @@
 <template lang="pug">
 .user.block
-    img(src="/assets/images/avatar_big.png", alt="").avatar
+    img(v-if="$store.getters.USER.avatar" :src="$store.getters.USER.avatar", alt="").avatar
+    img(v-else src="/assets/images/avatar.jpg", alt="").avatar
     .wrapper
         span {{$store.getters.USER.name}} {{$store.getters.USER.lastName}}
         span.type(v-if="$store.getters.USER.role == 'user'") Слушатель

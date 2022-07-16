@@ -23,6 +23,10 @@
                 .input-wrapper 
                     label E-mail
                     input(type="email" placeholder="mail@mail.com" v-model="$store.getters.USER.email" readonly)
+        //.info.block 
+            .card 
+                InputFile(name="asd" v-model="file" @input="input")
+                button.btn(@click="UploadVideo")
     ProfileColumnInfo
 </template>
 
@@ -30,6 +34,43 @@
 export default {
     mounted() {
         this.$store.dispatch('SET_PAGETITLE', 'Профиль')
+    },
+    data() {
+        return {
+            file: ''
+        }
+    },
+    methods: {
+        input(file) 
+        {
+            console.log(file)
+            let fileReader = new FileReader()
+        },
+        UploadVideo()
+        {
+            let config = {
+                method: 'post',
+                url: 'https://uploader.kinescope.io/video',
+                headers: { 
+                    'Authorization': 'Bearer 529e2c9c-7254-4fad-883d-1ba138fec8b3',
+                    'X-Project-ID': '36f71d1c-945e-49a8-b8a4-8dd37d329596', 
+                    'X-Folder-ID': '', 
+                    'X-Video-Title': 'New video', 
+                    'X-Video-Description': 'Video description', 
+                    'X-File-Name': 'video.mp4', 
+                    'Content-Type': 'text/plain'
+                },
+                data : this.file
+            };
+
+            this.$axios(config)
+            .then(function (response) {
+                console.log(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        }
     }
 }
 </script>

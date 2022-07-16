@@ -10,7 +10,8 @@ export const state = () => ({
     pagetitle: '',
     disableBgWhite: false,
     loading: false,
-    calendar: []
+    calendar: [],
+    notifications: [],
 })
 
 export const getters = {
@@ -49,6 +50,9 @@ export const getters = {
     },
     CALENDAR: state => {
         return state.calendar;
+    },
+    NOTIFICATIONS: state => {
+        return state.notifications;
     }
 }
 
@@ -88,6 +92,9 @@ export const mutations = {
     },
     SET_CALENDAR: (state, payload) => {
         state.calendar = payload;
+    },
+    SET_NOTIFICATIONS: (state, payload) => {
+        state.notifications = payload;
     }
 }
 
@@ -153,5 +160,13 @@ export const actions = {
         let calendar = await this.$axios.$get('/api/user/calendar');
 
         content.commit('SET_CALENDAR', calendar);
+    },
+    SET_NOTIFICATIONS: (context, payload) => {
+        context.commit('SET_NOTIFICATIONS', payload)
+    },
+    LOAD_NOTIFICATIONS: async function (context, payload) {
+        let notifications = await this.$axios.$get('/api/notification/get')
+
+        context.commit('SET_NOTIFICATIONS', notifications)
     }
 }

@@ -10,11 +10,15 @@ Modal(:name="ModalName" height="auto" classes="dialog" :adaptive="true" :scrolla
             label Название урока:
             .input
                 input(v-model="module.title")
-        .input-wrapper(:class="{error: errors.includes('link')}")
+        //.input-wrapper(:class="{error: errors.includes('link')}")
             label Ссылка на видео-запись:
             .input
                 input(placeholder="https://www.youtube.com" v-model="module.link")
+        //
         VideoIframe(v-if="module.link" :link="module.link")
+        .file-wrapper
+            a(v-if="module.file_path" :href="module.file_path", target="_blank", rel="noopener noreferrer").link Скачать файл
+            InputFile(:name="`video-file-${blockId}-${module.index}`" v-model="module.file" @input="FileInput")
         .center 
             button.btn(@click="SaveModule") Подтвердить
 
@@ -60,12 +64,12 @@ export default {
             {
                 this.errors.push('title')
             }
-
+            /*
             if (this.module.link == '')
             {
                 this.errors.push('link')
             }
-
+            */
             if (this.errors.length > 0)
             {
                 return false;
@@ -84,6 +88,10 @@ export default {
             }
 
             this.$emit('modal-close', this.ModalName)
+        },
+        FileInput(file)
+        {
+            this.module.fileId = `video-file-${this.blockId}-${this.module.index}`
         }
     },
     watch: {
@@ -97,5 +105,8 @@ export default {
 </script>
 
 <style>
-
+.file-wrapper
+{
+    margin-top: 15px;
+}
 </style>

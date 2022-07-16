@@ -116,6 +116,12 @@ section.lk
         box-sizing: content-box;
         border-radius: 50%;
         transition: 0.3s;
+        pointer-events: none;
+    }
+
+    .notification.active 
+    {
+        pointer-events: all;
     }
 
     .notification.active:after
@@ -235,7 +241,7 @@ section.lk
                     top: 50%;
                     transform: translate(-50%, -50%);
                     transition: 0.3s;
-                    max-width: 500px;
+                    max-width: 100%;
                 }
             }
 
@@ -371,14 +377,14 @@ section.lk
                 text-align: center;
             }
 
-            .tag.course 
+            .tag.webinar 
             {
                 background: #f2d3b7;
                 color: #b86a23;
             }
         }
 
-        .icon.course 
+        .icon.webinar 
         {
             background: url(~assets/images/icons/webinar-course.png);
             background-color: #f2d3b7;
@@ -386,7 +392,7 @@ section.lk
             background-repeat: no-repeat;
         }
 
-        .icon.free 
+        .icon.stream 
         {
             background: url(~assets/images/icons/webinar-free.png);
             background-color: #80a6b4;
@@ -1668,6 +1674,12 @@ section.lk .page .col-wrapper .col.second .recomendation
     }
 }
 
+.link 
+{
+    font-size: 14px;
+    color: #354c55;
+}
+
 .file 
 {
     padding: 10px;
@@ -1678,6 +1690,8 @@ section.lk .page .col-wrapper .col.second .recomendation
     color: #fff;
     font-family: 'OpenSans';
     position: relative;
+    font-size: 14px;
+    cursor: pointer;
 
 }
 
@@ -2121,7 +2135,7 @@ section.lk .page .content.hide-menu
             transition: 0.3s;
         }
 
-        .icon:hover 
+        .icon:hover, .icon.active
         {
             filter: grayscale(0%);
         }

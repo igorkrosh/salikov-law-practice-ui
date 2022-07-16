@@ -6,7 +6,7 @@
             textarea(v-model="course.name")
     .block 
         h2 Блоки курса 
-        CourseBlock(v-for="(item, index) in course.blocks" :key="index" :count="index + 1" :block="item" @delete-module="DeleteModule" @delete-block="DeteleBlock")
+        CourseBlock(v-for="(item, index) in course.blocks" :key="index" :count="index + 1" :block="item" @delete-module="DeleteModule" @delete-block="DeteleBlock" @input-file="HandleFileInput")
         .add-block
             button.btn.blue(@click="AddBlock") Добавить блок
         .couse-info 
@@ -61,28 +61,26 @@ export default {
                 authors: '',
                 date_start: new Date(),
                 duration: '',
-                image: '',
                 blocks: [
                     {
                         title: '',
                         date: new Date(),
-                        index: 1,
+                        index: 0,
                         modules: [],
                         errors: [],
                     }
                 ]
             },
             oldCover: '',
-            errors: []
+            cover: null,
+            errors: [],
+            files: [],
         }
     },
     methods: {
         PictireOnChange(image) 
         {
-            if (image)
-            {
-                this.course.image = image;
-            }
+            this.cover = this.$refs.pictureInput.$el.querySelector('input[type=file]').files[0]
         },
         
         AddBlock()
@@ -100,7 +98,7 @@ export default {
         {
             if (this.CheckCourse())
             {
-                this.$emit('save-course', this.course);
+                this.$emit('save-course', this.course, this.cover, this.files);
             }
         },
         CheckEnterData()
@@ -184,6 +182,26 @@ export default {
             .catch(error => {
                 this.$notify({title: 'Ошибка удаления курса', text: error.response.data.message, type: 'error'});
             })
+        },
+        HandleFileInput(file, fileId)
+        {
+            let index = this.files.findIndex( x => x.fileId === fileId );
+
+            if (index != -1)
+            {
+                this.files[index] = {
+                    file: file,
+                    fileId: fileId
+                }
+            }
+            else 
+            {
+                this.files.push({
+                    file: file,
+                    fileId: fileId
+                })
+            }
+            
         }
     },
     watch: {

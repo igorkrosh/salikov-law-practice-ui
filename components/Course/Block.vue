@@ -1,7 +1,7 @@
 <template lang="pug">
 .card.course-bloks
     button.btn-modal-close(@click="$emit('delete-block', index)")
-    b Блок №{{index}}
+    b Блок №{{block.index + 1}}
     .input-wrapper(:class="{error: block.errors.includes('title')}")
         label Название блока
         input(v-model="block.title")
@@ -28,10 +28,10 @@
         button.btn(@click="AddModule('video')") + Видео-запись
         button.btn.blue(@click="AddModule('job')") + Задания
         button.btn.blue(@click="AddModule('test')") + Тесты
-    ModalCourseBlockStream(:blockId="index" v-model="block.modules[selectedIndex]" @modal-close="ModalClose" @drop-module="DropModule")
-    ModalCourseBlockVideo(:blockId="index" v-model="block.modules[selectedIndex]" @modal-close="ModalClose" @drop-module="DropModule")
-    ModalCourseBlockJob(:blockId="index" v-model="block.modules[selectedIndex]" @modal-close="ModalClose" @drop-module="DropModule")
-    ModalCourseBlockTest(:blockId="index" v-model="block.modules[selectedIndex]" @modal-close="ModalClose" @drop-module="DropModule")
+    ModalCourseBlockStream(:blockId="block.index" v-model="block.modules[selectedIndex]" @modal-close="ModalClose" @drop-module="DropModule")
+    ModalCourseBlockVideo(:blockId="block.index" v-model="block.modules[selectedIndex]" @modal-close="ModalClose" @drop-module="DropModule" @input="FileInput")
+    ModalCourseBlockJob(:blockId="block.index" v-model="block.modules[selectedIndex]" @modal-close="ModalClose" @drop-module="DropModule" @input="FileInput")
+    ModalCourseBlockTest(:blockId="block.index" v-model="block.modules[selectedIndex]" @modal-close="ModalClose" @drop-module="DropModule" @input="FileInput")
 </template>
 
 <script>
@@ -85,6 +85,8 @@ export default {
                     authors: '',
                     title: '',
                     link: '',
+                    file: null,
+                    fileId: null,
                 })
             }
 
@@ -95,6 +97,8 @@ export default {
                     authors: '',
                     title: '',
                     text: '',
+                    file: null,
+                    fileId: null,
                     deadline: new Date(),
                     check_date: new Date(),
                 })
@@ -109,6 +113,8 @@ export default {
                     text: '',
                     deadline: new Date(),
                     check_date: new Date(),
+                    file: null,
+                    fileId: null,
                     test: [
                         {
                             question: '',
@@ -130,10 +136,10 @@ export default {
 
             this.$modal.show(`course-block-${type}-${this.index}`);
         },
-        ConfigureModule(index)
+        ConfigureModule(idx)
         {
-            this.selectedIndex = index;
-            this.$modal.show(`course-block-${this.block.modules[index].type}-${this.index}`);
+            this.selectedIndex = idx;
+            this.$modal.show(`course-block-${this.block.modules[this.selectedIndex].type}-${this.block.index}`);
         },
         CalcModulesIndex()
         {
@@ -172,9 +178,16 @@ export default {
 
             this.CalcModulesIndex()
         },
+        FileInput(module)
+        {
+            if (module.fileId)
+            {
+                this.$emit('input-file', module.file, module.fileId);
+            }
+        }
     },
     mounted() {
-        this.index = this.count;
+        //this.index = this.count;
     }
 }
 </script>

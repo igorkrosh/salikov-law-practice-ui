@@ -7,7 +7,7 @@
             label Ответ на задание: 
             TextEditor(v-model="text")
         .btn-wrapper 
-            button.file Прикрепить файл
+            a.link(v-if="data.file" :href="data.file" target="_blank") Скачать файл
         .center 
             button.btn.sm(@click="SendJob") Подтвердить
 </template>
@@ -26,7 +26,7 @@ export default {
     methods: {
         LoadModule()
         {
-            this.$axios.$get(`/api/module/job/${this.moduleId}/`)
+            this.$axios.$get(`/api/module/job/${this.moduleId}`)
             .then(response => {
                 this.data = response;
             })

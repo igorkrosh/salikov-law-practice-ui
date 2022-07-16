@@ -6,7 +6,8 @@
             //button.btn.blue.sm Добавить
         .wrapper
             .item(v-for="item in users.curators")
-                img(src="/assets/images/avatar_sm.png")
+                img(v-if="item.image" :src="item.image", alt="")
+                img(v-else src="/assets/images/avatar.jpg", alt="")
                 span {{item.name}}
     .people.block 
         .title-wrapper
@@ -14,11 +15,13 @@
             button.btn.blue.sm(@click="$modal.show('block-access')" v-if="this.$store.getters.USER.role != 'user'") Добавить
         .wrapper.hover(v-if="this.$store.getters.USER.role != 'user'")
             .item(v-for="item in users.users" @click="ShowModalAccessEdit(item.id, item.name)")
-                img(src="/assets/images/avatar_sm.png")
+                img(v-if="item.image" :src="item.image", alt="")
+                img(v-else src="/assets/images/avatar.jpg", alt="")
                 span {{item.name}}
         .wrapper(v-else)
             .item(v-for="item in users.users")
-                img(src="/assets/images/avatar_sm.png")
+                img(v-if="item.image" :src="item.image", alt="")
+                img(v-else src="/assets/images/avatar.jpg", alt="")
                 span {{item.name}}
     ModalBlockAccess(v-if="this.$store.getters.USER.role != 'user'" :courseId="courseId")
     ModalBlockAccessEdit(v-if="this.$store.getters.USER.role != 'user'" :courseId="courseId" :userId="userId" :name="name")

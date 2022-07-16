@@ -1,6 +1,7 @@
 <template lang="pug">
 .calendar.block
-    vc-calendar(is-expanded title-position="left" :masks="{ title: 'MMM', weekdays: 'WW' }" :attributes='attrs' color="none")
+    ClientOnly
+        vc-calendar(is-expanded title-position="left" :masks="{ title: 'MMM', weekdays: 'WW' }" :attributes='attrs' color="none")
 </template>
 
 <script>

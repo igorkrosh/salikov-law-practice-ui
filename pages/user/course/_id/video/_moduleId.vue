@@ -1,7 +1,7 @@
 <template lang="pug">
 .page-test.full-page
     .card(v-if="data")
-        kinescope-player.player-wrapper(:video-id="201388842" @time-update="HandlerProgress")
+        kinescope-player.player-wrapper(:video-id="data.kinescope_id" @time-update="HandlerProgress")
 </template>
 
 <script>
@@ -17,7 +17,7 @@ export default {
     methods: {
         LoadModule()
         {
-            this.$axios.$get(`/api/module/video/${this.moduleId}/`)
+            this.$axios.$get(`/api/module/video/${this.moduleId}`)
             .then(response => {
                 this.data = response;
             })

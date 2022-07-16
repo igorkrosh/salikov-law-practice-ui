@@ -32,8 +32,9 @@ Modal(:name="ModalName" :maxHeight="350" height="auto" width="800"  classes="dia
             .wrapper
                 DatePicker(label="Срок выполнения" v-model="module.deadline")
                 DatePicker(label="Срок проверки" v-model="module.check_date")
-            button.file 
-                |Прикрепить файл 
+            .file-wrapper
+                a(v-if="module.file_path" :href="module.file_path", target="_blank", rel="noopener noreferrer").link Скачать файл
+                InputFile(:name="`test-file-${blockId}-${module.index}`" v-model="module.file" @input="FileInput")
         .center 
             button.btn(@click="SaveModule") Подтвердить
                     
@@ -118,6 +119,10 @@ export default {
             }
 
             this.$emit('modal-close', this.ModalName)
+        },
+        FileInput(file)
+        {
+            this.module.fileId = `test-file-${this.blockId}-${this.module.index}`
         }
     },
     watch: {

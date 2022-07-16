@@ -7,26 +7,45 @@
             form.card(@submit.prevent="EditProfile" v-if="this.$store.getters.USER.name != undefined")
                 .input-wrapper 
                     label Имя
-                    input(type="text" placeholder="Иван" v-model="user.name")
+                    input(type="text" placeholder="" v-model="user.name")
                 .input-wrapper 
                     label Фамилия 
-                    input(type="text" placeholder="Иванов" v-model="user.lastName")
+                    input(type="text" placeholder="" v-model="user.lastName")
                 .input-wrapper 
                     label Дата рождения  
-                    input(type="text" placeholder="24.04.1992" v-maska="'##.##.####'" v-model="user.birthday")
+                    input(type="text" placeholder="" v-maska="'##.##.####'" v-model="user.birthday")
                 .input-wrapper 
                     label Город
-                    input(type="text" placeholder="Москва" v-model="user.city")
+                    input(type="text" placeholder="" v-model="user.city")
                 .input-wrapper 
                     label Номер телефона
-                    input(type="text" placeholder="+7 (912) 345-67-89" v-maska="'+7 (9##) ###-##-##'" v-model="user.phone")
+                    input(type="text" placeholder="" v-maska="'+7 (9##) ###-##-##'" v-model="user.phone")
                 .input-wrapper 
                     label E-mail
-                    input(type="email" placeholder="mail@mail.com" v-model="user.email")
+                    input(type="email" placeholder="" v-model="user.email")
                 .btn-wrapper 
                     button.btn 
                         img(src="/assets/images/icons/edit.png")
                         |Редактировать
+        .new-avatar.block 
+            h2 Загрузка фото профиля
+            .card 
+                .avatar-loader
+                    ClientOnly
+                        PictureInput(
+                            ref="pictureInput" 
+                            width="400" 
+                            height="400" 
+                            accept="image/jpeg,image/png" 
+                            size="2" 
+                            :custom-strings="{drag: 'Перетащите изображение или кликните по форме', change: 'Изменить фото', remove: 'Удалить фото', fileSize: 'Размер изображения не должен превышать 2 Мб'}"
+                            button-class="btn blue sm"
+                            removeButtonClass="btn blue sm"
+                            :removable="true"
+                            @change="PictireOnChange"
+                        )
+                    .center
+                        button.btn(@click="UpdatePhoto") Обновить
     ProfileColumnInfo
 </template>
 
@@ -41,8 +60,8 @@ export default {
                 city: '',
                 phone: '',
                 email: '',
-            }
-            
+            },
+            avatar: null,
         }
     },
     methods: {
@@ -80,6 +99,24 @@ export default {
             this.user.city = profile.city;
             this.user.phone = profile.phone;
             this.user.email = profile.email;
+        },
+        UpdatePhoto()
+        {
+            let formData = new FormData()
+            formData.append('avatar', this.avatar)
+            
+            this.$axios.$post(`/api/file/user/avatar`, formData)
+            .then(response => {
+                this.$notify({title: 'Фото обновлено', text: '', type: 'success'})
+                this.$store.dispatch('LOAD_PROFILE')
+            })
+            .catch(error => {
+                this.$notify({title: 'Ошибка загрузки фото', text: error.response.data.errors.avatar[0], type: 'error'})
+            })
+        },
+        PictireOnChange()
+        {
+            this.avatar = this.$refs.pictureInput.$el.querySelector('input[type=file]').files[0]
         }
     },
     watch: {
@@ -95,5 +132,13 @@ export default {
 </script>
 
 <style lang="scss">
+.avatar-loader
+{
+    width: 100%;
 
+    .center 
+    {
+        margin-top: 10px;
+    }
+}
 </style>
