@@ -29,6 +29,7 @@
 export default {
     mounted() {
         this.$store.dispatch('SET_PAGETITLE', 'Моё обучение')
+        this.$store.dispatch("LOAD_PROGRESS");
     }
 }
 </script>

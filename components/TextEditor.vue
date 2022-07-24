@@ -25,6 +25,12 @@ export default {
             this.$emit('input', this.content)
         }
     },
+    watch: {
+        value()
+        {
+            this.content = this.value;
+        }
+    },
     mounted()
     {
         this.content = this.value;

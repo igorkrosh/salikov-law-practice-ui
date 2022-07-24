@@ -134,7 +134,7 @@ export default {
             this.selectedIndex = this.block.modules.length - 1;
             this.CalcModulesIndex()
 
-            this.$modal.show(`course-block-${type}-${this.index}`);
+            this.$modal.show(`course-block-${type}-${this.block.index}`);
         },
         ConfigureModule(idx)
         {

@@ -3,11 +3,14 @@ Modal(name="homework-modal" height="auto" width="800" classes="dialog" :adaptive
     .card.homework-block(v-if="data")
         .btn-modal-close(@click="$emit('modal-close', 'homework-modal')")
         h3 Проверка задания 
-        h4 Ученик: <b>{{data.user}}</b>
+        h4 Ученик: 
+            NuxtLink(:to="`/profile/${data.user_id}`" target="_blank")
+                <b>{{data.user}}</b>
         .desc(v-html="data.question")
         .block-wrapper 
             label Ответ
             .answer(v-html="data.answer")
+            a.link(v-if="data.file" :href="data.file" target="_blank") Скачать файл 
         .block-wrapper 
             label Коментарий преподователя
             TextEditor(v-model="comment")
@@ -82,5 +85,25 @@ export default {
 </script>
 
 <style lang="scss">
+.card.homework-block
+{
+    .block-wrapper 
+    {
+        .link 
+        {
+            margin-top: 10px;
+            display: inline-block;
+        }
+    }
+}
 
+.card.homework-block .results-wrapper .icon.one:hover, .card.homework-block .results-wrapper .icon.one.active 
+{
+    opacity: 1;
+}
+
+.card.homework-block .results-wrapper .icon.one
+{
+    opacity: 0.5;
+}
 </style>

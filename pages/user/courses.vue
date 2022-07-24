@@ -1,6 +1,6 @@
 <template lang="pug">
 .courses-wrapper.full-page
-    CourseCard(v-for="(item, index) in this.courses" :key="index" :item="item")
+    CourseCard(v-for="(item, index) in this.$store.getters.ALL_USER_COURSES" :key="index" :item="item" :link="`/user/course/${item.id}`")
 </template>
 
 <script>

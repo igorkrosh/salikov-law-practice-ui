@@ -36,7 +36,10 @@ export default {
                 password: this.password
             })
             .then(response => {
-                this.$router.push({ path: '/dashboard' });
+                //this.$router.push({ path: '/dashboard' });
+                this.$router.back();
+                console.log(response)
+                localStorage.setItem('kathedra_token', response.token)
                 this.$notify({title: 'Вход выполнен', text: 'Добро пожаловать', type: 'success'})
             })
             .catch(errors => {
@@ -44,8 +47,12 @@ export default {
                 this.error = errors.response.data.errors
                 this.$refs['email'].classList.add('error')
             })
-        }
+        },
     },
+    mounted()
+    {
+        console.log(this.$route)
+    }
 
 }
 </script>

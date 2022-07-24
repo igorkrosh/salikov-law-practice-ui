@@ -20,6 +20,12 @@ export default {
             this.$emit('input', this.file);
         }
     },
+    watch: {
+        value()
+        {
+            this.file = this.value
+        }
+    },
     mounted() {
         this.file = this.value
     }
@@ -31,6 +37,7 @@ export default {
 {
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
 
     .filename 
     {

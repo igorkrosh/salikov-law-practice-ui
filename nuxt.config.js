@@ -16,6 +16,14 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ],
+    script: [
+      {
+        src: 'https://securepay.tinkoff.ru/html/payForm/js/tinkoff_v2.js'
+      },
+      {
+        src: 'https://forma.tinkoff.ru/static/onlineScript.js'
+      }
     ]
   },
 
@@ -45,7 +53,10 @@ export default {
       src: '~plugins/vue-notification.js',
       mode: 'client'
     },
-    '~/plugins/axios',
+    {
+      src: '~/plugins/axios',
+      mode: 'client'
+    },
     {
       src: '~/plugins/route',
       mode: 'client'
@@ -66,6 +77,14 @@ export default {
       src: '~/plugins/vue-kinescope-player.js',
       mode: 'client'
     },
+    { 
+      src: './plugins/echo', 
+      mode: 'client' 
+    },
+    { 
+      src: './plugins/vue2-perfect-scrollbar', 
+      mode: 'client' 
+    }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

@@ -7,6 +7,7 @@
             label Ответ на задание: 
             TextEditor(v-model="text")
         .btn-wrapper 
+            InputFile(v-model="file" name="job-file")
             a.link(v-if="data.file" :href="data.file" target="_blank") Скачать файл
         .center 
             button.btn.sm(@click="SendJob") Подтвердить
@@ -20,6 +21,7 @@ export default {
             moduleId: 0,
             data: null,
             text: '',
+            file: null,
         }
         
     },
@@ -36,15 +38,30 @@ export default {
         },
         SendJob()
         {
-            this.$axios.$post(`/api/module/job/${this.moduleId}/task`, {
-                task: this.text
-            })
+            let formData = new FormData()
+            formData.append("text", this.text);
+            formData.append("file", this.file);
+
+            this.$axios.$post(`/api/module/job/${this.moduleId}/task`, formData)
             .then(response => {
                 this.$notify({title: 'Задание отправлено на проверку', type: 'success'})
                 this.$router.push(`/user/course/${this.courseId}`);
+
+                this.SetStatus()
             })
             .catch(error => {
                 this.$notify({title: 'Ошибка отправки задания', text: error.response.data.message, type: 'error'})
+            })
+        },
+        SetStatus()
+        {
+            this.$axios.$post(`/api/module/job/${this.moduleId}/status`, {
+                user_id: this.$store.getters.USER.id,
+                status: 'done'
+            })
+            .then(response => {})
+            .catch(error => {
+                this.$notify({title: 'Ошибка отправки статуса модуля', text: error.response.data.message, type: 'error'})
             })
         }
 
@@ -80,7 +97,8 @@ export default {
         .btn-wrapper 
         {
             display: flex;
-            justify-content: right;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 20px;
         }
     }

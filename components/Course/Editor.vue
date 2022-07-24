@@ -12,11 +12,14 @@
         .couse-info 
             .input-wrapper(:class="{error: errors.includes('authors')}")
                 label Авторы:
-                input(placeholder="Иванов И.И." v-model="course.authors")
+                input(placeholder="" v-model="course.authors")
             DatePicker(label="Дата начала:" v-model="course.date_start")
             .input-wrapper(:class="{error: errors.includes('duration')}")
                 label Продолжительность:
-                input(placeholder="2 недели" v-model="course.duration")
+                input(placeholder="" v-model="course.duration")
+            .input-wrapper(:class="{error: errors.includes('hours')}")
+                label Количество академических часов:
+                input(placeholder="" v-model="course.hours" type="number")
             .input-wrapper(v-if="oldCover") 
                 label Текущая обложка курса:
                 .cover 
@@ -61,6 +64,7 @@ export default {
                 authors: '',
                 date_start: new Date(),
                 duration: '',
+                hours: '',
                 blocks: [
                     {
                         title: '',
@@ -151,6 +155,11 @@ export default {
             if (this.course.duration == '')
             {
                 this.errors.push('duration');
+            }
+
+            if (this.course.hours == '')
+            {
+                this.errors.push('hours');
             }
 
             let check = true;

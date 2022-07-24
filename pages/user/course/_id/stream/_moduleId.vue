@@ -1,7 +1,8 @@
 <template lang="pug">
-.page-test.full-page
+.page-test.full-page.stream-page
     .card(v-if="data")
         kinescope-player.player-wrapper(:video-id="201255626")
+        StreamChat(moduleType="module" :streamId="moduleId")
 </template>
 
 <script>
@@ -23,6 +24,17 @@ export default {
             .catch(error => {
                 this.$notify({title: 'Ошибка загрузки модуля', text: error.response.data.message, type: 'error'})
             })
+        },
+        SetStatus()
+        {
+            this.$axios.$post(`/api/module/stream/${this.moduleId}/status`, {
+                user_id: this.$store.getters.USER.id,
+                status: 'done'
+            })
+            .then(response => {})
+            .catch(error => {
+                this.$notify({title: 'Ошибка отправки статуса модуля', text: error.response.data.message, type: 'error'})
+            })
         }
     },
     mounted() 
@@ -34,6 +46,7 @@ export default {
         this.moduleId = this.$route.params.moduleId;
 
         this.LoadModule();
+        this.SetStatus();
     },
     destroyed() {
         this.$store.dispatch('SET_DISABLE_BG_WHITE', false)

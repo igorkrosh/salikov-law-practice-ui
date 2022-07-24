@@ -1,19 +1,35 @@
 <template lang="pug">
-    .course-card
-        .img
-            img(:src="item.image", alt="")
-            span {{item.date}} / {{item.duration}}
-        .desc
-            span.name {{item.title}}
-            span.lectors {{item.lectors}}
-            .btn-wrapper 
-                button.btn Перейти
-                button.tag {{item.type}}
+NuxtLink(:to="link").course-card
+    .img
+        img(:src="item.image", alt="")
+        span(v-if="item.duration") {{formatDate}} / {{item.duration}}
+        span(v-else) {{formatDate}}
+    .desc
+        span.name {{item.title}}
+        span.lectors {{item.lectors}}
+        .btn-wrapper 
+            button.btn Перейти
+            button.tag {{item.type == 'webinar' ? 'Вебинар' : item.type}}
 </template>
 
 <script>
 export default {
-    props: ['item']
+    props: {
+        item: Object,
+        link: {
+            type: String,
+            default: '#',
+        }
+    },
+    data() {
+        return {
+            formatDate: '',
+        }
+    },
+    mounted()
+    {
+        this.formatDate = new Date(this.item.date).toLocaleDateString('ru-RU')
+    }
 }
 </script>
 
@@ -96,8 +112,8 @@ export default {
             button 
             {
                 font-size: 13px;
-                padding-left: 25px;
-                padding-right: 25px;
+                padding-left: 20px;
+                padding-right: 20px;
                 height: 30px;
                 min-width: auto;
             }

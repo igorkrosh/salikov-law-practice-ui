@@ -53,7 +53,10 @@ export const getters = {
     },
     NOTIFICATIONS: state => {
         return state.notifications;
-    }
+    },
+    ALL_USER_COURSES: state => {
+        return state.progress.concat(state.done)
+    },
 }
 
 export const mutations = {
@@ -107,42 +110,17 @@ export const actions = {
         
         context.commit('SET_USER', profile.data.user);
         
-        context.commit('SET_PROGRESS', profile.data.progress);
+        //context.commit('SET_PROGRESS', profile.data.progress);
         context.commit('SET_WEBINAR', profile.data.webinar);
         context.commit('SET_RESULTS', profile.data.results);
         context.commit('SET_JOURNAL', profile.data.journal);
         context.commit('SET_ACHIEVEMENTS', profile.data.achievements);
-        context.commit('SET_DONE', profile.data.done);
+        //context.commit('SET_DONE', profile.data.done);
     },
-    LOAD_RECOMENDATIONS: (context, payload) => {
-        let recomendations = [
-            {
-                date: '07.04.2022',
-                duration: '2 недели',
-                title: 'Охрана исключительных прав IT-компаний: программное обеспечение и товарные знаки',
-                lectors: 'Иванов А.А.',
-                type: 'Курс',
-                image: 'https://www.iserbia.rs/files//2018/06/tajna-oruzja-uverljivih-ljudi.jpg'
-            },
-            {
-                date: '07.04.2022',
-                duration: '2 недели',
-                title: 'Охрана исключительных прав IT-компаний: программное обеспечение и товарные знаки',
-                lectors: 'Иванов А.А.',
-                type: 'Курс',
-                image: 'https://www.iserbia.rs/files//2018/06/tajna-oruzja-uverljivih-ljudi.jpg'
-            },
-            {
-                date: '07.04.2022',
-                duration: '2 недели',
-                title: 'Охрана исключительных прав IT-компаний: программное обеспечение и товарные знаки',
-                lectors: 'Иванов А.А.',
-                type: 'Курс',
-                image: 'https://www.iserbia.rs/files//2018/06/tajna-oruzja-uverljivih-ljudi.jpg'
-            }
-        ]
+    LOAD_RECOMENDATIONS: async function (context, payload) {
+        let recomendations = await this.$axios.get('/api/course/recomendations')
 
-        context.commit('SET_RECOMENDATIONS', recomendations);
+        context.commit('SET_RECOMENDATIONS', recomendations.data);
     },
     SET_PAGETITLE: (context, payload) => {
         context.commit('SET_PAGETITLE', payload);
@@ -168,5 +146,11 @@ export const actions = {
         let notifications = await this.$axios.$get('/api/notification/get')
 
         context.commit('SET_NOTIFICATIONS', notifications)
+    },
+    LOAD_PROGRESS: async function (context, payload) {
+        let response = await this.$axios.$get('/api/user/progress')
+        console.log(response)
+        context.commit('SET_PROGRESS', response.progress);
+        context.commit('SET_DONE', response.done);
     }
 }

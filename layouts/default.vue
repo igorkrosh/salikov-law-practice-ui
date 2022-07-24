@@ -30,11 +30,23 @@ export default {
             this.menuHide = !this.menuHide;
         }
     },
+    watch: {
+        '$store.getters.USER.id': function() {
+            console.log(`listen user-notification.${this.$store.getters.USER.id}`)
+            this.$echo.channel(`user-notification.${this.$store.getters.USER.id}`)
+            .listen('ClientNotification', (e) => {
+                console.log(e)
+                this.$store.dispatch('LOAD_NOTIFICATIONS')
+                this.$notify({title: e.title, text: e.text, type: 'info'})
+            })
+        }
+    },
     destroyed() {
         window.removeEventListener("resize", this.SetBgWhite);
     },
     mounted() {
         this.$store.dispatch("LOAD_PROFILE");
+        this.$store.dispatch("LOAD_PROGRESS");
         this.$store.dispatch("LOAD_RECOMENDATIONS");
         this.$store.dispatch("LOAD_CALENDAR");
         this.$store.dispatch('admin/LOAD_TASKS');

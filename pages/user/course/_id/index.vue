@@ -4,9 +4,9 @@
         .wrapper(v-if="course")
             h2 Курс: {{course.name}}
             .course-info 
-                span Приобретен: 16.02.2022
-                span Продолжительность: 72 ак. ч.
-                span Уроки: 37
+                span Приобретен: {{new Date(course.buy_at).toLocaleDateString('ru-RU')}}
+                span Продолжительность: {{course.hours}} ак. ч.
+                span Уроки: {{course.lessons}}
             h3 Модули курса:
             CourseModule(v-for="(item, index) in modules" :module="item" :key="index")
     ProfileColumnCourse
@@ -46,7 +46,8 @@ export default {
                 result.push({
                     count: `Модуль ${index}.`,
                     title: block.title,
-                    data: []
+                    data: [],
+                    access: block.access
                 })
 
                 for (let module of block.modules)
@@ -75,6 +76,7 @@ export default {
                         educator: module.authors,
                         type: module.type,
                         link: `/user/course/${this.courseId}/${module.type}/${module.id}`,
+                        access: module.access
                     })
                 }
             }

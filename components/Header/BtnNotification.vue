@@ -70,6 +70,11 @@ export default {
     {
         pointer-events: all;
     }
+
+    .clear-all
+    {
+        pointer-events: all;
+    }
 }
 
 .notification-wrapper
@@ -167,7 +172,6 @@ export default {
     {
         width: 100%;
         margin-top: 10px;
-        pointer-events: all;
     }
     
 }

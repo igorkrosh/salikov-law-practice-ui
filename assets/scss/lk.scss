@@ -334,11 +334,18 @@ section.lk
         {
             margin-bottom: 0;
         }
+        .item:hover 
+        {
+            background: rgb(255, 255, 255);
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        }
         .item 
         {
             display: flex;
             align-items: center;
-            margin-bottom: 30px;
+            padding: 15px;
+            border-radius: 15px;
+            transition: 0.3s;
 
             .item-title 
             {
