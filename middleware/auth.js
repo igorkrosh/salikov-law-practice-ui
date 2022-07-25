@@ -1,8 +1,8 @@
 export default function ({ store, redirect }) 
 {
-    console.log('auth')
     if (!store.getters["AUTH"])
     {
+        console.log('auth')
         return redirect("/login");
     }
     return;

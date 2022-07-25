@@ -143,6 +143,19 @@ export default {
         this.courseId = this.$route.params.id;
         this.LoadCourseConfig();
 
+        let queryString = window.location.search;
+        let urlParams = new URLSearchParams(queryString);
+        let packet = urlParams.get('packet')
+
+        if (packet != null)
+        {
+            this.selectedTariffIndex = packet;
+        }
+        else 
+        {
+            this.selectedTariffIndex = 1;
+        }
+
     },
     destroyed() {
         this.$store.dispatch('SET_DISABLE_BG_WHITE', false)
