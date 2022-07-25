@@ -1,4 +1,5 @@
 export const state = () => ({
+    auth: false,
     user: {},
     progress: [],
     webinar: [],
@@ -15,6 +16,9 @@ export const state = () => ({
 })
 
 export const getters = {
+    AUTH: state => {
+        return state.auth;
+    },
     USER: state => {
         return state.user;
     },
@@ -60,6 +64,9 @@ export const getters = {
 }
 
 export const mutations = {
+    SET_AUTH: (state, payload) => {
+        state.auth = payload
+    },
     SET_USER: (state, payload) => {
         state.user = payload;
     },
@@ -102,6 +109,9 @@ export const mutations = {
 }
 
 export const actions = {
+    SET_AUTH: (context, payload) => {
+        context.commit('SET_AUTH', payload)
+    },
     SET_USER: (context, payload) => {
         context.commit('SET_USER', payload);
     },

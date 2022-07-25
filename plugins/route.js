@@ -1,4 +1,5 @@
 export default function ({ app }) {
+    /*
     app.router.beforeEach((to, from, next) => {
         app.$axios.get('/api/user')
         .then(response => {
@@ -22,5 +23,19 @@ export default function ({ app }) {
             }
         })
     })
-    
+    */
+
+    console.log('route')
+
+    app.$axios.get('/api/user')
+    .then(response => {
+        app.store.dispatch('SET_AUTH', true);
+        console.log(response)
+
+        if (!response.data.email_verified_at)
+        {
+            app.router.push('/register/verification');
+        }
+
+    })
 }

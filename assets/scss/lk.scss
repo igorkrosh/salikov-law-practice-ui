@@ -2585,3 +2585,69 @@ section.lk .page .content.hide-menu
 {
     height: 100%;
 }
+
+.link 
+{
+    font-size: 14px;
+    color: #354c55;
+}
+
+.validation-type 
+{
+    display: flex;
+    flex-wrap: wrap;
+    widows: 100%;
+    margin-bottom: 25px;
+
+    .type:hover 
+    {
+        background: #efefef;
+    }
+
+    .type 
+    {
+        width: 33.33333%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 45px;
+        border-bottom: 2px solid #ededed;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .type.active
+    {
+        border-color: #80a6b4;
+    }
+}
+
+.validation-code
+{
+    position: relative;
+    width: 100%;
+
+    input 
+    {
+        width: 100%;
+    }
+
+    .btn 
+    {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        height: 25px;
+        min-height: 100%;
+        font-size: 13px;
+        margin: auto;
+        border-radius: 0;
+    }
+}
+
+.register-wrapper 
+{
+    margin-top: 15px;
+}

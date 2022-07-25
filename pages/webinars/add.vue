@@ -7,6 +7,7 @@
 
 <script>
 export default {
+    middleware: "auth",
     methods: {
         CreateWebinar(webinar, cover)
         {

@@ -32,6 +32,7 @@
 
 <script>
 export default {
+    middleware: "auth",
     data() {
         return {
             ticketId: 0,

@@ -58,8 +58,8 @@ export default {
                 password_confirmation: this.password_confirmation
             })
             .then(response => {
-                this.$notify({title: 'Пользователь зарегистрирован', text: 'Вы будете перенаправлены на страницу входа', type: 'success'})
-                this.$router.push('/login');
+                this.$notify({title: 'Пользователь зарегистрирован', text: 'Вы будете перенаправлены на страницу подтверждения', type: 'success'})
+                this.$router.push('/register/verification');
             })
             .catch(error => {
                 this.$notify({title: 'Ошибка заполнения формы', text: 'Пожалуйста, проверте правильность отправляемой формы', type: 'error'})

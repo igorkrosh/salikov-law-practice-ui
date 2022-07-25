@@ -1,7 +1,7 @@
 <template lang="pug">
 .col-wrapper.page-edit
     .col.first
-        ProfileUserBlock
+        ProfileUserBlock(:profile="this.$store.getters.USER")
         .info.block 
             h2 Информация
             form.card(@submit.prevent="EditProfile" v-if="this.$store.getters.USER.name != undefined")
@@ -51,6 +51,7 @@
 
 <script>
 export default {
+    middleware: "auth",
     data() {
         return {
             user: {

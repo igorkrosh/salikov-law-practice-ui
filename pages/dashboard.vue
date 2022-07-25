@@ -8,6 +8,7 @@ DashboardAdmin(v-else-if="this.$store.getters.USER.role == 'educator'")
 
 <script>
 export default {
+    middleware: "auth",
     data() {
         return {
             

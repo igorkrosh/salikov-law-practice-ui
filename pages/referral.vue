@@ -26,6 +26,7 @@
 
 <script>
 export default {
+    middleware: "auth",
     mounted() {
         this.$store.dispatch('SET_PAGETITLE', 'Реферальная программа')
     }

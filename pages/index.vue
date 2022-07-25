@@ -14,7 +14,7 @@ export default {
         }
     },
     mounted() {
-        if (this.$store.getters.USER.role)
+        if (this.$store.getters.AUTH)
         {
             this.$router.push('/dashboard');
         }
