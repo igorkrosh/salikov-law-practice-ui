@@ -3,6 +3,8 @@
     .card(v-if="data")
         kinescope-player.player-wrapper(:video-id="videoId")
         StreamChat(moduleType="webinar" :streamId="webinarId")
+        CourseFileList(v-if="data.files" :files="data.files")
+        CourseFilesPreview(v-if="data.preview" :files="data.preview")
 </template>
 
 <script>

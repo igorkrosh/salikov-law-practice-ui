@@ -28,10 +28,11 @@
         button.btn(@click="AddModule('video')") + Видео-запись
         button.btn.blue(@click="AddModule('job')") + Задания
         button.btn.blue(@click="AddModule('test')") + Тесты
+        
     ModalCourseBlockStream(:blockId="block.index" v-model="block.modules[selectedIndex]" @modal-close="ModalClose" @drop-module="DropModule")
-    ModalCourseBlockVideo(:blockId="block.index" v-model="block.modules[selectedIndex]" @modal-close="ModalClose" @drop-module="DropModule" @input="FileInput")
-    ModalCourseBlockJob(:blockId="block.index" v-model="block.modules[selectedIndex]" @modal-close="ModalClose" @drop-module="DropModule" @input="FileInput")
-    ModalCourseBlockTest(:blockId="block.index" v-model="block.modules[selectedIndex]" @modal-close="ModalClose" @drop-module="DropModule" @input="FileInput")
+    ModalCourseBlockVideo(:blockId="block.index" v-model="block.modules[selectedIndex]" @modal-close="ModalClose" @drop-module="DropModule")
+    ModalCourseBlockJob(:blockId="block.index" v-model="block.modules[selectedIndex]" @modal-close="ModalClose" @drop-module="DropModule")
+    ModalCourseBlockTest(:blockId="block.index" v-model="block.modules[selectedIndex]" @modal-close="ModalClose" @drop-module="DropModule")
 </template>
 
 <script>
@@ -75,6 +76,9 @@ export default {
                     title: '',
                     link: '',
                     date: new Date(),
+                    new_files: [],
+                    deleted_files: [],
+                    files: [],
                 })
             }
 
@@ -85,8 +89,9 @@ export default {
                     authors: '',
                     title: '',
                     link: '',
-                    file: null,
-                    fileId: null,
+                    new_files: [],
+                    deleted_files: [],
+                    files: [],
                 })
             }
 
@@ -97,8 +102,9 @@ export default {
                     authors: '',
                     title: '',
                     text: '',
-                    file: null,
-                    fileId: null,
+                    new_files: [],
+                    deleted_files: [],
+                    files: [],
                     deadline: new Date(),
                     check_date: new Date(),
                 })
@@ -113,8 +119,9 @@ export default {
                     text: '',
                     deadline: new Date(),
                     check_date: new Date(),
-                    file: null,
-                    fileId: null,
+                    new_files: [],
+                    deleted_files: [],
+                    files: [],
                     test: [
                         {
                             question: '',
@@ -178,6 +185,7 @@ export default {
 
             this.CalcModulesIndex()
         },
+        /*
         FileInput(module)
         {
             if (module.fileId)
@@ -185,9 +193,10 @@ export default {
                 this.$emit('input-file', module.file, module.fileId);
             }
         }
+        */
     },
     mounted() {
-        //this.index = this.count;
+        
     }
 }
 </script>

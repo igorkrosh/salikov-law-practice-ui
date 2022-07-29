@@ -1,7 +1,7 @@
 <template lang="pug">
 .input-file
     label.file(:for="name") Прикрепить файл 
-    span.filename(v-if="file") {{file.name}}
+    //span.filename(v-if="file") {{file.name}}
     input(type="file" :id="name" :ref="name" v-on:change="HandleFileUpload()" hidden)
 </template>
 

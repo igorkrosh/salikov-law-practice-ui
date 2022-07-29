@@ -6,9 +6,10 @@
         .input-wrapper 
             label Ответ на задание: 
             TextEditor(v-model="text")
+        CourseFileList(v-if="data.files" :files="data.files")
+        CourseFilesPreview(v-if="data.preview" :files="data.preview")
         .btn-wrapper 
             InputFile(v-model="file" name="job-file")
-            a.link(v-if="data.file" :href="data.file" target="_blank") Скачать файл
         .center 
             button.btn.sm(@click="SendJob") Подтвердить
 </template>
@@ -100,7 +101,7 @@ export default {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin: 20px 0;
         }
     }
 }

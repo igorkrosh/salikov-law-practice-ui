@@ -1,9 +1,10 @@
 <template lang="pug">
-.page-add-course 
+.page-add-course.webinar
     .block
         .card.course-name(:class="{error: errors.includes('name')}")
-            span Название вебинар 
+            span Название вебинара
             textarea(v-model="webinar.name")
+            WebinarFileEditor(v-model="webinar")
     .block 
         .couse-info 
             .input-wrapper(:class="{error: errors.includes('authors')}")
@@ -59,6 +60,9 @@ export default {
                 authors: '',
                 date_start: new Date(),
                 link: '',
+                files: [],
+                new_files: [],
+                deleted_files: []
             },
             oldCover: null,
             cover: null,
@@ -141,5 +145,8 @@ export default {
 </script>
 
 <style>
-
+.page-add-course.webinar .module-files-wrapper
+{
+    margin-top: 20px;
+}
 </style>

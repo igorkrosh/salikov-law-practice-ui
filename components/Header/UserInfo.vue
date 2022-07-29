@@ -56,9 +56,9 @@ export default {
     methods: {
         Logout()
         {
-            this.$axios.post('/api/logout')
+            this.$auth.logout()
             .then(response => {
-                this.$router.push('/login')
+                //this.$router.push('/login')
             })
             .catch(error => {
                 this.$notify({

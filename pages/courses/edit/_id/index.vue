@@ -16,17 +16,42 @@ export default {
         }
     },
     methods: {
-        EditCourse(course, cover, files)
+        EditCourse(course, cover)
         {
             let formData = new FormData()
             formData.append("course", JSON.stringify(course));
 
-            for (let file of files) 
+            if (course.blocks)
             {
-                formData.append(file.fileId, file.file)    
+                for (let block of course.blocks)
+                {
+                    if (block.modules)
+                    {
+                        for (let module of block.modules)
+                        {
+                            if (module.new_files)
+                            {
+                                for (let newFile of module.new_files)
+                                {
+                                    if (!newFile)
+                                    {
+                                        continue
+                                    }
+
+                                    formData.append(newFile.id, newFile.file)    
+                                }
+                            }
+
+                            if (module.type == 'video')
+                            {
+                                formData.append(module.fileId, module.file)    
+                            }
+                        }
+                    }
+                }
             }
 
-            this.disable = true;
+            //this.disable = true;
 
             this.$axios.$post(`/api/course/${this.courseId}/edit`, formData)
             .then(response => {
@@ -44,7 +69,7 @@ export default {
                     })
                 }
                 
-                this.$router.push('/dashboard');
+                //this.$router.push('/dashboard');
             })
             .catch(error => {
                 this.$notify({title: 'Ошибка сохранения курса', text: error.response.data.message, type: 'error'})

@@ -14,7 +14,7 @@ Modal(:name="ModalName" height="auto" classes="dialog" :adaptive="true" :scrolla
             label Стрим-ссылка:
             .input
                 input(placeholder="https://www.ya.ru" v-model="module.link")
-        VideoIframe(v-if="module.link" :link="module.link")
+        CourseFileEditor(v-model="module" :blockId="blockId")
         .date-row 
             .wrapper
                 DatePicker(label="Дата проведения" v-model="module.date")

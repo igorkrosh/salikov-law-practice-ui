@@ -10,8 +10,8 @@
         .center 
             button.btn.blue.sm(@click="Prev") Назад
             button.btn.sm(@click="Next") Далее
-        .btn-wrapper 
-            a.link(v-if="data.file" :href="data.file" target="_blank") Скачать файл
+        CourseFileList(v-if="data.files" :files="data.files")
+        CourseFilesPreview(v-if="data.preview" :files="data.preview")
 </template>
 
 <script>

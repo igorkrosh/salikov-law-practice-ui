@@ -23,6 +23,31 @@
                 .input-wrapper 
                     label E-mail
                     input(type="email" placeholder="" v-model="user.email")
+                .input-wrapper 
+                        label.radio
+                            |Юридическое лицо     
+                            input(type="checkbox" v-model="user.jurictic")
+                            span.checkmark
+                .jurictic-wrapper(v-if="user.jurictic")
+                    .input-wrapper 
+                        label 
+                            |Название компании
+                            span.required *
+                        input(type="text" placeholder="" v-model="user.jurictic_data.company_name" required)
+                    .input-wrapper 
+                        label 
+                            |ИНН
+                            span.required *
+                        input(type="text" placeholder="" v-model="user.jurictic_data.inn" required)
+                    .input-wrapper 
+                        label ОГРН
+                        input(type="text" placeholder="" v-model="user.jurictic_data.ogrn")
+                    .input-wrapper 
+                        label Рассчтеный счет
+                        input(type="text" placeholder="" v-model="user.jurictic_data.account")
+                    .input-wrapper 
+                        label Адрес
+                        input(type="text" placeholder="" v-model="user.jurictic_data.address")
                 .btn-wrapper 
                     button.btn 
                         img(src="/assets/images/icons/edit.png")
@@ -61,6 +86,14 @@ export default {
                 city: '',
                 phone: '',
                 email: '',
+                jurictic: false,
+                jurictic_data: {
+                    company_name: '',
+                    inn: '',
+                    ogrn: '',
+                    account: '',
+                    address: ''
+                },
             },
             avatar: null,
         }
@@ -70,21 +103,8 @@ export default {
         {
             this.$axios.$post('/api/user/edit', this.user)
             .then(response => {
-                console.log(response)
                 this.$notify({title: 'Успешно', text: 'Данные обновлены.', type: 'success'})
-                this.$store.dispatch('SET_USER', {
-                    role: response.role,
-                    points: response.points,
-                    allPoints: response.allPoints,
-                    invites: response.invites,
-                    name: response.name,
-                    lastName: response.lastName,
-                    birthday: response.birthday,
-                    city: response.city,
-                    phone: response.phone,
-                    email: response.email,
-                    avatar: response.avatar,
-                })
+                this.$store.dispatch('LOAD_PROFILE')
             })
             .catch(error => {
                 this.$notify({title: 'Ошибка!', text: 'Ошибка отправки формы.', type: 'error'})
@@ -100,6 +120,12 @@ export default {
             this.user.city = profile.city;
             this.user.phone = profile.phone;
             this.user.email = profile.email;
+            this.user.jurictic = profile.jurictic;
+            
+            if (this.user.jurictic)
+            {
+                this.user.jurictic_data = profile.jurictic_data;
+            }
         },
         UpdatePhoto()
         {
@@ -140,6 +166,16 @@ export default {
     .center 
     {
         margin-top: 10px;
+    }
+}
+
+.page-edit .card .jurictic-wrapper 
+{
+    width: 100%;
+
+    .input-wrapper 
+    {
+        width: 100%;
     }
 }
 </style>

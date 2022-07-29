@@ -28,13 +28,11 @@ Modal(:name="ModalName" :maxHeight="350" height="auto" width="800"  classes="dia
             .btn-wrapper
                 button.btn.blue.add-question(@click="AddQuestion" v-if="index + 1 == module.test.length") Добавить вопрос
                 button.btn.blue(@click="AddAnswer(index)") Добавить ответ
+        CourseFileEditor(v-model="module" :blockId="blockId")
         .date-row
             .wrapper
                 DatePicker(label="Срок выполнения" v-model="module.deadline")
                 DatePicker(label="Срок проверки" v-model="module.check_date")
-            .file-wrapper
-                a(v-if="module.file_path" :href="module.file_path", target="_blank", rel="noopener noreferrer").link Скачать файл
-                InputFile(:name="`test-file-${blockId}-${module.index}`" v-model="module.file" @input="FileInput")
         .center 
             button.btn(@click="SaveModule") Подтвердить
                     

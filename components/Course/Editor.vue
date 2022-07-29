@@ -6,7 +6,7 @@
             textarea(v-model="course.name")
     .block 
         h2 Блоки курса 
-        CourseBlock(v-for="(item, index) in course.blocks" :key="index" :count="index + 1" :block="item" @delete-module="DeleteModule" @delete-block="DeteleBlock" @input-file="HandleFileInput")
+        CourseBlock(v-for="(item, index) in course.blocks" :key="index" :count="index + 1" :block="item" @delete-module="DeleteModule" @delete-block="DeteleBlock")
         .add-block
             button.btn.blue(@click="AddBlock") Добавить блок
         .couse-info 
@@ -192,6 +192,7 @@ export default {
                 this.$notify({title: 'Ошибка удаления курса', text: error.response.data.message, type: 'error'});
             })
         },
+        /*
         HandleFileInput(file, fileId)
         {
             let index = this.files.findIndex( x => x.fileId === fileId );
@@ -212,6 +213,7 @@ export default {
             }
             
         }
+        */
     },
     watch: {
         enterData()

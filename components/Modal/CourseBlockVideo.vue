@@ -16,9 +16,13 @@ Modal(:name="ModalName" height="auto" classes="dialog" :adaptive="true" :scrolla
                 input(placeholder="https://www.youtube.com" v-model="module.link")
         //
         VideoIframe(v-if="module.link" :link="module.link")
-        .file-wrapper
-            a(v-if="module.file_path" :href="module.file_path", target="_blank", rel="noopener noreferrer").link Скачать файл
+        .module-files-wrapper.add-video
+            .wrapper 
+                h4 Видео-файл
+                .item(v-if="module.file")
+                    span.filename {{module.file.name}}
             InputFile(:name="`video-file-${blockId}-${module.index}`" v-model="module.file" @input="FileInput")
+        CourseFileEditor(v-model="module" :blockId="blockId")
         .center 
             button.btn(@click="SaveModule") Подтвердить
 
@@ -105,6 +109,10 @@ export default {
 </script>
 
 <style>
+.module-files-wrapper.add-video
+{
+    margin-top: 20px;
+}
 .file-wrapper
 {
     margin-top: 15px;

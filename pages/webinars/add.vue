@@ -11,7 +11,15 @@ export default {
     methods: {
         CreateWebinar(webinar, cover)
         {
-            this.$axios.$post(`/api/webinar/create`, webinar)
+            let formData = new FormData()
+            formData.append("webinar", JSON.stringify(webinar));
+
+            for (let file of webinar.new_files)
+            {
+                formData.append(file.id, file.file)
+            }
+
+            this.$axios.$post(`/api/webinar/create`, formData)
             .then(response => {
                 this.$notify({title: 'Успешно', text: 'Вебинар успешно создан', type: 'success'});
 

@@ -19,10 +19,14 @@
                     :active="selectedTariffIndex == index" 
                     @select-tariff="HandleSelectTariff"
                 )
-            .payment-wrapper 
+            .payment-wrapper(v-if="$store.getters.USER.jurictic == 0")
                 button.btn.buy(@click="TinkoffPay") Оплатить
                 button.btn.credit(@click="TinkoffCredit") В рассрочку
-    ModalTinkoffPay(:paymentLink="paymentLink")
+            .payment-wrapper(v-else)
+                button.btn.buy(@click="JuricticPay") Оставить заявку
+
+        ModalTinkoffPay(:paymentLink="paymentLink")
+        ModalJuricticPay(:tariff="this.course.modx.tariffs[this.selectedTariffIndex].title" @send-jurictic="HandlerSendJurictic")
 </template>
 
 <script>
@@ -36,7 +40,8 @@ export default {
             selectedTariffIndex: -1,
             accessModules: [],
             paymentOption: {},
-            paymentLink: ''
+            paymentLink: '',
+            creaditOrderId: 0,
         }
     },
     methods: {
@@ -49,6 +54,8 @@ export default {
                 {
                     this.accessModules.push(false)
                 }
+
+                this.SelectStartTariff()
             })
             .catch(error => {
                 this.$notify({title: 'Ошибка загрузки курса', text: error.response.data.message, type: 'error'})
@@ -99,15 +106,12 @@ export default {
         },
         TinkoffCredit()
         {
-            let orderId = Date.now().toString()
-            console.log(orderId)
-            console.log(`http://api.kathedra.ru/api/buy/credit/${this.$store.getters.USER.id}/notification`)
+            this.creaditOrderId = Date.now().toString()
             tinkoff.createDemo({
                 shopId: 'fb922623-cdf2-4127-b368-de8016ad149c',
                 showcaseId: 'b133c70f-18c8-4073-bc61-5f8704eb6a29',
                 sum: this.paymentOption.price,
-                webhookURL: `http://api.kathedra.ru/api/buy/credit/${this.$store.getters.USER.id}/notification`,
-                orderNumber: orderId,
+                orderNumber: this.creaditOrderId,
                 successURL: 'http://lk.kathedra.ru/profile',
                 items: [
                     {
@@ -117,10 +121,58 @@ export default {
                     },
                 ]
             })
+
+
         },
-        HandlerTinkoffSuccess(data)
+        HandlerTinkoffApproved(data)
         {
             console.log(data)
+            this.$axios.$post(`/api/buy/course/${this.course.id}/order/create`, {
+                price: this.paymentOption['price'],
+                access: this.paymentOption['access'],
+                access_days: this.paymentOption['access_days'],
+                packet_name: this.paymentOption['packet_name'],
+                order_id: this.creaditOrderId
+            })
+            .then(response => {})
+            .catch(error => {
+                this.$notify({title: 'Ошибка создания заказа', error: error.response.data.message, type: 'error'})
+            })
+            
+        },
+        HandlerTinkoffSigned(data)
+        {
+            data.meta.iframe.destroy();
+        },
+        SelectStartTariff()
+        {
+            let queryString = window.location.search;
+            let urlParams = new URLSearchParams(queryString);
+            let packet = urlParams.get('packet')
+
+            if (packet != null)
+            {
+                this.HandleSelectTariff(packet)
+            }
+            else 
+            {
+                this.HandleSelectTariff(0)
+            }
+        },
+        JuricticPay()
+        {
+            this.$modal.show(`modal-jurictic-pay`);
+        },
+        HandlerSendJurictic(juricticData)
+        {
+            this.$axios.$post(`/api/buy/course/${this.courseId}/order/jurictic`, juricticData)
+            .then(response => {
+                this.$modal.hide(`modal-jurictic-pay`);
+                this.$notify({title: 'Заявка отправлена', text: 'С вами свяжутся в ближайшее время', type: 'success'})
+            })
+            .catch(error => {
+                this.$notify({title: 'Ошибка создания заказа', error: error.response.data.message, type: 'error'})
+            })
         }
     },
     watch: {
@@ -143,19 +195,8 @@ export default {
         this.courseId = this.$route.params.id;
         this.LoadCourseConfig();
 
-        let queryString = window.location.search;
-        let urlParams = new URLSearchParams(queryString);
-        let packet = urlParams.get('packet')
-
-        if (packet != null)
-        {
-            this.selectedTariffIndex = packet;
-        }
-        else 
-        {
-            this.selectedTariffIndex = 1;
-        }
-
+        tinkoff.methods.on(tinkoff.constants.APPROVED, this.HandlerTinkoffApproved);
+        tinkoff.methods.on(tinkoff.constants.SUCCESS, this.HandlerTinkoffSigned);
     },
     destroyed() {
         this.$store.dispatch('SET_DISABLE_BG_WHITE', false)

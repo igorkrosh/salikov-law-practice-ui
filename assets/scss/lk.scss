@@ -2651,3 +2651,110 @@ section.lk .page .content.hide-menu
 {
     margin-top: 15px;
 }
+
+.page-events 
+{
+    .calendar .vc-container .vc-weeks
+    {
+        grid-template-columns: repeat(7, 43px);
+        grid-auto-rows: 43px;
+    }
+
+    .calendar.block .vc-day-content
+    {
+        font-size: 16px;
+    }
+
+    .vc-highlight
+    {
+        width: 43px;
+        height: 43px;
+    }
+
+    .vc-popover-content-wrapper
+    {
+        display: none;
+    }
+    
+    .events-wrapper
+    {
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid #ededed;
+        background: #fff;
+
+        h4 
+        {
+            margin-top: 0;
+        }
+
+        .calendar-btns  
+        {
+            margin-left: auto;
+
+            a 
+            {
+                width: 40px;
+                height: 40px;
+                padding: 0;
+                background: none;
+                border: 1px solid #ededed;
+                border-radius: 5px;
+                margin-left: 10px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        .event 
+        {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 15px;
+            border: 1px solid #ededed;
+            border-radius: 10px;
+
+            .type 
+            {
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: #ededed;
+                margin-right: 25px;
+            }
+
+            .type.blue
+            {
+                background: #4299E1;
+            }
+
+            .type.purple
+            {
+                background: #9F7AEA;
+            }
+
+            .type.orange
+            {
+                background: #ED8936;
+            }
+
+            .type.red 
+            {
+                background: #F56565;
+            }
+
+            .type.green 
+            {
+                background: #48BB78;
+            }
+
+            .date 
+            {
+                font-size: 13px;
+                color: #9c9c9c;
+            }
+        }
+    }
+}

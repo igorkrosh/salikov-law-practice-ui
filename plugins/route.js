@@ -1,3 +1,4 @@
+/*
 export default async function ({ app }) {
     await app.$axios.get('/api/user')
     .then(response => {
@@ -11,3 +12,4 @@ export default async function ({ app }) {
 
     })
 }
+*/

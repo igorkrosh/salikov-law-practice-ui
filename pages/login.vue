@@ -87,16 +87,29 @@ export default {
         },
         SuccessLogin()
         {
-            this.$store.dispatch('SET_AUTH', true);
-            this.$router.back();
-            this.$notify({title: 'Вход выполнен', text: 'Добро пожаловать', type: 'success'})
+            if (this.$auth.user.email_verified_at == null)
+            {
+               this.$router.push('/register/verification') 
+            }
+            else 
+            {
+                if (window.history.length > 2)
+                {
+                    this.$router.back();
+                }
+                else 
+                {
+                    this.$router.push('/dashboard')
+                }
+            }
         },
         LoginByPassword() {
-            this.$axios.$post('/api/login', {
-                email: this.email,
-                password: this.password,
-            })
-            .then(response => {
+           this.$auth.loginWith('laravelPassword', {
+                data: {
+                    email: this.email,
+                    password: this.password
+                },
+            }).then(response => {
                 this.SuccessLogin()
             })
             .catch(errors => {
@@ -106,9 +119,12 @@ export default {
         },
         LoginByEmail()
         {
-            this.$axios.$post('/api/auth/login/email', {
-                email: this.email,
-                code: this.code,
+            console.log('asd')
+            this.$auth.loginWith('laravelEmail', {
+                data: {
+                    email: this.email,
+                    code: this.code,
+                }
             })
             .then(response => {
                 this.SuccessLogin()
@@ -120,9 +136,11 @@ export default {
         },
         LoginBySms()
         {
-            this.$axios.$post('/api/auth/login/sms', {
-                phone: this.phone,
-                code: this.code,
+            this.$auth.loginWith('laravelSms', {
+                data: {
+                    phone: this.phone,
+                    code: this.code,
+                }
             })
             .then(response => {
                 this.SuccessLogin()
@@ -196,7 +214,14 @@ export default {
     },
     mounted()
     {
-        console.log(this.$route)
+        this.$store.dispatch('SET_PAGETITLE', '')
+
+        console.log(this.$router)
+
+        if (this.$auth.loggedIn)
+        {
+            this.$router.push('/dashboard')
+        }
     }
 
 }

@@ -1,7 +1,9 @@
 <template lang="pug">
 .page-test.full-page
-    .card(v-if="data")
+    .card.pad-min(v-if="data")
         kinescope-player.player-wrapper(:video-id="data.kinescope_id" @time-update="HandlerProgress")
+        CourseFileList(v-if="data.files" :files="data.files")
+        CourseFilesPreview(v-if="data.preview" :files="data.preview")
 </template>
 
 <script>
@@ -62,5 +64,8 @@ export default {
 </script>
 
 <style>
-
+.card.pad-min
+{
+    padding: 15px;
+}
 </style>

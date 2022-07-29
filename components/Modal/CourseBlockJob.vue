@@ -13,13 +13,11 @@ Modal(:name="ModalName" height="auto" width="800" classes="dialog" :adaptive="tr
         .input-wrapper(:class="{error: errors.includes('text')}")
             label Задание: 
             TextEditor(v-model="module.text")
+        CourseFileEditor(v-model="module" :blockId="blockId")
         .date-row
             .wrapper
                 DatePicker(label="Срок выполнения" v-model="module.deadline")
                 DatePicker(label="Срок проверки" v-model="module.check_date")
-            .file-wrapper
-                a(v-if="module.file_path" :href="module.file_path", target="_blank", rel="noopener noreferrer").link Скачать файл
-                InputFile(:name="`job-file-${blockId}-${module.index}`" v-model="module.file" @input="FileInput")
         .center 
             button.btn(@click="SaveModule") Подтвердить
                 

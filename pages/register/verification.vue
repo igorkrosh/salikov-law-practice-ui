@@ -29,7 +29,7 @@ export default {
         GetCode()
         {
             this.$axios.$post(`/api/auth/code/email/send`, {
-                email: this.$store.getters.USER.email
+                email: this.$auth.user.email
             })
             .then(response => {
                 if (response.status == 'queued')
@@ -58,8 +58,30 @@ export default {
                 code: this.code
             })
             .then(response => {
-                this.$notify({title: 'Успешно', text: 'Почта подтверждена', type: 'success'});
-                this.$router.push('/dashboard')
+                this.$notify({title: 'Успешно', text: '', type: 'success'});
+
+                if (this.$auth.loggedIn)
+                {
+                    this.$auth.fetchUser()
+                    .then(() => {
+                        this.$router.push('/dashboard');
+                    })
+                }
+                else 
+                {
+                    this.$auth.loginWith('laravelPassword', {
+                        data: {
+                            email: this.$auth.user.email,
+                            password: this.$auth.user.password
+                        },
+                    }).then(response => {
+                        this.$notify({title: 'Почта подтверждена', type: 'success'});
+                    })
+                    .catch(errors => {
+                        console.log(errors.response.data.errors)
+                        this.error = errors.response.data.errors
+                    })
+                }
             })
             .catch(error => {
                 this.$notify({title: 'Ошибка отправки кода', text: error.response.data.message, type: 'error'});
@@ -68,7 +90,6 @@ export default {
         }
     },
     mounted() {
-        this.$store.dispatch("LOAD_PROFILE");
     }
     
 }

@@ -97,15 +97,90 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     "vue2-editor/nuxt",
-    '@nuxtjs/axios'
+    '@nuxtjs/auth-next',
+    '@nuxtjs/axios',
   ],
 
+  auth: {
+    redirect: {
+      login: '/login',
+      logout: '/login',
+      home: '/dashboard',
+      callback: '/callback',
+    },
+    rewriteRedirects: false,
+    strategies: {
+      laravelPassword: {
+        scheme: 'local',
+        provider: 'laravle/sanctum',
+        autoFetchUser: true,
+        endpoints: {
+          login: {
+            url: '/api/auth/login',
+            method: 'post',
+          },
+          user: {
+            url: '/api/user',
+            method: 'get',
+            property: false
+          },
+          logout: {
+            url: '/api/auth/logout',
+            method: 'post',
+          }
+        },
+      },
+      laravelEmail: {
+        scheme: 'local',
+        provider: 'laravle/sanctum',
+        autoFetchUser: true,
+        endpoints: {
+          login: {
+            url: '/api/auth/login/email',
+            method: 'post',
+          },
+          user: {
+            url: '/api/user',
+            method: 'get',
+            property: false
+          },
+          logout: {
+            url: '/api/auth/logout',
+            method: 'post',
+          }
+        },
+      },
+      laravelSms: {
+        scheme: 'local',
+        provider: 'laravle/sanctum',
+        autoFetchUser: true,
+        endpoints: {
+          login: {
+            url: '/api/auth/login/sms',
+            method: 'post',
+            
+          },
+          user: {
+            url: '/api/user',
+            method: 'get',
+            property: false
+          },
+          logout: {
+            url: '/api/auth/logout',
+            method: 'post',
+          }
+        },
+      }
+    },
+  },
+
   axios: {
-    baseURL: 'http://localhost:8000', // Used as fallback if no runtime config is provided
+    baseURL: 'http://localhost:8000',
     credentials: true,
     headers: {
       common: {
-        'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': '*',
+        Accept: 'application/json'
       }
     }
   },

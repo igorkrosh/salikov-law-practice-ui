@@ -1,5 +1,5 @@
 export const state = () => ({
-    auth: false,
+    //auth: false,
     user: {},
     progress: [],
     webinar: [],

@@ -52,6 +52,11 @@ export default {
         this.$store.dispatch('admin/LOAD_TASKS');
         window.addEventListener("resize", this.SetBgWhite);
         this.SetBgWhite();
+
+        if (this.$auth.user.email_verified_at == null)
+        {
+            this.$router.push('/register/verification');
+        }
     },
 }
 </script>

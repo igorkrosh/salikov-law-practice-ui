@@ -944,4 +944,30 @@
     {
         width: 10%;
     }
+
+    .page-events .events-wrapper .calendar-btns a
+    {
+        margin-left: 0;
+    }
+
+    .page-events .events-wrapper .event
+    {
+        padding: 10px;
+    }
+
+    .page-events .events-wrapper .event .text 
+    {
+        font-size: 14px;
+    }
+
+    .page-events .events-wrapper .calendar-btns
+    {
+        flex-direction: column;
+        display: flex;
+    }
+
+    .page-events .events-wrapper .event .type
+    {
+        margin-right: 10px;
+    }
 }

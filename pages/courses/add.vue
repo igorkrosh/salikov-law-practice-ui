@@ -13,14 +13,39 @@ export default {
         }
     },
     methods: {
-        CreateCourse(course, cover, files) 
+        CreateCourse(course, cover) 
         {
             let formData = new FormData()
             formData.append("course", JSON.stringify(course));
 
-            for (let file of files) 
+            if (course.blocks)
             {
-                formData.append(file.fileId, file.file)    
+                for (let block of course.blocks)
+                {
+                    if (block.modules)
+                    {
+                        for (let module of block.modules)
+                        {
+                            if (module.new_files)
+                            {
+                                for (let newFile of module.new_files)
+                                {
+                                    if (!newFile)
+                                    {
+                                        continue
+                                    }
+
+                                    formData.append(newFile.id, newFile.file)    
+                                }
+                            }
+
+                            if (module.type == 'video')
+                            {
+                                formData.append(module.fileId, module.file)    
+                            }
+                        }
+                    }
+                }
             }
 
             this.$axios.$post('/api/course/create', formData)

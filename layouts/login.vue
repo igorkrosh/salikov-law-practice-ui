@@ -6,7 +6,7 @@ section.lk
                 .side 
                     .navbar
                         .col.first
-                            a(href="/" class="logo")
+                            NuxtLink(to="/" class="logo")
                                 img(src="~assets/images/logo.png", alt="")
                         .col.second
                             h1 {{this.$store.getters.PAGETITLE}}
