@@ -48,10 +48,6 @@ export default {
 
             return 'lock disable';
         }  
-    },
-    computed: 
-    {
-          
     }
 }
 </script>

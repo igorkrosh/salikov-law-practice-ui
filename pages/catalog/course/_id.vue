@@ -19,11 +19,15 @@
                     :active="selectedTariffIndex == index" 
                     @select-tariff="HandleSelectTariff"
                 )
-            .payment-wrapper(v-if="$store.getters.USER.jurictic == 0")
-                button.btn.buy(@click="TinkoffPay") Оплатить
-                button.btn.credit(@click="TinkoffCredit") В рассрочку
-            .payment-wrapper(v-else)
-                button.btn.buy(@click="JuricticPay") Оставить заявку
+            .buy-wrapper(v-if="paymentOption.price > 0")
+                .payment-wrapper(v-if="$store.getters.USER.jurictic == 0")
+                    button.btn.buy(@click="TinkoffPay") Оплатить
+                    button.btn.credit(@click="TinkoffCredit") В рассрочку
+                .payment-wrapper(v-else)
+                    button.btn.buy(@click="JuricticPay") Оставить заявку
+            .buy-wrapper(v-else)
+                .payment-wrapper
+                    button.btn.buy(@click="TakeFreeCourse") Забрать
 
         ModalTinkoffPay(:paymentLink="paymentLink")
         ModalJuricticPay(:tariff="this.course.modx.tariffs[this.selectedTariffIndex].title" @send-jurictic="HandlerSendJurictic")
@@ -121,8 +125,15 @@ export default {
                     },
                 ]
             })
-
-
+        },
+        TakeFreeCourse()
+        {
+            this.$axios.$post(`/api/buy/course/${this.course.id}/order/free`, this.paymentOption)
+            .then(response => {
+            })
+            .catch(error => {
+                this.$notify({title: 'Ошибка создания заказа', error: error.response.data.message, type: 'error'})
+            })
         },
         HandlerTinkoffApproved(data)
         {
@@ -205,63 +216,5 @@ export default {
 </script>
 
 <style lang="scss">
-.page-course-detail.page-buy
-{
-    .wrapper
-    {
-        width: 100%;
-    }
 
-    .course-dropdown.buy.disable 
-    {
-        pointer-events: all;
-    }
-
-    .course-dropdown.buy.disable  .course-header.active img
-    {
-        transform: none;
-    }
-
-    .tariffs
-    {
-        margin-top: 60px;
-
-        .title::after 
-        {
-            content: '';
-            width: 38px;
-            height: 37px;
-            background: url(/assets/images/icons/ask.png);
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            margin: auto;
-        }
-
-        .wrapper 
-        {
-            width: 100%;
-            display: grid;
-            grid-template-columns: repeat(4, 270px);
-            grid-gap: 12px;
-        }
-
-        .payment-wrapper 
-        {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 25px;
-
-            .btn.credit 
-            {
-                background: #354c55;
-                border-color: #354c55;
-                color: #fff;
-                margin-left: 15px;
-            }
-        }
-    }
-}
 </style>

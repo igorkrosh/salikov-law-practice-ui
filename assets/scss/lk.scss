@@ -2758,3 +2758,63 @@ section.lk .page .content.hide-menu
         }
     }
 }
+
+.page-course-detail.page-buy
+{
+    .wrapper
+    {
+        width: 100%;
+    }
+
+    .course-dropdown.buy.disable 
+    {
+        pointer-events: all;
+    }
+
+    .course-dropdown.buy.disable  .course-header.active img
+    {
+        transform: none;
+    }
+
+    .tariffs
+    {
+        margin-top: 60px;
+
+        .title::after 
+        {
+            content: '';
+            width: 38px;
+            height: 37px;
+            background: url(/assets/images/icons/ask.png);
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+
+        .wrapper 
+        {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(4, 270px);
+            grid-gap: 12px;
+        }
+
+        .payment-wrapper 
+        {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 25px;
+
+            .btn.credit 
+            {
+                background: #354c55;
+                border-color: #354c55;
+                color: #fff;
+                margin-left: 15px;
+            }
+        }
+    }
+}
