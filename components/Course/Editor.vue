@@ -115,6 +115,7 @@ export default {
                     'video': [],
                     'job': [],
                     'test': [],
+                    'block': [],
                 }
                 for (let block of this.course.blocks)
                 {
@@ -128,10 +129,15 @@ export default {
         {
             this.course.deleted[type].push(moduleID);
         },
-        DeteleBlock(blockID)
+        DeteleBlock(index, id)
         {
-            console.log(blockID)
-            this.course.blocks.splice(blockID - 1, 1);
+            console.log(index)
+            this.course.blocks.splice(index, 1);
+
+            if (id != undefined)
+            {
+                this.course.deleted['block'].push(id);
+            }
         },
         CheckCourse()
         {

@@ -69,7 +69,7 @@ export default {
                     })
                 }
                 
-                //this.$router.push('/dashboard');
+                this.$router.push('/dashboard');
             })
             .catch(error => {
                 this.$notify({title: 'Ошибка сохранения курса', text: error.response.data.message, type: 'error'})

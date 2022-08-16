@@ -1,6 +1,6 @@
 <template lang="pug">
 .card.course-bloks
-    button.btn-modal-close(@click="$emit('delete-block', index)")
+    button.btn-modal-close(@click="$emit('delete-block', block.index, block.id)")
     b Блок №{{block.index + 1}}
     .input-wrapper(:class="{error: block.errors.includes('title')}")
         label Название блока
