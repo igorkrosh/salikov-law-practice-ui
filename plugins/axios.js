@@ -1,3 +1,3 @@
 export default function ({ $axios }) {
-    $axios.get('/api/auth/token')
+    $axios.get('/sanctum/csrf-cookie')
 }

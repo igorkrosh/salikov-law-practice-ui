@@ -84,6 +84,10 @@ export default {
     { 
       src: './plugins/vue2-perfect-scrollbar', 
       mode: 'client' 
+    },
+    { 
+      src: './plugins/vue-chart.js', 
+      mode: 'client' 
     }
   ],
 
@@ -114,6 +118,10 @@ export default {
         scheme: 'local',
         provider: 'laravle/sanctum',
         autoFetchUser: true,
+        token: {
+          property: 'token',
+          maxAge: 60 * 60 * 24
+        },
         endpoints: {
           login: {
             url: '/api/auth/login',
@@ -122,12 +130,13 @@ export default {
           user: {
             url: '/api/user',
             method: 'get',
-            property: false
+            property: 'user'
           },
           logout: {
             url: '/api/auth/logout',
             method: 'post',
-          }
+          },
+          //refresh: { url: '/api/auth/token', method: 'get' },
         },
       },
       laravelEmail: {

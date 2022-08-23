@@ -7,7 +7,7 @@ ClientOnly
         color="none" 
         v-model="date" 
         :select-attribute="selectAttribute" 
-        mode="dateTime" 
+        :mode="mode" 
         is24hr
         @input="OnInput"
     )
@@ -22,7 +22,15 @@ ClientOnly
 
 <script>
 export default {
-    props: ['label', 'value'],
+    //props: ['label', 'value'],
+    props: {
+        label: String,
+        value: Date,
+        mode: {
+            type: String,
+            default: 'dateTime'
+        }
+    },
     data() {
         return {
             date: new Date(),

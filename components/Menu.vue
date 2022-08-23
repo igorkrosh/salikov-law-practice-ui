@@ -103,6 +103,11 @@ export default {
                         icon: '/assets/images/icons/menu/group.png',
                         name: 'Пользователи'
                     },
+                    {
+                        link: '/statistic',
+                        icon: '/assets/images/icons/menu/statistical_h.png',
+                        name: 'Статистика'
+                    },
                 ],
                 educator: [
                     {

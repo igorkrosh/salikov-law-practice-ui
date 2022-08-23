@@ -19,6 +19,10 @@
                     :active="selectedTariffIndex == index" 
                     @select-tariff="HandleSelectTariff"
                 )
+            .promocode-wrapper.input-wrapper
+                .validation-code(:class="{disable: promocodeSet}")
+                    input(type="text" v-model="promocode" required)
+                    button.btn.sm.blue(@click.prevent="SetPromocode") Применить промокод
             .buy-wrapper(v-if="paymentOption.price > 0")
                 .payment-wrapper(v-if="$store.getters.USER.jurictic == 0")
                     button.btn.buy(@click="TinkoffPay") Оплатить
@@ -46,6 +50,8 @@ export default {
             paymentOption: {},
             paymentLink: '',
             creaditOrderId: 0,
+            promocode: '',
+            promocodeSet: false
         }
     },
     methods: {
@@ -184,6 +190,38 @@ export default {
             .catch(error => {
                 this.$notify({title: 'Ошибка создания заказа', error: error.response.data.message, type: 'error'})
             })
+        },
+        SetPromocode()
+        {
+            this.$axios.$post(`/api/promocode/get`, {
+                promocode: this.promocode
+            })
+            .then(response => {
+                this.$notify({title: 'Промокод применен', text: `Размер скидки ${response}р.`, type: 'success'})
+
+                for (let i = 0; i < this.course.modx.tariffs.length; i++)
+                {
+                    if ((this.course.modx.tariffs[i].old_price == '' || this.course.modx.tariffs[i].old_price == 0) && this.course.modx.tariffs[i].price != 0)
+                    {
+                        this.course.modx.tariffs[i].old_price = this.course.modx.tariffs[i].price;
+                    }
+
+                    if (this.course.modx.tariffs[i].price - response <= 0)
+                    {
+                        this.course.modx.tariffs[i].price = 0;
+                    }
+                    else 
+                    {
+                        this.course.modx.tariffs[i].price -= response
+                    }
+                }
+
+                this.promocodeSet = true;
+                this.paymentOption['promocode'] = this.promocode
+            })
+            .catch(error => {
+                this.$notify({title: 'Ошибка применения промокода', text: error.response.data.message, type: 'error'})
+            })
         }
     },
     watch: {
@@ -206,6 +244,8 @@ export default {
         this.courseId = this.$route.params.id;
         this.LoadCourseConfig();
 
+        this.$axios.$post(`/api/statistic/course/${this.courseId}/enter`)
+
         tinkoff.methods.on(tinkoff.constants.APPROVED, this.HandlerTinkoffApproved);
         tinkoff.methods.on(tinkoff.constants.SUCCESS, this.HandlerTinkoffSigned);
     },
@@ -216,5 +256,16 @@ export default {
 </script>
 
 <style lang="scss">
-
+.promocode-wrapper
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+    width: 100%;
+    .validation-code 
+    {
+        width: 400px
+    }
+}
 </style>

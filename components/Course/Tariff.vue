@@ -4,7 +4,7 @@
         b {{tariff.title}}
         span {{tariff.subtitle}}
         .price-wrapper 
-            .old-price {{tariff.old_price}} руб.
+            .old-price(v-if="tariff.old_price") {{tariff.old_price}} руб.
             .price {{tariff.price}} руб.
     .desc
         .row-wrapper
@@ -33,6 +33,8 @@ export default {
     cursor: pointer;
     border: 2px solid #efefef;
     transition: 0.3s;
+    display: flex;
+    flex-direction: column;
 
     .name 
     {
@@ -40,6 +42,7 @@ export default {
         flex-direction: column;
         padding: 20px;
         color: #354c55;
+        height: 100%;
 
         b 
         {

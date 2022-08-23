@@ -110,6 +110,8 @@ export default {
                     password: this.password
                 },
             }).then(response => {
+                console.log(response.data.user)
+                //this.$auth.setUser(response.data.user)
                 this.SuccessLogin()
             })
             .catch(errors => {
