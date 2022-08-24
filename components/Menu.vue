@@ -81,7 +81,12 @@ export default {
                     {
                         link: '/dashboard',
                         icon: '/assets/images/icons/menu/4.png',
-                        name: 'Курсы'
+                        name: 'Мои курсы'
+                    },
+                    {
+                        link: '/courses/moderation',
+                        icon: '/assets/images/icons/menu/check_h.png',
+                        name: 'Модерация'
                     },
                     {
                         link: '/webinars',
@@ -136,6 +141,33 @@ export default {
                         name: 'Реферальная программа'
                     },
                 ],
+                author: [
+                    {
+                        link: '/events',
+                        icon: '/assets/images/icons/menu/2.png',
+                        name: 'События'
+                    },
+                    {
+                        link: '/callback',
+                        icon: '/assets/images/icons/menu/3.png',
+                        name: 'Обратная связь'
+                    },
+                    {
+                        link: '/dashboard',
+                        icon: '/assets/images/icons/menu/4.png',
+                        name: 'Мои курсы'
+                    },
+                    {
+                        link: '/referral',
+                        icon: '/assets/images/icons/menu/6.png',
+                        name: 'Реферальная программа'
+                    },
+                    {
+                        link: '/statistic',
+                        icon: '/assets/images/icons/menu/statistical_h.png',
+                        name: 'Статистика'
+                    },
+                ]
             },
             
             active: false,

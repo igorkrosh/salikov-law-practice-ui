@@ -20,6 +20,16 @@
             .input-wrapper(:class="{error: errors.includes('hours')}")
                 label Количество академических часов:
                 input(placeholder="" v-model="course.hours" type="number")
+            .select-wrapper(:class="{error: errors.includes('category')}")
+                label Категория:
+                select(placeholder="" v-model="course.category")
+                    option(v-for="category in categories" :value="category") {{category}}
+            .select-wrapper(:class="{error: errors.includes('status')}" v-if="$store.getters.USER.role == 'admin' || $store.getters.USER.role == 'moderator'")
+                label Статус публикации: 
+                select(placeholder="" v-model="course.status")
+                    option(value="edit") Необходима проверка
+                    option(value="check") На проверке
+                    option(value="verified") Проверен
             .input-wrapper(v-if="oldCover") 
                 label Текущая обложка курса:
                 .cover 
@@ -44,6 +54,9 @@
                 button.btn(@click="SaveCourse") Сохранить
             .btn-wrapper(v-if="course.id")
                 button.btn.red(@click="$modal.show('course-delete')") Удалить
+            br
+            .btn-wrapper(v-if="course.id && $store.getters.USER.role != 'admin' && $store.getters.USER.role != 'moderator' && course.status == 'edit'")
+                button.btn.blue(@click="$modal.show('course-delete')") Отправить на проверку
     ModalCourseDelete(@delete-course="DeleteCourse")
 </template>
 
@@ -65,6 +78,8 @@ export default {
                 date_start: new Date(),
                 duration: '',
                 hours: '',
+                category: '',
+                status: 'edit',
                 blocks: [
                     {
                         title: '',
@@ -79,6 +94,7 @@ export default {
             cover: null,
             errors: [],
             files: [],
+            categories: []
         }
     },
     methods: {
@@ -86,7 +102,11 @@ export default {
         {
             this.cover = this.$refs.pictureInput.$el.querySelector('input[type=file]').files[0]
         },
-        
+        ModerateCourse()
+        {
+            this.course.status = 'check'
+            this.SaveCourse()
+        },
         AddBlock()
         {
             let index = this.course.blocks.length;
@@ -168,6 +188,11 @@ export default {
                 this.errors.push('hours');
             }
 
+            if (this.course.category == '')
+            {
+                this.errors.push('category');
+            }
+
             let check = true;
 
             for (let block of this.course.blocks)
@@ -198,28 +223,16 @@ export default {
                 this.$notify({title: 'Ошибка удаления курса', text: error.response.data.message, type: 'error'});
             })
         },
-        /*
-        HandleFileInput(file, fileId)
+        LoadCategories()
         {
-            let index = this.files.findIndex( x => x.fileId === fileId );
-
-            if (index != -1)
-            {
-                this.files[index] = {
-                    file: file,
-                    fileId: fileId
-                }
-            }
-            else 
-            {
-                this.files.push({
-                    file: file,
-                    fileId: fileId
-                })
-            }
-            
+            this.$axios.$get(`/api/course/categories`)
+            .then(response => {
+                this.categories = response
+            })
+            .catch(error => {
+                this.$notify({title: 'Ошибка загрузки категорий', text: error.response.data.message, type: 'error'})
+            })
         }
-        */
     },
     watch: {
         enterData()
@@ -230,6 +243,7 @@ export default {
     mounted() 
     {
         this.CheckEnterData();
+        this.LoadCategories();
     }
 }
 </script>

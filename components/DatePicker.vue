@@ -25,7 +25,7 @@ export default {
     //props: ['label', 'value'],
     props: {
         label: String,
-        value: Date,
+        value: [String, Date],
         mode: {
             type: String,
             default: 'dateTime'

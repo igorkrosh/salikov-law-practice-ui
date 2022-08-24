@@ -47,13 +47,29 @@ export default {
         },
         LoadPromocodes()
         {
-            this.$axios.$get(`/api/promocode/all`)
-            .then(response => {
-                this.promocodes = response;
-            })
-            .catch(error => {
-                this.$notify({title: 'Ошибка загрузки промокодов', text: error.response.data.message, type: 'error'})
-            })
+            if (this.$store.getters.USER.role != 'author')
+            {
+                this.$axios.$get(`/api/promocode/all`)
+                .then(response => {
+                    this.promocodes = response;
+                })
+                .catch(error => {
+                    this.$notify({title: 'Ошибка загрузки промокодов', text: error.response.data.message, type: 'error'})
+                })
+            }
+            else 
+            {
+                this.$axios.$post(`/api/promocode/all`, {
+                    personal: true
+                })
+                .then(response => {
+                    this.promocodes = response;
+                })
+                .catch(error => {
+                    this.$notify({title: 'Ошибка загрузки промокодов', text: error.response.data.message, type: 'error'})
+                })
+            }
+            
         },
         DeletePromocode(id)
         {
@@ -65,6 +81,11 @@ export default {
             .catch(error => {
                 this.$notify({title: 'Ошибка удаления промокода', text: error.response.data.message, type: 'error'})
             })
+        }
+    },
+    watch: {
+        '$store.getters.USER': function () {
+            this.LoadPromocodes();
         }
     },
     mounted()

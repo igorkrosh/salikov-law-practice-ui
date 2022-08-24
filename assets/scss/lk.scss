@@ -318,6 +318,37 @@ section.lk
             margin: 10px 0;
         }
 
+        .wrapper 
+        {
+            display: flex;
+        }
+
+        .status
+        {
+            margin-left: auto;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 7px;
+        }
+
+        .status.edit 
+        {
+            background: #187FE7;
+        }
+
+        .status.check 
+        {
+            background: #f48a06
+        } 
+
+        .status.verified
+        {
+            background: #42A85F
+        } 
+
         .icon
         {
             width: 50px;
@@ -1117,6 +1148,16 @@ section.lk .bg-white.hide
     }
 }
 
+.select-wrapper.error 
+{
+    color: #a90808;
+
+    select 
+    {
+        border-color: #f1b2b2;
+    }
+}
+
 .select-wrapper 
 {
     display: flex;
@@ -1565,6 +1606,11 @@ section.lk .page .col-wrapper .col.first.page-users
             .role.admin 
             {
                 background: #B41066;
+            }
+
+            .role.author 
+            {
+                background: #f48a06;
             }
         }
     }

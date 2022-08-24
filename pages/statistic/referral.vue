@@ -47,13 +47,28 @@ export default {
     methods: {
         LoadReferral()
         {
-            this.$axios.$get(`/api/referral/${this.type}/get`)
-            .then(response => {
-                this.referrals = response;
-            })
-            .catch(error => {
-                this.$notify({title: 'Ошибка загрузки списка источников', text: error.response.data.message, type: 'error'})
-            })
+            if (this.$store.getters.USER.role != 'author')
+            {
+                this.$axios.$get(`/api/referral/${this.type}/get`)
+                .then(response => {
+                    this.referrals = response;
+                })
+                .catch(error => {
+                    this.$notify({title: 'Ошибка загрузки списка источников', text: error.response.data.message, type: 'error'})
+                })
+            }
+            else 
+            {
+                this.$axios.$get(`/api/referral/${this.type}/get`, {
+                    personal: true
+                })
+                .then(response => {
+                    this.referrals = response;
+                })
+                .catch(error => {
+                    this.$notify({title: 'Ошибка загрузки списка источников', text: error.response.data.message, type: 'error'})
+                })
+            }
         },
         CopyLink(link)
         {
@@ -83,6 +98,9 @@ export default {
     watch: {
         type()
         {
+            this.LoadReferral();
+        },
+        '$store.getters.USER': function () {
             this.LoadReferral();
         }
     },

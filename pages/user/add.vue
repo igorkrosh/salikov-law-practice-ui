@@ -48,8 +48,10 @@
                     .select-wrapper 
                         label Уровень доступа 
                         select(v-model="user.role")
-                            option(value="user") Слушатель 
+                            option(value="user") Ученик 
                             option(value="educator") Преподователь 
+                            option(value="author") Автор 
+                            option(value="moderator") Модератор 
                             option(value="admin") Администратор 
                 .center 
                     button.btn Сохранить

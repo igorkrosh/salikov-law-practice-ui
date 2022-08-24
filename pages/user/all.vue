@@ -8,7 +8,7 @@
                 label.radio Администраторы
                     input(type="checkbox" v-model="filter.admin" @change="SetFilter")
                     span.checkmark
-                //label.radio Менеджеры
+                label.radio Модератор
                     input(type="checkbox")
                     span.checkmark
                 label.radio Преподователь
@@ -17,20 +17,22 @@
                 label.radio Ученики
                     input(type="checkbox" v-model="filter.user" @change="SetFilter")
                     span.checkmark
-                //label.radio Авторы
-                    input(type="checkbox")
+                label.radio Авторы
+                    input(type="checkbox" v-model="filter.author" @change="SetFilter")
                     span.checkmark
             .filters-input 
                 input.filter(placeholder="Поиск по имени" v-model="filter.name" @input="LoadUsers")
-                //select.filter
-                    option Поиск по направлению
-                //input.filter(placeholder="Поиск по курсу")
+                select(v-model="filter.category" @change="LoadUsers").filter
+                    option(value="") Поиск по направлению
+                    option(v-for="category in categories" :value="category") {{category}}
+                input.filter(placeholder="Поиск по курсу" v-model="filter.course" @input="LoadUsers")
             .table 
                 .item(v-for="(user, index) in users" :key="index" @click="EditUser(user)")
                     span.name {{user.name}} {{user.last_name}}
                     span.role(v-if="user.role == 'user'") Ученик
                     span.role.educator(v-if="user.role == 'educator'") Преподователь
                     span.role.admin(v-if="user.role == 'admin'") Администратор
+                    span.role.author(v-if="user.role == 'author'") Автор
             //.navs 
                 span.active 1
                 span 2
@@ -53,9 +55,13 @@ export default {
                 admin: false,
                 educator: false,
                 user: false,
-                name: ''
+                author: false,
+                name: '',
+                category: '',
+                course: '',
             },
             filterAll: true,
+            categories: [],
         }
     },
     methods: {
@@ -79,6 +85,16 @@ export default {
             .catch(error => {
                 this.$notify({title: 'Ошибка', text: 'Ошибка загрузки списка пользователей', type: 'error'})
             })
+        },
+        LoadCategories()
+        {
+            this.$axios.$get(`/api/course/categories`)
+            .then(response => {
+                this.categories = response
+            })
+            .catch(error => {
+                this.$notify({title: 'Ошибка загрузки категорий', text: error.response.data.message, type: 'error'})
+            })
         }
     },
     watch: {
@@ -101,6 +117,7 @@ export default {
     mounted() {
         this.$store.dispatch('SET_PAGETITLE', 'Пользователи')
         this.LoadUsers();
+        this.LoadCategories();
     }
 }
 </script>

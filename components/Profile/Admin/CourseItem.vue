@@ -7,6 +7,10 @@ NuxtLink(:to="EditLink").item
         .name {{item.lectors}}
         .wrapper 
             span.tag {{item.type}}
+            span.status(:class="item.status") 
+                span(v-if="item.status == 'edit'") Необходима проверка
+                span(v-if="item.status == 'check'") На проверке
+                span(v-if="item.status == 'verified'") Проверен
 </template>
 
 <script>

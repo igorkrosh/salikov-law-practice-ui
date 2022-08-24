@@ -24,42 +24,98 @@ export default {
     methods: {
         LoadTodayStatistic()
         {
-            this.$axios.$get(`/api/statistic/today`)
-            .then(response => {
-                this.columnChartData = response;
-                this.type = 'today'
-            })
-            .catch(error => {
-                this.$notify({title: 'Ошибка загрузки статистики', text: error.response.data.message, type: 'error'})
-            })
+            if (this.$store.getters.USER.role != 'author')
+            {
+                this.$axios.$get(`/api/statistic/today`)
+                .then(response => {
+                    this.columnChartData = response;
+                    this.type = 'today'
+                })
+                .catch(error => {
+                    this.$notify({title: 'Ошибка загрузки статистики', text: error.response.data.message, type: 'error'})
+                })
+            }
+            else 
+            {
+                this.$axios.$post(`/api/statistic/today`, {
+                    personal: true
+                })
+                .then(response => {
+                    this.columnChartData = response;
+                    this.type = 'today'
+                })
+                .catch(error => {
+                    this.$notify({title: 'Ошибка загрузки статистики', text: error.response.data.message, type: 'error'})
+                })
+            }
+            
         },
         LoadDaysStatistic(days)
         {
-            this.$axios.$get(`/api/statistic/days/${days}`)
-            .then(response => {
-                this.lineChartData = response;
-                this.type = `${days}-days`
-            })
-            .catch(error => {
-                this.$notify({title: 'Ошибка загрузки статистики', text: error.response.data.message, type: 'error'})
-            })
+            if (this.$store.getters.USER.role != 'author')
+            {
+                this.$axios.$get(`/api/statistic/days/${days}`)
+                .then(response => {
+                    this.lineChartData = response;
+                    this.type = `${days}-days`
+                })
+                .catch(error => {
+                    this.$notify({title: 'Ошибка загрузки статистики', text: error.response.data.message, type: 'error'})
+                })
+            }
+            else 
+            {
+                this.$axios.$post(`/api/statistic/days/${days}`, {
+                    personal: true
+                })
+                .then(response => {
+                    this.lineChartData = response;
+                    this.type = `${days}-days`
+                })
+                .catch(error => {
+                    this.$notify({title: 'Ошибка загрузки статистики', text: error.response.data.message, type: 'error'})
+                })
+            }
+            
         },
         LoadYearStatistic()
         {
-            this.$axios.$get(`/api/statistic/year`)
-            .then(response => {
-                this.columnChartData = response;
-                this.type = `year`
-                console.log(response)
-            })
-            .catch(error => {
-                this.$notify({title: 'Ошибка загрузки статистики', text: error.response.data.message, type: 'error'})
-            })
+            if (this.$store.getters.USER.role != 'author')
+            {
+                this.$axios.$get(`/api/statistic/year`)
+                .then(response => {
+                    this.columnChartData = response;
+                    this.type = `year`
+                    console.log(response)
+                })
+                .catch(error => {
+                    this.$notify({title: 'Ошибка загрузки статистики', text: error.response.data.message, type: 'error'})
+                })
+            }
+            else 
+            {
+                this.$axios.$post(`/api/statistic/year`, {
+                    personal: true
+                })
+                .then(response => {
+                    this.columnChartData = response;
+                    this.type = `year`
+                    console.log(response)
+                })
+                .catch(error => {
+                    this.$notify({title: 'Ошибка загрузки статистики', text: error.response.data.message, type: 'error'})
+                })
+            }
+        }
+    },
+    watch: {
+        '$store.getters.USER.role': function () {
+            this.LoadTodayStatistic()
         }
     },
     mounted()
     {
-        this.LoadTodayStatistic()
+        this.LoadTodayStatistic();
     },
 }
 </script>

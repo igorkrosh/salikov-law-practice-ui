@@ -27,13 +27,33 @@ export default {
     methods: {
         LoadCourses()
         {
-            this.$axios.$get(`/api/statistic/courses`)
-            .then(response => {
-                this.courses = response;
-            })
-            .catch(error => {
-                this.$notify({title: 'Ошибка загрузки курсов', text: error.response.data.message, type: 'error'})
-            })
+            if (this.$store.getters.USER.role != 'author')
+            {
+                this.$axios.$get(`/api/statistic/courses`)
+                .then(response => {
+                    this.courses = response;
+                })
+                .catch(error => {
+                    this.$notify({title: 'Ошибка загрузки курсов', text: error.response.data.message, type: 'error'})
+                })
+            }
+            else 
+            {
+                this.$axios.$post(`/api/statistic/courses`, {
+                    personal: true
+                })
+                .then(response => {
+                    this.courses = response;
+                })
+                .catch(error => {
+                    this.$notify({title: 'Ошибка загрузки курсов', text: error.response.data.message, type: 'error'})
+                })
+            }
+        }
+    },
+    watch: {
+        '$store.getters.USER': function () {
+            this.LoadCourses();
         }
     },
     mounted()

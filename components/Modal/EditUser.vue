@@ -35,6 +35,8 @@ Modal(name="edit-user" height="auto" classes="dialog" :adaptive="true" :scrollab
                 select(v-model="user.role")
                     option(value="user") Ученик 
                     option(value="educator") Преподователь 
+                    option(value="author") Автор 
+                    option(value="moderator") Модератор 
                     option(value="admin") Администратор 
         //.row 
             .select-wrapper 
