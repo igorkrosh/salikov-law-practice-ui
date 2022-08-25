@@ -26,6 +26,9 @@
                     option(value="") Поиск по направлению
                     option(v-for="category in categories" :value="category") {{category}}
                 input.filter(placeholder="Поиск по курсу" v-model="filter.course" @input="LoadUsers")
+            .filters-input 
+                .input-wrapper
+                    label Количество пользователей:
             .table 
                 .item(v-for="(user, index) in users" :key="index" @click="EditUser(user)")
                     span.name {{user.name}} {{user.last_name}}

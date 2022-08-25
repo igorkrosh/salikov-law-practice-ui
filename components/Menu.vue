@@ -94,11 +94,6 @@ export default {
                         name: 'Вебинары'
                     },
                     {
-                        link: '/referral',
-                        icon: '/assets/images/icons/menu/6.png',
-                        name: 'Реферальная программа'
-                    },
-                    {
                         link: '/user/add',
                         icon: '/assets/images/icons/menu/user.png',
                         name: 'Добавить пользователя'
@@ -112,6 +107,11 @@ export default {
                         link: '/statistic',
                         icon: '/assets/images/icons/menu/statistical_h.png',
                         name: 'Статистика'
+                    },
+                    {
+                        link: '/settings',
+                        icon: '/assets/images/icons/menu/statistical_h.png',
+                        name: 'Настройки'
                     },
                 ],
                 educator: [
@@ -135,11 +135,6 @@ export default {
                         icon: '/assets/images/icons/menu/5.png',
                         name: 'Вебинары'
                     },
-                    {
-                        link: '/referral',
-                        icon: '/assets/images/icons/menu/6.png',
-                        name: 'Реферальная программа'
-                    },
                 ],
                 author: [
                     {
@@ -156,11 +151,6 @@ export default {
                         link: '/dashboard',
                         icon: '/assets/images/icons/menu/4.png',
                         name: 'Мои курсы'
-                    },
-                    {
-                        link: '/referral',
-                        icon: '/assets/images/icons/menu/6.png',
-                        name: 'Реферальная программа'
                     },
                     {
                         link: '/statistic',

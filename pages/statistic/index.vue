@@ -5,7 +5,7 @@
     .stats-wrapper 
         .stat 
             span.big {{numbers.sum}} р 
-            span.small Общих доход
+            span.small Общий доход
         .stat 
             span.big {{numbers.count}} 
             span.small Кол-во заказов
