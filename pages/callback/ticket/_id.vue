@@ -19,7 +19,9 @@
                 .text-wrapper
                     .username {{item.username}}
                     .text(v-html="item.text")
-                    .date {{ConvertDate(item.date)}}
+                    .row
+                        .date {{ConvertDate(item.date)}}
+                        button.link.red(@click="DeleteMessage(item.id)") Удалить
                     .file-wrapper(v-if="item.file")
                         a(:href="item.file").link Скачать файл
             .answer-wrapper 
@@ -27,6 +29,13 @@
                 .btn-wrapper 
                     InputFile(v-model="file" name="message-file")
                     button.btn.sm(@click="SendMessage") Отправить
+            .ticket-status 
+                label Статус запроса
+                .select-wrapper 
+                    select(v-model="status")
+                        option(value="new") В работе 
+                        option(value="done") Закрыт
+                button.btn.sm(@click="SetTicketStatus") Сохранить
                     
 </template>
 
@@ -39,6 +48,7 @@ export default {
             data: null,
             answer: '',
             file: null,
+            status: '',
         }
     },
     methods:
@@ -55,6 +65,7 @@ export default {
                 this.$store.dispatch('SET_PAGETITLE', response.ticket.title);
                 this.answer = '';
                 this.file = null;
+                this.status = response.ticket.status
             })
             .catch(error => {
                 this.$notify({title: 'Ошибка загрузки чата', text: error.response.data.message, type: 'error'})
@@ -78,6 +89,28 @@ export default {
             this.$echo.channel(`chat-notification.${this.ticketId}`)
             .listen('ChatUpdate', (e) => {
                 this.LoadChat()
+            })
+        },
+        DeleteMessage(messageId)
+        {
+            this.$axios.$delete(`/api/ticket/message/${messageId}`)
+            .then(response => {
+                this.$notify({title: 'Сообщение удалено', type: 'success'})
+            })
+            .catch(error => {
+                this.$notify({title: 'Ошибка удаления сообщения', text: error.response.data.message, type: 'error'})
+            })
+        },
+        SetTicketStatus()
+        {
+            this.$axios.$post(`/api/ticket/${this.ticketId}/status`, {
+                status: this.status
+            })
+            .then(response => {
+                this.$notify({title: 'Статус запроса обновлен', type: 'success'})
+            })
+            .catch(error => {
+                this.$notify({title: 'Ошибка обновления статуса', text: error.response.data.message, type: 'error'})
             })
         }
     },
@@ -112,6 +145,29 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
+    }
+
+    .ticket-status 
+    {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 20px;
+        padding: 15px;
+        border: 1px solid #ededed;
+        border-radius: 10px;
+
+        .select-wrapper 
+        {
+            margin: 0;
+        }
+
+        label 
+        {
+            font-size: 14px;
+            font-weight: 600;
+        }
     }
 }
 .ticket-message:not(.author)

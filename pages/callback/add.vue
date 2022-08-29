@@ -38,6 +38,7 @@ export default {
             this.$axios.$post('/api/ticket/create', formData)
             .then(response => {
                 this.$notify({title: 'Чат создан', text: 'Спасибо за обращение!', type: 'success'})
+                this.$router.push('/callback')
             })
             .catch(error => {
                 this.$notify({title: 'Ошибка создания чата', text: error.response.data.message, type: 'error'})

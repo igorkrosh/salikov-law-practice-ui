@@ -2617,6 +2617,11 @@ section.lk .page .content.hide-menu
     height: 300px;
 }
 
+.iframe-wrapper div 
+{
+    height: 100%;
+}
+
 .iframe-wrapper.video-page
 {
     width: 100%;
@@ -2638,6 +2643,14 @@ section.lk .page .content.hide-menu
 {
     font-size: 14px;
     color: #354c55;
+    border: none;
+    font-family: 'OpenSans';
+    background: none;
+}
+
+.link.red 
+{
+    color: #b40606;
 }
 
 .validation-type 

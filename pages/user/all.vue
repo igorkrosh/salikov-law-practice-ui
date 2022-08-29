@@ -25,10 +25,13 @@
                 select(v-model="filter.category" @change="LoadUsers").filter
                     option(value="") Поиск по направлению
                     option(v-for="category in categories" :value="category") {{category}}
-                input.filter(placeholder="Поиск по курсу" v-model="filter.course" @input="LoadUsers")
+                //input.filter(placeholder="Поиск по курсу" v-model="filter.course" @input="LoadUsers")
+                select(v-model="filter.course" @change="LoadUsers").filter
+                    option(value="") Поиск по курсу
+                    option(v-for="course in courses" :value="course") {{course}}
             .filters-input 
                 .input-wrapper
-                    label Количество пользователей:
+                    label Количество пользователей: {{count}}
             .table 
                 .item(v-for="(user, index) in users" :key="index" @click="EditUser(user)")
                     span.name {{user.name}} {{user.last_name}}
@@ -53,6 +56,7 @@ export default {
     data() {
         return {
             users: [],
+            count: 0,
             editUser: null,
             filter: {
                 admin: false,
@@ -65,6 +69,7 @@ export default {
             },
             filterAll: true,
             categories: [],
+            courses: []
         }
     },
     methods: {
@@ -83,22 +88,24 @@ export default {
         {
             this.$axios.$post('/api/user/all', {filter: this.filter})
             .then(response => {
-                this.users = response;
+                this.users = response.users;
+                this.count = response.count;
             })
             .catch(error => {
                 this.$notify({title: 'Ошибка', text: 'Ошибка загрузки списка пользователей', type: 'error'})
             })
         },
-        LoadCategories()
+        LoadCourseFilter()
         {
-            this.$axios.$get(`/api/course/categories`)
+            this.$axios.$get(`/api/course/filter`)
             .then(response => {
-                this.categories = response
+                this.categories = response.categories
+                this.courses = response.courses
             })
             .catch(error => {
                 this.$notify({title: 'Ошибка загрузки категорий', text: error.response.data.message, type: 'error'})
             })
-        }
+        },
     },
     watch: {
         filterAll(value) {
@@ -120,7 +127,7 @@ export default {
     mounted() {
         this.$store.dispatch('SET_PAGETITLE', 'Пользователи')
         this.LoadUsers();
-        this.LoadCategories();
+        this.LoadCourseFilter();
     }
 }
 </script>

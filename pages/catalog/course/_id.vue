@@ -23,6 +23,11 @@
                 .validation-code(:class="{disable: promocodeSet}")
                     input(type="text" v-model="promocode" required)
                     button.btn.sm.blue(@click.prevent="SetPromocode") Применить промокод
+            .promocode-wrapper.input-wrapper(v-if="this.$store.getters.USER.points != 0")
+                h3 У вас есть {{this.$store.getters.USER.points}} бонусов
+                label.radio Списать бонусы
+                    input(type="checkbox" name="use-points" v-model="usePoints")
+                    span.checkmark
             .buy-wrapper(v-if="paymentOption.price > 0")
                 .payment-wrapper(v-if="$store.getters.USER.jurictic == 0")
                     button.btn.buy(@click="TinkoffPay") Оплатить
@@ -32,6 +37,7 @@
             .buy-wrapper(v-else)
                 .payment-wrapper
                     button.btn.buy(@click="TakeFreeCourse") Забрать
+            
 
         ModalTinkoffPay(:paymentLink="paymentLink")
         ModalJuricticPay(:tariff="this.course.modx.tariffs[this.selectedTariffIndex].title" @send-jurictic="HandlerSendJurictic")
@@ -51,7 +57,8 @@ export default {
             paymentLink: '',
             creaditOrderId: 0,
             promocode: '',
-            promocodeSet: false
+            promocodeSet: false,
+            usePoints: false,
         }
     },
     methods: {
@@ -108,25 +115,44 @@ export default {
         },
         TinkoffPay()
         {
+            this.paymentOption['use_points'] = this.usePoints;
+
             this.$axios.post(`/api/buy/course/${this.courseId}`, this.paymentOption)
             .then(response => {
                 this.paymentLink = response.data.PaymentURL;
                 this.$modal.show(`modal-tinkoff`);
+                this.$store.dispatch("LOAD_PROFILE");
             })
         },
         TinkoffCredit()
         {
+            this.paymentOption['user_points'] = this.usePoints;
             this.creaditOrderId = Date.now().toString()
+
+            let orderPrice = this.paymentOption.price
+
+
+            if (this.usePoints)
+            {
+                orderPrice -= this.$store.getters.USER.points
+
+                if (orderPrice <= 0)
+                {
+                    this.TinkoffPay();
+                    return;
+                }
+            }
+
             tinkoff.createDemo({
                 shopId: 'fb922623-cdf2-4127-b368-de8016ad149c',
                 showcaseId: 'b133c70f-18c8-4073-bc61-5f8704eb6a29',
-                sum: this.paymentOption.price,
+                sum: orderPrice,
                 orderNumber: this.creaditOrderId,
                 successURL: 'http://lk.kathedra.ru/profile',
                 items: [
                     {
                         name: `Покупка доступа к курсу "${this.course.name}" (${this.paymentOption.packet_name})`, 
-                        price: this.paymentOption.price, 
+                        price: orderPrice, 
                         quantity: 1
                     },
                 ]
@@ -149,9 +175,12 @@ export default {
                 access: this.paymentOption['access'],
                 access_days: this.paymentOption['access_days'],
                 packet_name: this.paymentOption['packet_name'],
-                order_id: this.creaditOrderId
+                order_id: this.creaditOrderId,
+                use_points: this.usePoints
             })
-            .then(response => {})
+            .then(response => {
+                this.$store.dispatch("LOAD_PROFILE");
+            })
             .catch(error => {
                 this.$notify({title: 'Ошибка создания заказа', error: error.response.data.message, type: 'error'})
             })
@@ -160,6 +189,7 @@ export default {
         HandlerTinkoffSigned(data)
         {
             data.meta.iframe.destroy();
+            this.$store.dispatch("LOAD_PROFILE");
         },
         SelectStartTariff()
         {

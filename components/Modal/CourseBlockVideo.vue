@@ -10,12 +10,13 @@ Modal(:name="ModalName" height="auto" classes="dialog" :adaptive="true" :scrolla
             label Название урока:
             .input
                 input(v-model="module.title")
-        //.input-wrapper(:class="{error: errors.includes('link')}")
+        .input-wrapper(:class="{error: errors.includes('link')}")
             label Ссылка на видео-запись:
             .input
                 input(placeholder="https://www.youtube.com" v-model="module.link")
         //
-        VideoIframe(v-if="module.link" :link="module.link")
+        //VideoIframe(v-if="module.link" :link="module.link")
+        kinescope-player.iframe-wrapper(v-if="module.link" :video-id="module.link.split('https://kinescope.io/embed/')[1]")
         .module-files-wrapper.add-video
             .wrapper 
                 h4 Видео-файл

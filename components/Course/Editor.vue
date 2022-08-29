@@ -43,7 +43,6 @@
                         width="350" 
                         height="350" 
                         accept="image/jpeg,image/png" 
-                        size="2" 
                         :custom-strings="{drag: 'Перетащите изображение или кликните по форме', change: 'Изменить фото', remove: 'Удалить фото', fileSize: 'Размер изображения не должен превышать 2 Мб'}"
                         button-class="btn blue sm"
                         removeButtonClass="btn blue sm"

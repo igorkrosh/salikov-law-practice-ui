@@ -3,6 +3,8 @@
     .text-wrapper
         .ticket-title {{ticket.title}}
         .ticket-data {{ticket.data}}
+    .status.edit(v-if="ticket.status == 'new'") В работе
+    .status.verified(v-if="ticket.status == 'done'") Закрыт
     .options-wrapper 
         NuxtLink(:to="`/callback/ticket/${ticket.id}`").btn.blue.sm Перейти
 </template>
@@ -33,6 +35,11 @@ export default {
     {
         font-size: 13px;
         color: #aaaaaa;
+    }
+
+    .status 
+    {
+        margin-right: 10px;
     }
     
 }

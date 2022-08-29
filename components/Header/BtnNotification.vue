@@ -1,11 +1,17 @@
 <template lang="pug">
 .notification(:class="{active: active}" @click="open = !open")
-    .notification-wrapper(:class="{active: open}" v-if="$store.getters.NOTIFICATIONS.length > 0")
-        .item(v-for="item in $store.getters.NOTIFICATIONS")
-            .text-wrapper 
-                .item-title {{item.title}} 
-                .item-text {{item.text}}
-            button.close(@click.stop="DeleteNotification(item.id)")
+    .notification-wrapper(:class="{active: open}" v-if="$store.getters.NOTIFICATIONS.length > 0"  @click.stop="")
+        .root(v-for="item in $store.getters.NOTIFICATIONS")
+            NuxtLink(:to="item.link").item(v-if="item.link")
+                .text-wrapper 
+                    .item-title {{item.title}} 
+                    .item-text {{item.text}}
+                button.close(@click.prevent="DeleteNotification(item.id)")
+            .item(v-else)
+                .text-wrapper 
+                    .item-title {{item.title}} 
+                    .item-text {{item.text}}
+                button.close(@click.prevent="DeleteNotification(item.id)")
         button.btn.clear-all(@click.stop="DeleteAllNotification") Прочитать все
 </template>
 
@@ -64,7 +70,7 @@ export default {
 .notification-wrapper.active 
 {
     opacity: 1;
-    pointer-events: none;
+    pointer-events: all;
 
     .close 
     {
