@@ -6,7 +6,7 @@
             span Дата начала: {{new Date(webinar.date_start).toLocaleDateString('ru-RU')}}
         h3 Описание курса:
         WebinarItemDesc(v-for="(item, index) in webinar.modx.modules" :module="item" :key="index")
-        .tariffs
+        .tariffs(v-if="!access")
             .buy-wrapper(v-if="webinar.modx.price > 0")
                 .payment-wrapper(v-if="$store.getters.USER.jurictic == 0")
                     button.btn.buy(@click="TinkoffPay") Оплатить
@@ -16,6 +16,8 @@
             .buy-wrapper(v-else)
                 .payment-wrapper
                     button.btn.buy(@click="TakeFreeWebinar") Забрать
+        .tariffs(v-else)
+            h3.access-true Вы уже имете доступ к данному вебинару
         ModalTinkoffPay(:paymentLink="paymentLink")
         ModalJuricticPay(:tariff="this.webinar.name" @send-jurictic="HandlerSendJurictic")
 </template>
@@ -31,11 +33,20 @@ export default {
             selectedTariffIndex: -1,
             paymentLink: '',
             creaditOrderId: 0,
+            access: false
         }
     },
     methods: {
         LoadWebinar()
         {
+            this.$axios.$get(`/api/check/webinar/${this.webinarId}/access`)
+            .then(response => {
+                this.access = response
+            })
+            .catch(error => {
+                this.$notify({title: 'Ошибка загрузки доступа', text: error.response.data.message, type: 'error'})
+            })
+
             this.$axios.$get(`/api/webinar/${this.webinarId}/config`)
             .then(response => {
                 this.webinar = response;
@@ -89,6 +100,7 @@ export default {
                 if (e.status == 'CONFIRMED')
                 {
                     this.$notify({title: 'Оплачео', text: 'Вы будете перенаправлены на главную страницу', type: 'success'})
+                    this.$store.dispatch("LOAD_PROFILE");
                     this.$router.push(`/dashboard`)
                 }
             })
@@ -111,5 +123,8 @@ export default {
 </script>
 
 <style>
-
+.access-true
+{
+    text-align: center;
+}
 </style>

@@ -15,6 +15,14 @@ export default {
             
         }
     },
+    watch: {
+        '$store.getters.USER': function () {
+            if (this.$store.getters.USER.role == 'moderator')
+            {
+                this.$router.push('/courses/moderation')
+            }
+        }
+    }
 }
 </script>
 

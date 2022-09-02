@@ -48,6 +48,8 @@ export default {
             this.$axios.$post(`/api/course/${this.courseId}/set-access`, this.access)
             .then(response => {
                 this.$notify({title: 'Участник добавлен', type: 'success'})
+                this.CloseModal();
+                this.$emit('load-users')
             })
             .catch(error => {
                 this.$notify({title: 'Ошибка добавления участника', text: error.response.data.message, type: 'error'})

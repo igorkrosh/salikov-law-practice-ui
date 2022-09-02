@@ -110,7 +110,7 @@ export default {
                     },
                     {
                         link: '/settings',
-                        icon: '/assets/images/icons/menu/statistical_h.png',
+                        icon: '/assets/images/icons/menu/settings_h.png',
                         name: 'Настройки'
                     },
                 ],
@@ -157,6 +157,24 @@ export default {
                         icon: '/assets/images/icons/menu/statistical_h.png',
                         name: 'Статистика'
                     },
+                ],
+                moderator: [
+                    {
+                        link: '/events',
+                        icon: '/assets/images/icons/menu/2.png',
+                        name: 'События'
+                    },
+                    {
+                        link: '/callback',
+                        icon: '/assets/images/icons/menu/3.png',
+                        name: 'Обратная связь'
+                    },
+                    {
+                        link: '/courses/moderation',
+                        icon: '/assets/images/icons/menu/check_h.png',
+                        name: 'Модерация'
+                    },
+                    
                 ]
             },
             

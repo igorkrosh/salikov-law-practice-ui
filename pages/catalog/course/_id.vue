@@ -248,6 +248,7 @@ export default {
 
                 this.promocodeSet = true;
                 this.paymentOption['promocode'] = this.promocode
+                this.HandleSelectTariff(this.selectedTariffIndex);
             })
             .catch(error => {
                 this.$notify({title: 'Ошибка применения промокода', text: error.response.data.message, type: 'error'})
@@ -263,6 +264,7 @@ export default {
                 {
                     this.$notify({title: 'Оплачео', text: 'Вы будете перенаправлены на страницу курса', type: 'success'})
                     this.$router.push(`/user/course/${this.courseId}`)
+                    this.$store.dispatch("LOAD_PROFILE");
                 }
             })
         }

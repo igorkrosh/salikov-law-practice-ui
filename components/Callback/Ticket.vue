@@ -24,6 +24,7 @@ export default {
     display: flex;
     align-items: center;
     padding: 15px 25px;
+    margin-bottom: 15px;
 
     .ticket-title
     {

@@ -15,13 +15,13 @@
         .recomendation.block(v-if="this.$store.getters.RECOMENDATIONS.length > 0")
             h2 Рекомендации:
             .wrapper
-                CourseCard(v-for="(item, index) in this.$store.getters.RECOMENDATIONS" :key="index" :item="item")
+                RecomendationCard(v-for="(item, index) in this.$store.getters.RECOMENDATIONS" :key="index" :item="item")
     .col.second
         ProfileColumnInfo
-        .recomendation.block(v-if="this.$store.getters.RECOMENDATIONS.length > 0")
+        //.recomendation.block(v-if="this.$store.getters.RECOMENDATIONS.length > 0")
             h2 Рекомендации:
             .wrapper
-                CourseCard(v-for="(item, index) in this.$store.getters.RECOMENDATIONS" :key="index" :item="item")
+                CourseCard(v-for="(item, index) in this.$store.getters.RECOMENDATIONS" :key="index" :item="item" :link="item.link")
 
 </template>
 

@@ -9,8 +9,8 @@
         .detail 
             .text(v-html="module.desc")
             .date 
-                span 12 часов теории
-                span 12 часов практики
+                span {{module.hoursTheory}} часов теории
+                span {{module.hoursPractice}} часов практики
                 
             
 </template>

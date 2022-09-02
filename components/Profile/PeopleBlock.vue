@@ -23,7 +23,7 @@
                 img(v-if="item.image" :src="item.image", alt="")
                 img(v-else src="/assets/images/avatar.jpg", alt="")
                 span {{item.name}}
-    ModalBlockAccess(v-if="this.$store.getters.USER.role != 'user'" :courseId="courseId")
+    ModalBlockAccess(v-if="this.$store.getters.USER.role != 'user'" :courseId="courseId" @load-users="LoadUsers")
     ModalBlockAccessEdit(v-if="this.$store.getters.USER.role != 'user'" :courseId="courseId" :userId="userId" :name="name")
 </template>
 
@@ -64,7 +64,7 @@ export default {
 </script>
 
 <style lang="scss">
-.people.block
+.block-wrapper .people.block
 {
     .hover 
     {
@@ -78,6 +78,11 @@ export default {
         {
             background: #ededed;
         }
+    }
+
+    .wrapper 
+    {
+        display: block;
     }
 }
 </style>
