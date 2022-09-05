@@ -5,6 +5,7 @@
         StreamChat(moduleType="module" :streamId="moduleId")
         CourseFileList(v-if="data.files" :files="data.files")
         CourseFilesPreview(v-if="data.preview" :files="data.preview")
+    ReviewEditor(type="stream" :id="moduleId")
 </template>
 
 <script>

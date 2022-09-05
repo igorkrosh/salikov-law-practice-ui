@@ -4,6 +4,7 @@
         kinescope-player.player-wrapper(:video-id="data.kinescope_id" @time-update="HandlerProgress")
         CourseFileList(v-if="data.files" :files="data.files")
         CourseFilesPreview(v-if="data.preview" :files="data.preview")
+    ReviewEditor(type="video" :id="moduleId")
 </template>
 
 <script>

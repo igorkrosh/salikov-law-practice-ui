@@ -109,6 +109,11 @@ export default {
                         name: 'Статистика'
                     },
                     {
+                        link: '/reviews',
+                        icon: '/assets/images/icons/menu/settings_h.png',
+                        name: 'Отзывы'
+                    },
+                    {
                         link: '/settings',
                         icon: '/assets/images/icons/menu/settings_h.png',
                         name: 'Настройки'

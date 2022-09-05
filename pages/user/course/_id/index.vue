@@ -8,7 +8,8 @@
                 span Продолжительность: {{course.hours}} ак. ч.
                 span Уроки: {{course.lessons}}
             h3 Модули курса:
-            CourseModule(v-for="(item, index) in modules" :module="item" :key="index")
+            CourseModule(v-for="(item, index) in modules" :module="item" :key="index") 
+            ReviewEditor(type="course" :id="courseId")
     ProfileColumnCourse
 </template>
 

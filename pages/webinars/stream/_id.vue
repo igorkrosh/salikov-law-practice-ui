@@ -5,6 +5,7 @@
         StreamChat(moduleType="webinar" :streamId="webinarId")
         CourseFileList(v-if="data.files" :files="data.files")
         CourseFilesPreview(v-if="data.preview" :files="data.preview")
+    ReviewEditor(type="webinar" :id="webinarId")
 </template>
 
 <script>
