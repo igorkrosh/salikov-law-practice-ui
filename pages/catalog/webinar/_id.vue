@@ -7,7 +7,17 @@
         h3 Описание курса:
         WebinarItemDesc(v-for="(item, index) in webinar.modx.modules" :module="item" :key="index")
         .tariffs(v-if="!access")
-            .buy-wrapper(v-if="webinar.modx.price > 0")
+            h2.title Тарифы и варианты оплаты 
+            .wrapper 
+                CourseTariff(
+                    v-for="(item, index) in webinar.modx.tariffs" 
+                    :key="index" 
+                    :tariff="item" 
+                    :index="index" 
+                    :active="selectedTariffIndex == index" 
+                    @select-tariff="HandleSelectTariff"
+                )
+            .buy-wrapper(v-if="paymentOption.price > 0")
                 .payment-wrapper(v-if="$store.getters.USER.jurictic == 0")
                     button.btn.buy(@click="TinkoffPay") Оплатить
                     //button.btn.credit(@click="TinkoffCredit") В рассрочку
@@ -32,6 +42,7 @@ export default {
             webinar: null,
             selectedTariffIndex: -1,
             paymentLink: '',
+            paymentOption: {},
             creaditOrderId: 0,
             access: false
         }
@@ -50,6 +61,8 @@ export default {
             this.$axios.$get(`/api/webinar/${this.webinarId}/config`)
             .then(response => {
                 this.webinar = response;
+
+                this.SelectStartTariff()
             })
             .catch(error => {
                 this.$notify({title: 'Ошибка загрузки вебинара', text: error.response.data.message, type: 'error'})
@@ -57,7 +70,7 @@ export default {
         },
         TakeFreeWebinar()
         {
-            this.$axios.$post(`/api/buy/webinar/${this.webinar.id}/order/free`)
+            this.$axios.$post(`/api/buy/webinar/${this.webinar.id}/order/free`, this.paymentOption)
             .then(response => {
                 this.$store.dispatch("LOAD_PROFILE");
             })
@@ -67,9 +80,7 @@ export default {
         },
         TinkoffPay() 
         {
-            this.$axios.post(`/api/buy/webinar/${this.webinarId}`, {
-                price: this.webinar.modx.price
-            })
+            this.$axios.post(`/api/buy/webinar/${this.webinarId}`, this.paymentOption)
             .then(response => {
                 this.paymentLink = response.data.PaymentURL;
                 this.$modal.show(`modal-tinkoff`);
@@ -89,7 +100,30 @@ export default {
             .catch(error => {
                 this.$notify({title: 'Ошибка создания заказа', error: error.response.data.message, type: 'error'})
             })
-        }
+        },
+        HandleSelectTariff(tariff)
+        {
+            this.selectedTariffIndex = tariff;
+
+            this.paymentOption['price'] = this.webinar.modx.tariffs[this.selectedTariffIndex].price
+            this.paymentOption['access_days'] = this.webinar.modx.tariffs[this.selectedTariffIndex].access_days
+            this.paymentOption['packet_name'] = this.webinar.modx.tariffs[this.selectedTariffIndex].title
+        },
+        SelectStartTariff()
+        {
+            let queryString = window.location.search;
+            let urlParams = new URLSearchParams(queryString);
+            let packet = urlParams.get('packet')
+
+            if (packet != null)
+            {
+                this.HandleSelectTariff(packet)
+            }
+            else 
+            {
+                this.HandleSelectTariff(0)
+            }
+        },
     },
     watch: {
         '$store.getters.USER.id': function () {

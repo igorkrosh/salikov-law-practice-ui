@@ -2,14 +2,17 @@
 .col-wrapper.page-course-detail
     .col.first
         .wrapper(v-if="course")
-            h2 Курс: {{course.name}}
-            .course-info 
-                span Приобретен: {{new Date(course.buy_at).toLocaleDateString('ru-RU')}}
-                span Продолжительность: {{course.hours}} ак. ч.
-                span Уроки: {{course.lessons}}
-            h3 Модули курса:
-            CourseModule(v-for="(item, index) in modules" :module="item" :key="index") 
-            ReviewEditor(type="course" :id="courseId")
+                h2 Курс: {{course.name}}
+                .course-info 
+                    span Приобретен: {{new Date(course.buy_at).toLocaleDateString('ru-RU')}}
+                    span Продолжительность: {{course.hours}} ак. ч.
+                    span Уроки: {{course.lessons}}
+                .root(v-if="course.access")
+                    h3 Модули курса:
+                    CourseModule(v-for="(item, index) in modules" :module="item" :key="index") 
+                    ReviewEditor(type="course" :id="courseId")
+                .root(v-else)
+                    h3 У вас нету доступа к этому курсу 
     ProfileColumnCourse
 </template>
 
