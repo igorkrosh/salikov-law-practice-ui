@@ -10,6 +10,8 @@ NuxtLink(:to="link").course-card
         .btn-wrapper 
             button.btn Перейти
             button.tag {{item.type == 'webinar' ? 'Вебинар' : item.type}}
+    .tag-wrapper(v-if="item.status == 'done'")
+        .tag.done Запись
 </template>
 
 <script>
@@ -42,6 +44,28 @@ export default {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+
+    .tag-wrapper 
+    {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 15px;
+
+        .tag.done 
+        {
+            background: #f1b2b2;
+            color: #a90808;
+        }
+
+        .tag 
+        {
+            padding: 5px 10px;
+        }
+    }
 
     .img 
     {

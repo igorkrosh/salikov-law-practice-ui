@@ -413,6 +413,12 @@
     {
         grid-template-columns: 100%;
     }
+
+    
+    .page-course-detail.page-buy .tariffs .wrapper
+    {
+        grid-template-columns: repeat(3, 289px);
+    }
 }
 
 @media(max-width: 992px)
@@ -643,6 +649,16 @@
     {
         align-items: center;
     }
+
+    .page-course-detail.page-buy .tariffs .wrapper
+    {
+        grid-template-columns: repeat(2, 50%);
+    }
+
+    .tariff-item
+    {
+        width: 100%;
+    }
 }
 
 @media(max-width: 768px)
@@ -715,6 +731,7 @@
     {
         flex-direction: column;
     }
+
 }
 
 @media(max-width: 540px)
@@ -970,4 +987,26 @@
     {
         margin-right: 10px;
     }
+
+    .page-course-detail.page-buy .tariffs .wrapper
+    {
+        grid-template-columns: repeat(1, 100%);
+    }
+
+    .promocode-wrapper .validation-code
+    {
+        width: 100%;
+    }
+
+    .page-course-detail.page-buy .tariffs .payment-wrapper
+    {
+        flex-direction: column;
+    }
+
+    .page-course-detail.page-buy .tariffs .payment-wrapper .btn.credit
+    {
+        margin-left: 0;
+        margin-top: 15px;
+    }
+
 }

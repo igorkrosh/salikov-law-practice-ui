@@ -152,4 +152,25 @@ export default {
         font-family: "OpenSans";
     }
 }
+
+@media(max-width: 768px)
+{
+    .review-wrapper
+    {
+        .review 
+        {
+            flex-direction: column;
+        }
+
+        .score-wrapper
+        {
+            margin-top: 10px;
+        }
+
+        .btn-wrapper
+        {
+            text-align: center;
+        }
+    }
+}
 </style>

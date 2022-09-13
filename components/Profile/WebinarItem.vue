@@ -6,9 +6,12 @@ NuxtLink(:to="Link").item
         .wrapper
             .date {{item.date}}
             .name Спикеры: {{item.lectors}}
-            .tag(:class="item.type")
-                span(v-if="item.type == 'stream'") Стрим в рамках курса 
-                span(v-if="item.type == 'webinar'") Вебинар
+            .tag-wrapper
+                .tag(:class="item.type")
+                    span(v-if="item.type == 'stream'") Стрим в рамках курса 
+                    span(v-if="item.type == 'webinar'") Вебинар
+                .tag(:class="item.status" v-if="item.status == 'done'")
+                    span Запись
 </template>
 
 <script>

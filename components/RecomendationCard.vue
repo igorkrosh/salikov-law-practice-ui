@@ -43,6 +43,7 @@ export default {
     {
         width: 100%;
         height: 215px;
+        min-height: 215px;
         position: relative;
         padding: 15px;
         display: flex;
@@ -87,6 +88,7 @@ export default {
         display: flex;
         flex-direction: column;
         background: #fff;
+        height: 100%;
 
         .name 
         {
@@ -104,6 +106,7 @@ export default {
         .btn-wrapper 
         {
             display: flex;
+            margin-top: auto;
 
             button 
             {

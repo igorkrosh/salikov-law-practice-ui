@@ -1,8 +1,8 @@
 <template lang="pug">
 .page-test.full-page.stream-page
     .card(v-if="data")
-        kinescope-player.player-wrapper(:video-id="data.kinescope_id")
-        StreamChat(moduleType="module" :streamId="moduleId" :courseId="courseId")
+        kinescope-player.player-wrapper(:video-id="videoId")
+        StreamChat(moduleType="module" :streamId="moduleId" :courseId="courseId" :status="data.status")
 </template>
 
 <script>
@@ -13,17 +13,24 @@ export default {
             data: null,
             courseId: null,
             moduleId: null,
+            videoId: null,
         };
     },
     methods: {
         LoadModule() {
             this.$axios.$get(`/api/module/stream/${this.moduleId}`)
-                .then(response => {
+            .then(response => {
                 this.data = response;
+                this.ParseLink();
             })
                 .catch(error => {
                 this.$notify({ title: "Ошибка загрузки модуля", text: error.response.data.message, type: "error" });
             });
+        },
+        ParseLink()
+        {
+            let urlParse = this.data.link.split('/');
+            this.videoId = urlParse[urlParse.length - 1]
         }
     },
     mounted() {

@@ -386,12 +386,14 @@ section.lk
             .desc 
             {
                 padding-left: 15px;
+                width: 100%;
             }
 
             .wrapper 
             {
                 display: flex;
                 align-items: center;
+                width: 100%;
             }
 
             .date 
@@ -411,14 +413,27 @@ section.lk
                 font-size: 13px;
                 font-weight: 400;
                 padding: 3px 15px;
-                min-width: 190px;
+                //min-width: 190px;
                 text-align: center;
+                margin-left: 10px;
             }
 
             .tag.webinar 
             {
                 background: #f2d3b7;
                 color: #b86a23;
+            }
+
+            .tag.done 
+            {
+                background: #f1b2b2;
+                color: #a90808;
+            }
+
+            .tag-wrapper
+            {
+                display: flex;
+                margin-left: auto;
             }
         }
 
@@ -428,6 +443,7 @@ section.lk
             background-color: #f2d3b7;
             background-position: center;
             background-repeat: no-repeat;
+            min-width: 50px;
         }
 
         .icon.stream 
@@ -565,6 +581,7 @@ section.lk
                 .img 
                 {
                     height: 145px;
+                    min-height: 145px;
 
                     span 
                     {
@@ -591,7 +608,8 @@ section.lk
                     .btn-wrapper 
                     {
                         justify-content: flex-start;
-                        margin: 0;
+                        margin-top: auto;
+                        padding-top: 10px;
                         button 
                         {
                             padding-left: 10px;
@@ -3033,4 +3051,146 @@ table.promo-table.sm
         transform: scale(0.9);
     }
 
+}
+
+.dialog .input-wrapper
+{
+    margin-top: 10px;
+    border-radius: 10px;
+    
+    .calendar.popover .date-wrapper.date-wrapper 
+    {
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .calendar.popover .date-wrapper .date
+    {
+        height: auto;
+        margin-left: 10px;
+    }
+}
+.dialog .input-wrapper.disable 
+{
+    opacity: 0.3;
+}
+
+.tariff-item.active 
+{
+    border: 2px solid #354c55;
+}
+.tariff-item 
+{
+    width: 270px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 0px 8px rgb(0 0 0 / 15%);
+    cursor: pointer;
+    border: 2px solid #efefef;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+
+    .name 
+    {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        color: #354c55;
+        height: 100%;
+
+        b 
+        {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        span 
+        {
+            font-size: 15px;
+        }
+
+        .price-wrapper
+        {
+            margin-top: 35px;
+            color: #000;
+
+            .old-price
+            {
+                font-size: 15px;
+                text-decoration: line-through;
+            }
+
+            .price 
+            {
+                font-size: 25px;
+                font-weight: 700;
+            }
+        }
+    }
+
+    .desc 
+    {
+        padding: 15px;
+        font-size: 13px;
+        background: #fff;
+
+        .row 
+        {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #dedede;
+        }
+
+        .row:last-child
+        {
+            border-bottom: none;
+        }
+
+        span 
+        {
+            width: 50%;
+        }
+
+        b 
+        {
+            width: 50%;
+        }
+    }
+}
+
+.tariff-item:nth-child(1) .name
+{
+    background: #ebfcfb;
+}
+
+.tariff-item:nth-child(2) .name
+{
+    background: #f1f4fc;
+}
+
+.tariff-item:nth-child(3) .name
+{
+    background: #d0e8ff;
+}
+
+.tariff-item:nth-child(4) .name
+{
+    background: #f4efd2;
+}
+
+.promocode-wrapper
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+    width: 100%;
+    .validation-code 
+    {
+        width: 400px
+    }
 }

@@ -2,27 +2,14 @@
 .page-statistic.full-page
     StatisticMenu
     StatisticChart
-    .stats-wrapper 
-        .stat 
-            span.big {{numbers.sum}} р 
-            span.small Общий доход
-        .stat 
-            span.big {{numbers.count}} 
-            span.small Кол-во заказов
-        .stat 
-            span.big {{numbers.jurictic}} 
-            span.small Кол-во заявок юр.лиц
+    
 </template>
 
 <script>
 export default {
     data() {
         return {
-            numbers: {
-                sum: 0,
-                count: 0,
-                jurictic: 0,
-            }
+            
         }
     },
     methods: {
@@ -42,7 +29,7 @@ export default {
     },
     watch: {
         '$store.getters.USER.role': function () {
-            this.LoadStatisticNumbers()
+            //this.LoadStatisticNumbers()
         }
     },
     mounted()
@@ -50,7 +37,7 @@ export default {
         this.$store.dispatch('SET_DISABLE_BG_WHITE', true)
         this.$store.dispatch('SET_PAGETITLE', 'Статистика продаж')
 
-        this.LoadStatisticNumbers()
+        //this.LoadStatisticNumbers()
     },
     destroyed() {
         this.$store.dispatch('SET_DISABLE_BG_WHITE', false)

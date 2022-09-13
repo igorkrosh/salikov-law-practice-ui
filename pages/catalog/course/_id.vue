@@ -288,16 +288,5 @@ export default {
 </script>
 
 <style lang="scss">
-.promocode-wrapper
-{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 25px;
-    width: 100%;
-    .validation-code 
-    {
-        width: 400px
-    }
-}
+
 </style>

@@ -1,8 +1,15 @@
 <template lang="pug">
-Modal(name="block-access-edit" height="auto" width="600" classes="dialog" :adaptive="true" :scrollable="true" @closed="ClearAccess" @before-open="GetUserAccess")
+Modal(name="block-access-edit" height="auto" width="600" classes="dialog" :adaptive="true" :scrollable="true" )
     .card.course-block
         .btn-modal-close(@click="CloseModal")
         h3 Редактировать участника <br> {{name}}
+        h4 Доступ к курсу: 
+        .radio-wrapper
+            label.radio Неограниченный доступ
+                input.checkbox(type="checkbox" v-model="unlimited")
+                span.checkmark 
+        .input-wrapper(:class="{disable: unlimited}")
+            DatePicker(label="Дата окончания доступа:" v-model="accessDate")
         h4(v-if="blocksList") Доступы к блокам курса:
         .radio-wrapper(v-for="item in blocksList")
             label.radio 
@@ -21,6 +28,8 @@ export default {
             access: null,
             accessList: [],
             blocksList: null,
+            unlimited: false,
+            accessDate: new Date()
         }
     },
     methods: {
@@ -28,7 +37,10 @@ export default {
         {
             this.$axios.$get(`/api/course/${this.courseId}/user/${this.userId}/access`)
             .then(response => {
-                this.access = response;
+                console.log(response)
+                this.access = response.access;
+                this.accessDate = response.accessDate ? response.accessDate : new Date();
+                this.unlimited = response.accessDate ? false : true;
 
                 for (let item of this.access)
                 {
@@ -36,13 +48,15 @@ export default {
                 }
             })
             .catch(error => {
+                console.log(error)
                 this.$notify({title: 'Ошибка загрузки доступов к блокам', text: error.response.data.message, type: 'error'})
             })
         },
         SetAccess()
         {
             this.$axios.$post(`/api/course/${this.courseId}/user/${this.userId}/set-access`, {
-                access: this.accessList
+                access: this.accessList,
+                accessDate: this.unlimited ? false : this.accessDate
             })
             .then(response => {
                 this.$notify({title: 'Доступ обновлен', type: 'success'})
@@ -55,7 +69,7 @@ export default {
         CloseModal()
         {
             this.$modal.hide('block-access-edit')
-            this.ClearAccess();
+            //this.ClearAccess();
         },
         ClearAccess()
         {
@@ -65,6 +79,8 @@ export default {
     },
     watch: {
         userId(value) {
+            this.userId = value;
+            console.log(value);
             this.accessList = [];
             this.GetUserAccess();
         },
@@ -83,6 +99,6 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 
 </style>

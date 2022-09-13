@@ -10,7 +10,7 @@
         .detail 
             .item.border-bottom(v-for="(item, index) in module.data" :class="IconClass(item)")
                 .info 
-                    .date(v-if="item.date") {{new Date(item.date).toLocaleString('ru-RU')}}
+                    .date(v-if="item.date") {{item.date}}
                     .course-title {{item.title}} 
                     .name {{item.educator}}
                 .type(:class="item.type")

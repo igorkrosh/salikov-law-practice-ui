@@ -3,7 +3,7 @@
     .messages-wrapper
         PerfectScrollbar(@scroll="HandlerScroll" ref="chat")
             StreamMessage(v-for="(item, index) in messages" :item="item" :key="index" @delete-message="DeleteMessage")
-    .input-wrapper
+    .input-wrapper(v-if="status != 'done'")
         input(v-model="newMessage")
         button.btn.blue.sm(@click="SendMessage") Отправить
     NuxtLink(:to='ChatLink' target="_blank").btn.sm.chat-window(v-if="this.$store.getters.USER.role != 'user'") Открыть чат в новом окне
@@ -17,6 +17,10 @@ export default {
         courseId: {
             type: String,
             default: '0'
+        },
+        status: {
+            type: String,
+            default: 'live',
         }
     },
     data() {
@@ -79,7 +83,7 @@ export default {
                 return;
             }
 
-            this.$axios.$delete(`/api/chat/${this.type}/${this.streamId}/message/${messageId}`)
+            this.$axios.$delete(`/api/chat/${this.moduleType}/${this.streamId}/message/${messageId}`)
             .then(response => {
                 this.$notify({title: 'Сообщение удалено', text: '', type: 'success'})
             })

@@ -3,7 +3,7 @@
     .root(v-if="access")
         .card(v-if="data")
             kinescope-player.player-wrapper(:video-id="videoId")
-            StreamChat(moduleType="webinar" :streamId="webinarId")
+            StreamChat(moduleType="webinar" :streamId="webinarId" :status="data.status")
             CourseFileList(v-if="data.files" :files="data.files")
             CourseFilesPreview(v-if="data.preview" :files="data.preview")
         ReviewEditor(type="webinar" :id="webinarId")

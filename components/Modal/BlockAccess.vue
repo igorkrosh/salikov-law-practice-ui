@@ -6,6 +6,13 @@ Modal(name="block-access" height="auto" width="600" classes="dialog" :adaptive="
         .input-wrapper
             label Email:
             input(placeholder="user@user.com" v-model="access.email")
+        h4 Доступ к курсу: 
+        .radio-wrapper
+            label.radio Неограниченный доступ
+                input.checkbox(type="checkbox" v-model="access.unlimited")
+                span.checkmark 
+        .input-wrapper(:class="{disable: access.unlimited}")
+            DatePicker(label="Дата окончания доступа:" v-model="access.access_date")
         h4(v-if="blocksList") Доступы к блокам курса:
         .radio-wrapper(v-for="item in blocksList")
             label.radio 
@@ -25,6 +32,8 @@ export default {
                 email: '',
                 course_id: this.courseId,
                 blocks: [],
+                access_date: new Date(),
+                unlimited: false,
             },
             blocksList: null
         }
