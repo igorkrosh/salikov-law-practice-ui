@@ -48,16 +48,34 @@ export default {
         OnInput()
         {
             this.$emit('input', this.date);
+        },
+        ConverDate()
+        {
+            if (typeof this.value == 'object')
+            {
+                this.date = this.value;
+            }
+            if (typeof this.value == 'string')
+            {
+                let [day, month, year] = this.value.split(' ')[0].split('.');
+                let [hours, minutes] = this.value.split(' ')[1].split(':');
+
+                this.date = new Date(+year, +month - 1, +day, +hours, +minutes);
+            }
         }
     },
     watch: {
         value()
         {
-            this.date = new Date(this.value);
+            //console.log(typeof this.value)
+            //console.log(`${typeof this.value} - ${this.value}`)
+
+            this.ConverDate()
         }
     },
     mounted() {
-        this.date = this.value;
+        console.log(`${typeof this.value} - ${this.value}`)
+        this.ConverDate()
 
     }
 }

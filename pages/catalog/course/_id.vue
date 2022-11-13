@@ -37,6 +37,7 @@
             .buy-wrapper(v-else)
                 .payment-wrapper
                     button.btn.buy(@click="TakeFreeCourse") Забрать
+            Agreement
             
 
         ModalTinkoffPay(:paymentLink="paymentLink")
@@ -143,7 +144,7 @@ export default {
                 }
             }
 
-            tinkoff.createDemo({
+            tinkoff.create({
                 shopId: 'fb922623-cdf2-4127-b368-de8016ad149c',
                 showcaseId: 'b133c70f-18c8-4073-bc61-5f8704eb6a29',
                 sum: orderPrice,
@@ -253,6 +254,14 @@ export default {
             .catch(error => {
                 this.$notify({title: 'Ошибка применения промокода', text: error.response.data.message, type: 'error'})
             })
+        },
+        OrderInit()
+        {
+            this.$axios.$post(`/api/order/course/${this.courseId}/init`)
+            .then(response => {})
+            .catch(error => {
+                this.$notify({title: 'Ошибка инициализации заказа', text: error.response.data.message, type: 'error'})
+            })
         }
     },
     watch: {
@@ -262,7 +271,7 @@ export default {
                 console.log(e)
                 if (e.status == 'CONFIRMED')
                 {
-                    this.$notify({title: 'Оплачео', text: 'Вы будете перенаправлены на страницу курса', type: 'success'})
+                    this.$notify({title: 'Оплачено', text: 'Вы будете перенаправлены на страницу курса', type: 'success'})
                     this.$router.push(`/user/course/${this.courseId}`)
                     this.$store.dispatch("LOAD_PROFILE");
                 }
@@ -277,6 +286,7 @@ export default {
         this.LoadCourseConfig();
 
         this.$axios.$post(`/api/statistic/course/${this.courseId}/enter`)
+        this.OrderInit()
 
         tinkoff.methods.on(tinkoff.constants.APPROVED, this.HandlerTinkoffApproved);
         tinkoff.methods.on(tinkoff.constants.SUCCESS, this.HandlerTinkoffSigned);

@@ -1,13 +1,25 @@
 <template lang="pug">
-section.lk 
-    Header(ref="header")
-    .page
+.root
+    section.lk 
+        Header(ref="header")
+        .page
+            .container 
+                .content(:class="{'hide-menu':menuHide}")
+                    Menu(@menu-hide="HideMenu")
+                    Nuxt
+            .bg-white(ref="bgWhite" :class="{hide: this.$store.getters.DISABLE_BG_WHITE}")
+        NotificationsSystem
+    footer
         .container 
-            .content(:class="{'hide-menu':menuHide}")
-                Menu(@menu-hide="HideMenu")
-                Nuxt
-        .bg-white(ref="bgWhite" :class="{hide: this.$store.getters.DISABLE_BG_WHITE}")
-    NotificationsSystem
+            .wrapper
+                .col 
+                    span ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ "КАФЕДРА ОНЛАЙН"
+                .col 
+                    span ИНН: 5190091813
+                    span КПП: 519001001
+                .col
+                    span ОГРН: 1225100003468
+                    span 183039, Мурманская область, г Мурманск, ул Новое Плато, д. 1, помещ. 1
 </template>
 
 <script>
@@ -61,6 +73,10 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+body
+{
+    background: #f1fafd;
+}
 
 </style>

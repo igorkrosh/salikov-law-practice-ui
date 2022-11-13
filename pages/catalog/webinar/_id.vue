@@ -26,6 +26,7 @@
             .buy-wrapper(v-else)
                 .payment-wrapper
                     button.btn.buy(@click="TakeFreeWebinar") Забрать
+            Agreement
         .tariffs(v-else)
             h3.access-true Вы уже имете доступ к данному вебинару
         ModalTinkoffPay(:paymentLink="paymentLink")

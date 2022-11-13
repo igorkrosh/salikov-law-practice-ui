@@ -13,26 +13,27 @@
             span.checkmark
     .add-wrapper
         button.btn.sm(@click="$modal.show('referral-create')") Добавить источник +
-    table.promo-table.sm
-        thead
-            tr
-                th Ссылка
-                th Кол-во переходов
-                th Кол-во заявок
-                th Общий доход
-                th Коментарий
-                th 
-        tbody
-            tr(v-for="ref in referrals") 
-                td
-                    //button.link(@click="CopyLink(ref.link)") {{ref.link}}
-                    a(:href="ref.link" target="_blank").link {{ref.link}}
-                td {{ref.count}}
-                td {{ref.requests}}
-                td {{ref.sum}} р.
-                td {{ref.comment}}
-                td
-                    button.btn.red.sm.btn-delete(@click="DeleteReferralLink(ref.ref_id)") Удалить
+    .table-wrapper
+        table.promo-table.sm
+            thead
+                tr
+                    th Ссылка
+                    th Кол-во переходов
+                    th Кол-во заявок
+                    th Общий доход
+                    th Коментарий
+                    th 
+            tbody
+                tr(v-for="ref in referrals") 
+                    td
+                        //button.link(@click="CopyLink(ref.link)") {{ref.link}}
+                        a(:href="ref.link" target="_blank").link {{ref.link}}
+                    td {{ref.count}}
+                    td {{ref.requests}}
+                    td {{ref.sum}} р.
+                    td {{ref.comment}}
+                    td
+                        button.btn.red.sm.btn-delete(@click="DeleteReferralLink(ref.ref_id)") Удалить
     ModalCreateReferral(@create-referral="LoadReferral")
 </template>
 

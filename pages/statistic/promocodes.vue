@@ -3,26 +3,27 @@
     StatisticMenu
     .add-wrapper
         button.btn.sm(@click="$modal.show('promocode-create')") Добавить промокод +
-    table.promo-table
-        thead
-            tr
-                th Промокод
-                th Размер скидки 
-                th Кол-во использований
-                th Общая сумма скидки
-                th Дата начала 
-                th Дата окончания
-                th 
-        tbody
-            tr(v-for="promocode in promocodes") 
-                td {{promocode.code}}
-                td {{promocode.value}} р.
-                td {{promocode.count}}
-                td {{promocode.sum}} р.
-                td {{promocode.date_start}}
-                td {{promocode.deadline}}
-                td
-                    button.btn.red.sm.btn-delete(@click="DeletePromocode(promocode.id)") Удалить
+    .table-wrapper
+        table.promo-table
+            thead
+                tr
+                    th Промокод
+                    th Размер скидки 
+                    th Кол-во использований
+                    th Общая сумма скидки
+                    th Дата начала 
+                    th Дата окончания
+                    th 
+            tbody
+                tr(v-for="promocode in promocodes") 
+                    td {{promocode.code}}
+                    td {{promocode.value}} р.
+                    td {{promocode.count}}
+                    td {{promocode.sum}} р.
+                    td {{promocode.date_start}}
+                    td {{promocode.deadline}}
+                    td
+                        button.btn.red.sm.btn-delete(@click="DeletePromocode(promocode.id)") Удалить
     ModalCreatePromocode(@create-promocode="HandleCreatePromocode")
 </template>
 

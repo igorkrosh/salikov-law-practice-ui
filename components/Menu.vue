@@ -64,7 +64,7 @@ export default {
                     {
                         link: '/user/done',
                         icon: '/assets/images/icons/menu/8.png',
-                        name: 'Пройденые курсы'
+                        name: 'Пройденные курсы'
                     }
                 ],
                 admin: [
@@ -168,6 +168,11 @@ export default {
                         link: '/events',
                         icon: '/assets/images/icons/menu/2.png',
                         name: 'События'
+                    },
+                    {
+                        link: '/dashboard',
+                        icon: '/assets/images/icons/menu/4.png',
+                        name: 'Курсы'
                     },
                     {
                         link: '/callback',

@@ -19,7 +19,12 @@
                     span(v-else-if="item.type == 'job'") Домашнее задание
                     span(v-else-if="item.type == 'test'") Тест
                     span(v-else-if="item.type == 'none'") {{item.type}}
-                NuxtLink(v-if="item.link && item.access" :to='item.link').link
+                //NuxtLink(v-if="item.link && item.access && item.icon != 'done'" :to='item.link').link
+                NuxtLink(v-if="item.link && item.access && (item.type == 'video' || item.type == 'stream')" :to='item.link').link
+                NuxtLink(v-if="item.link && item.access && item.icon != 'done' && (item.type == 'job' || item.type == 'test' )" :to='item.link').link
+                NuxtLink(v-if="item.type == 'test' && item.access && item.icon == 'done'" :to='`/user/course/${module.courseId}/test/${item.id}/result`').link
+                .link(v-if="item.icon == 'done' && item.type == 'job'" @click="$modal.show(`task-result-${item.id}`)")
+                    ModalTaskResult(:title="item.data.title" :job="item.data.job", :answer="item.data.answer" :comment="item.data.comment" :score="item.data.score" :id="item.id")
             
 </template>
 

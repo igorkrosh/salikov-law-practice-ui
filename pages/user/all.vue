@@ -1,52 +1,78 @@
 <template lang="pug">
-.col-wrapper 
-    .col.first.page-users 
-            .filters-radio
-                label.radio Все
-                    input(type="checkbox" v-model="filterAll" )
-                    span.checkmark
-                label.radio Администраторы
-                    input(type="checkbox" v-model="filter.admin" @change="SetFilter")
-                    span.checkmark
-                label.radio Модератор
-                    input(type="checkbox")
-                    span.checkmark
-                label.radio Преподователь
-                    input(type="checkbox" v-model="filter.educator" @change="SetFilter")
-                    span.checkmark
-                label.radio Ученики
-                    input(type="checkbox" v-model="filter.user" @change="SetFilter")
-                    span.checkmark
-                label.radio Авторы
-                    input(type="checkbox" v-model="filter.author" @change="SetFilter")
-                    span.checkmark
-            .filters-input 
-                input.filter(placeholder="Поиск по имени" v-model="filter.name" @input="LoadUsers")
-                select(v-model="filter.category" @change="LoadUsers").filter
-                    option(value="") Поиск по направлению
-                    option(v-for="category in categories" :value="category") {{category}}
-                //input.filter(placeholder="Поиск по курсу" v-model="filter.course" @input="LoadUsers")
-                select(v-model="filter.course" @change="LoadUsers").filter
-                    option(value="") Поиск по курсу
-                    option(v-for="course in courses" :value="course") {{course}}
-            .filters-input 
-                .input-wrapper
-                    label Количество пользователей: {{count}}
-            .table 
-                .item(v-for="(user, index) in users" :key="index" @click="EditUser(user)")
-                    span.name {{user.name}} {{user.last_name}}
-                    span.role(v-if="user.role == 'user'") Ученик
-                    span.role.educator(v-if="user.role == 'educator'") Преподователь
-                    span.role.admin(v-if="user.role == 'admin'") Администратор
-                    span.role.author(v-if="user.role == 'author'") Автор
-            //.navs 
-                span.active 1
-                span 2
-                span 3 
-                span ... 
-                span 28
+.full-page.page-users 
+    .filters-radio
+        label.radio Все
+            input(type="checkbox" v-model="filterAll" )
+            span.checkmark
+        label.radio Администраторы
+            input(type="checkbox" v-model="filter.admin" @change="SetFilter")
+            span.checkmark
+        label.radio Модератор
+            input(type="checkbox")
+            span.checkmark
+        label.radio Преподователь
+            input(type="checkbox" v-model="filter.educator" @change="SetFilter")
+            span.checkmark
+        label.radio Ученики
+            input(type="checkbox" v-model="filter.user" @change="SetFilter")
+            span.checkmark
+        label.radio Авторы
+            input(type="checkbox" v-model="filter.author" @change="SetFilter")
+            span.checkmark
+    .filters-input 
+        input.filter(placeholder="Поиск по имени" v-model="filter.name" @input="LoadUsers")
+        select(v-model="filter.category" @change="LoadUsers").filter
+            option(value="") Поиск по направлению
+            option(v-for="category in categories" :value="category") {{category}}
+        //input.filter(placeholder="Поиск по курсу" v-model="filter.course" @input="LoadUsers")
+        select(v-model="filter.course" @change="LoadUsers").filter
+            option(value="") Поиск по курсу
+            option(v-for="course in courses" :value="course.id") {{course.name}}
+    .filters-input 
+        .input-wrapper
+            label Количество пользователей: {{count}}
+    //.table 
+        .item(v-for="(user, index) in users" :key="index" @click="EditUser(user)")
+            span.name {{user.name}} {{user.last_name}}
+            span.role(v-if="user.role == 'user'") Ученик
+            span.role.educator(v-if="user.role == 'educator'") Преподователь
+            span.role.admin(v-if="user.role == 'admin'") Администратор
+            span.role.author(v-if="user.role == 'author'") Автор
+    .table-data 
+        table
+            thead
+                tr
+                    th Пользователь
+                    th ID
+                    th Email
+                    th Роль
+                    th
+                        .sort
+                            span Дата регистрации
+                            button(:class="{asc: filter.sort == 'asc', desc: filter.sort == 'desc'}" @click="SetSort()")
+                                img(src='/assets/images/icons/sort.png')
+            tbody
+                tr(v-for="(user, index) in users" :key="index") 
+                    td
+                        .user(@click="EditUser(user)")
+                            img(v-if="user.avatar" :src="user.avatar", alt="").avatar
+                            img(v-else src="/assets/images/avatar.jpg", alt="").avatar
+                            span {{user.name}} {{user.last_name}}
+                    td {{user.id}}
+                    td {{user.email}}
+                    td 
+                        span.role(v-if="user.role == 'user'") Ученик
+                        span.role.educator(v-if="user.role == 'educator'") Преподователь
+                        span.role.admin(v-if="user.role == 'admin'") Администратор
+                        span.role.author(v-if="user.role == 'author'") Автор
+                    td {{user.created_at}}
 
-    ProfileColumnInfo 
+        //.navs 
+            span.active 1
+            span 2
+            span 3 
+            span ... 
+            span 28
     ModalEditUser(:user="editUser")
 </template>
 
@@ -66,6 +92,7 @@ export default {
                 name: '',
                 category: '',
                 course: '',
+                sort: '',
             },
             filterAll: true,
             categories: [],
@@ -106,6 +133,25 @@ export default {
                 this.$notify({title: 'Ошибка загрузки категорий', text: error.response.data.message, type: 'error'})
             })
         },
+        SetSort()
+        {
+            switch (this.filter.sort) 
+            {
+                case '':
+                    this.filter.sort = 'asc'
+                    break;
+                case 'asc':
+                    this.filter.sort = 'desc'
+                    break;
+                case 'desc':
+                    this.filter.sort = 'asc'
+                    break;
+                default:
+                    break;
+            }
+            
+            this.LoadUsers();
+        }
     },
     watch: {
         filterAll(value) {
@@ -126,9 +172,13 @@ export default {
     },
     mounted() {
         this.$store.dispatch('SET_PAGETITLE', 'Пользователи')
+        this.$store.dispatch('SET_DISABLE_BG_WHITE', true)
         this.LoadUsers();
         this.LoadCourseFilter();
-    }
+    },
+    destroyed() {
+        this.$store.dispatch('SET_DISABLE_BG_WHITE', false)
+    },
 }
 </script>
 

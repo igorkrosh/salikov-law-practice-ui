@@ -47,9 +47,11 @@ export default {
             this.$axios.$post(`/api/module/job/${this.moduleId}/task`, formData)
             .then(response => {
                 this.$notify({title: 'Задание отправлено на проверку', type: 'success'})
-                this.$router.push(`/user/course/${this.courseId}`);
 
-                this.SetStatus()
+                this.SetStatus();
+                this.$store.dispatch("LOAD_PROFILE");
+
+                this.$router.push(`/user/course/${this.courseId}`);
             })
             .catch(error => {
                 this.$notify({title: 'Ошибка отправки задания', text: error.response.data.message, type: 'error'})

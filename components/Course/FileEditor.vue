@@ -94,6 +94,11 @@ export default {
         }
     }
 
+    .wrapper 
+    {
+        flex-direction: column;
+    }
+
     .item 
     {
         font-size: 14px;
@@ -103,6 +108,7 @@ export default {
         {
             margin-right: 10px;
             display: inline-block;
+            word-break: break-all;
         }
 
         .link 

@@ -2,13 +2,23 @@
 .block-wrapper(v-if="users")
     .people.block(v-if="users.curators.length > 0")
         .title-wrapper
-            h2 Кураторы 
+            h2 Автор 
             //button.btn.blue.sm Добавить
         .wrapper
             .item(v-for="item in users.curators")
                 img(v-if="item.image" :src="item.image", alt="")
                 img(v-else src="/assets/images/avatar.jpg", alt="")
                 span {{item.name}}
+    .people.block
+        .title-wrapper
+            h2 Преподаватели
+            button.btn.blue.sm(@click="$modal.show('educator-access')" v-if="this.$store.getters.USER.role != 'user'") Добавить
+        .wrapper
+            .item(v-for="item in users.educators")
+                img(v-if="item.image" :src="item.image", alt="")
+                img(v-else src="/assets/images/avatar.jpg", alt="")
+                span {{item.name}}
+        .wrapper
     .people.block 
         .title-wrapper
             h2 Однокурсники
@@ -25,6 +35,7 @@
                 span {{item.name}}
     ModalBlockAccess(v-if="this.$store.getters.USER.role != 'user'" :courseId="courseId" @load-users="LoadUsers")
     ModalBlockAccessEdit(v-if="this.$store.getters.USER.role != 'user'" :courseId="courseId" :userId="userId" :name="name")
+    ModalEducatorAccess(v-if="this.$store.getters.USER.role != 'user'" :courseId="courseId" @load-users="LoadUsers")
 </template>
 
 <script>

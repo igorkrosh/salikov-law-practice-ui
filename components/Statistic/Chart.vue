@@ -15,6 +15,9 @@
         .stat 
             span.big {{numbers.sum}} р 
             span.small Общий доход
+        .stat(v-if="$store.getters.USER.role != 'author'")
+            span.big {{numbers.royalty}} р 
+            span.small Отчисления авторам
         .stat 
             span.big {{numbers.count}} 
             span.small Кол-во заказов
@@ -107,7 +110,6 @@ export default {
                     this.columnChartData = response.chart;
                     this.numbers = response.numbers;
                     this.type = `year`
-                    console.log(response)
                 })
                 .catch(error => {
                     this.$notify({title: 'Ошибка загрузки статистики', text: error.response.data.message, type: 'error'})

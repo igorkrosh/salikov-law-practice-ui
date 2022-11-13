@@ -52,7 +52,8 @@ export default {
                     count: `Модуль ${index}.`,
                     title: block.title,
                     data: [],
-                    access: block.access
+                    access: block.access,
+                    courseId: this.courseId,
                 })
 
                 for (let module of block.modules)
@@ -81,7 +82,9 @@ export default {
                         educator: module.authors,
                         type: module.type,
                         link: `/user/course/${this.courseId}/${module.type}/${module.id}`,
-                        access: module.access
+                        access: module.access,
+                        id: module.id,
+                        data: module.data
                     })
                 }
             }

@@ -85,25 +85,5 @@ export default {
 </script>
 
 <style lang="scss">
-.card.homework-block
-{
-    .block-wrapper 
-    {
-        .link 
-        {
-            margin-top: 10px;
-            display: inline-block;
-        }
-    }
-}
 
-.card.homework-block .results-wrapper .icon.one:hover, .card.homework-block .results-wrapper .icon.one.active 
-{
-    opacity: 1;
-}
-
-.card.homework-block .results-wrapper .icon.one
-{
-    opacity: 0.5;
-}
 </style>

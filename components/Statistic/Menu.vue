@@ -12,6 +12,15 @@
     NuxtLink(to="/statistic/courses").radio Курсы
         input(type="checkbox" :checked="this.$route.name == 'statistic-courses'")
         span.checkmark
+    NuxtLink(to="/statistic/students" v-if="$store.getters.USER.role != 'author'").radio Статус обучения
+        input(type="checkbox" :checked="this.$route.name == 'statistic-students'")
+        span.checkmark
+    NuxtLink(to="/statistic/files" v-if="$store.getters.USER.role != 'author'").radio Файлы
+        input(type="checkbox" :checked="this.$route.name == 'statistic-files'")
+        span.checkmark
+    NuxtLink(to="/statistic/orders" v-if="$store.getters.USER.role != 'author'").radio Заказы
+        input(type="checkbox" :checked="this.$route.name == 'statistic-orders'")
+        span.checkmark
 </template>
 
 <script>

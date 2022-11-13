@@ -1,5 +1,5 @@
 <template lang="pug">
-.table-review 
+.table-data 
     table
         thead
             tr
@@ -65,69 +65,5 @@ export default {
 </script>
 
 <style lang="scss">
-.table-review 
-{
-    margin-top: 40px;
-    background: #fff;
-    padding: 25px;
-    border-radius: 10px;
-    border: 1px solid #ededed;
 
-    table 
-    {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 14px;
-        table-layout: fixed;
-    }
-
-    th, td
-    {
-        text-align: left;
-        padding: 15px 10px;
-    }
-    
-    th.review
-    {
-        width: 160px;
-    }
-
-    th.date
-    {
-        width: 100px;
-    }
-
-    tr 
-    {
-        border-bottom: 1px solid #ededed;
-    }
-
-    .user:hover 
-    {
-        background: #ededed;
-    }
-
-    .user 
-    {   
-        display: flex;
-        align-items: center; 
-        padding: 5px;
-        transition: 0.3s;
-        border-radius: 15px;
-        img
-        {
-            border-radius: 50%;
-            max-width: 47px;
-            max-height: 47px;
-            margin-right: 10px;
-        }
-
-    }
-
-    .scores 
-    {
-        display: flex;
-        flex-direction: column;
-    }
-}
 </style>

@@ -19,29 +19,5 @@ export default {
 </script>
 
 <style lang="scss">
-.card.ticket
-{
-    display: flex;
-    align-items: center;
-    padding: 15px 25px;
-    margin-bottom: 15px;
 
-    .ticket-title
-    {
-        font-weight: 700;
-        font-size: 14px;
-    }
-
-    .ticket-data
-    {
-        font-size: 13px;
-        color: #aaaaaa;
-    }
-
-    .status 
-    {
-        margin-right: 10px;
-    }
-    
-}
 </style>

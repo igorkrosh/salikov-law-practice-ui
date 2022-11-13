@@ -1,6 +1,6 @@
 <template lang="pug">
 .review-wrapper
-    h3 Пожалуйста, оцените курс по 10-ти бальной шкале:
+    h3 Пожалуйста, оцените курс по 10-балльной шкале:
     .review(:class="{error: errors.includes('speakers')}")
         span Выступление спикера
         ReviewScore(v-model="review.score.speakers")

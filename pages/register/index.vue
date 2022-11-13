@@ -12,6 +12,12 @@
                 span.required *
             span.msg(v-if="error && error.name") {{error.name[0]}}
             input(type="text" v-model="name")
+        .input-wrapper(ref="last_name")
+            label 
+                |Фамилия 
+                span.required *
+            span.msg(v-if="error && error.last_name") {{error.last_name[0]}}
+            input(type="text" v-model="last_name")
         .input-wrapper(ref="email")
             label 
                 |Email 
@@ -61,6 +67,7 @@ export default {
     data() {
         return {
             name: '',
+            last_name: '',
             email: '',
             password: '',       
             password_confirmation: '',
@@ -75,7 +82,7 @@ export default {
     },
     methods: {
         Register() {
-            let inputKeys = ['name', 'email', 'password', 'password_confirmation'];
+            let inputKeys = ['name', 'last_name', 'email', 'password', 'password_confirmation'];
 
             for (let key of inputKeys) 
             {
@@ -84,6 +91,7 @@ export default {
             this.error = null;
             this.$axios.post('/api/register', {
                 name: this.name,
+                last_name: this.last_name,
                 email: this.email,
                 password: this.password,
                 password_confirmation: this.password_confirmation,

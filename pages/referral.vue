@@ -15,7 +15,7 @@
             p Получайте баллы за каждого приглашенного участника и учитесь абсолютно бесплатно! 
             p Скопируйте ссылку и предоставьте её будущему участнику. Вы будете получать баллы каждый раз после его покупки курса или вебинара.
             b Реферальная ссылка:
-            a(:href="referralData.invite_link" target="_blank").btn.blue 
+            button(target="_blank" @click="CopyLink").btn.blue 
                 |{{referralData.invite_link}}
                 img(src="/assets/images/icons/foreign.png")
         
@@ -41,6 +41,12 @@ export default {
             .catch(error => {
                 this.$notify({title: 'Ошибка загрузки данных', text: error.response.data.message, type: 'error'})
             })
+        },
+        CopyLink()
+        {
+            navigator.clipboard.writeText(this.referralData.invite_link).then(text => {
+                this.$notify({title:'Ссылка скопирована', text: ''})
+            });
         }
     },
     mounted() {
